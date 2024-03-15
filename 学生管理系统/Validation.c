@@ -10,7 +10,10 @@ void Validation(char username) //验证功能
         printf("连接服务器失败！\n");
         return;
     }
-    fread(tureusername,sizeof(int),1,file_read);
+    fread(tureusername,sizeof(Student),1,file_read);
+
+    strcmp(username,tureusername);
+
     while(username == tureusername)
     {
         printf("用户名不存在！\n你可以输入“1”重新输入，输入“2”退出：");
