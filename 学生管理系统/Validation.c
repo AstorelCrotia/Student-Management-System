@@ -1,6 +1,6 @@
 #include "head.h"
 
-void Validation(char username) //验证
+void Validation(char username) //验证功能
 {
     int tureusername = 0;
     int flag = 0;
