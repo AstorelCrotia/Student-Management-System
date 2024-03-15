@@ -6,7 +6,7 @@ int main()
     char username[20] = "0";
     int usergroup = 0;
     int sc = 0;
-    Initialface();
+    Initialface(username);
     Validation(username);
     Interface(usergroup,username);
     switch (sc)
