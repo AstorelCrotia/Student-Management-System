@@ -3,6 +3,7 @@
 int main()
 {
     Student s1 = {0};
+    Student* head = createlist();
     char username[20] = "0";
     int usergroup = 0;
     int sc = 0;
