@@ -1,6 +1,6 @@
 #include "head.h"
 
-void Validation(char *username, int *usergroup) // 验证功能
+void Validation(char *username, int *usergroup,int *sc) // 验证功能
 {
     Student *turestudent = NULL;
     Administrator *tureadmin = NULL;
@@ -10,12 +10,14 @@ void Validation(char *username, int *usergroup) // 验证功能
     if (file_student == NULL)
     {
         printf("连接服务器失败！\n");
+        *sc = 1;
         return;
     }
     FILE *file_admin = fopen("Admin.txt", "r");
     if (file_admin == NULL)
     {
         printf("连接服务器失败！\n");
+        *sc = 1;
         return;
     }
     while (i != 3)
