@@ -8,7 +8,7 @@ int main()
     int sc = 0;
     Initialface(&username);
     Validation(&username,&usergroup,&sc);
-    if(sc == 1)
+    if(sc == 1 && usergroup != 0)
     {
         return 0;
     }

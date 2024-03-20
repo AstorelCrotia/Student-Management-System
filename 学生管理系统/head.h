@@ -16,10 +16,11 @@ typedef struct Student//定义学生结构体
     struct Student * next; 
 } Student;
 
-typedef struct //定义管理者结构体
+typedef struct Administrator //定义管理者结构体
 {
     char username[20];
-    int code[20];
+    char code[20];
+    struct Administrator * next; 
 } Administrator;
 
 void Initialface(char *username);//初始界面
