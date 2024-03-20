@@ -51,16 +51,16 @@ void Validation(char *username, int *usergroup) // 验证功能
         {
             printf("用户名不存在！\n");
             printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
-            printf("你可以输入“1”重新输入，输入“2”退出：");
+            printf("你可以输入“1”重新输入，输入其他退出：");
             scanf("%d",&flag);
-            if (flag == 2)
-            {
-                break;
-            }
-            else
+            if (flag == 1)
             {
                 printf("请输入用户名:");
                 scanf("%s", username);
+            }
+            else
+            {
+                break;
             }
         }
         i++;
