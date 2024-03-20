@@ -2,9 +2,9 @@
 #include<string.h>
 #include<stdlib.h>
 
-typedef struct //定义学生结构体
+typedef struct Student//定义学生结构体
 {
-    char id[20];
+    char username[20];
     char name[20];
     char gender[10];
     int code[20];
