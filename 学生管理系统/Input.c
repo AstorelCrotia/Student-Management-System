@@ -1,6 +1,6 @@
 #include "head.h"
 
-int Input(int usergroup,char username) //Â¼Èë
+void Input(Student *s1) //Â¼Èë
 {
-
+    
 }

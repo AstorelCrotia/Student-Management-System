@@ -26,7 +26,7 @@ void Validation(char *username, int *usergroup) // 验证功能
             if (strcmp(username, turestudent->username) == 0)
             {
                 printf("欢迎登录！\n");
-                *usergroup = 1;
+                *usergroup = 2;
                 flag = 2;
                 break;
             }

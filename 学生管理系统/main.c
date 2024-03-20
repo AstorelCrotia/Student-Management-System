@@ -9,20 +9,20 @@ int main()
     int sc = 0;
     Initialface(username);
     Validation(username,usergroup);
-    Interface(usergroup,username);
+    Interface(username,usergroup,sc);
     switch (sc)
     {
     case 1:
-        Input(usergroup,username);
+        Input();
         break;
     case 2:
         Query(s1);
         break;
     case 3:
-        Modify(usergroup,username);
+        Modify();
         break;
     case 4:
-        Delete(usergroup,username);
+        Delete();
         break;
     default:
         break;
