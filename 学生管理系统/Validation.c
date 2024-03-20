@@ -2,10 +2,11 @@
 
 void Validation(char * username) //验证功能
 {
-    int tureusername = 0;
+    
     int flag = 0;
     int i = 1;
-    FILE* file_read = fopen("users.txt","r");
+    FILE* file_read = fopen("Students.txt","r");
+    FILE* file_read = fopen("Admin.txt","r");
     if(file_read == NULL)
     {
         printf("连接服务器失败！\n");
