@@ -22,7 +22,7 @@ typedef struct //定义管理者结构体
     int code[20];
 } Administrator;
 
-void Initialface();//初始界面
+void Initialface(char *username);//初始界面
 void Validation(char *username,int *usergroup);//验证功能
 void Interface(int usergroup,char username,int *sc);//登录显示界面
 void Input(int usergroup,char username);//录入功能
