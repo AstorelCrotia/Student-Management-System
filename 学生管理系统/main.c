@@ -8,7 +8,7 @@ int main()
     int usergroup = 0;
     int sc = 0;
     Initialface(username);
-    Validation(username);
+    Validation(username,usergroup);
     Interface(usergroup,username);
     switch (sc)
     {
