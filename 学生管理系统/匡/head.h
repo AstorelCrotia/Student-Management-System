@@ -41,10 +41,10 @@ char *decrypt(char *code);//解密
 char *encrypt(char *code);//加密
 //管理员与学生功能面板
 void InterfaceAdmin(int usergroup,Administratorlist *admin,StudentList *student);//管理调用函数
-void InterfaceStudent(StudentList *student,char *name);//学生
+void InterfaceStudent(StudentList *student,char *id);//学生
 void supAdminFunc(Administratorlist *admin,StudentList *student);//超级管理的功能
 void AdminFunc(StudentList *student);//普通
-void studentFunc(StudentList *student,char *name);//学生
+void studentFunc(StudentList *student,char *id);//学生
 //功能实现
 void InputAdmin(Administratorlist *a);//添加管理员
 int checkAdminExistence(char *name,Administratorlist *admin);//查询管理员是否存在
@@ -64,6 +64,6 @@ void QueryStuByClass(StudentList *student);//班级排序
 void QueryStuById(StudentList *student);//学号排序
 //修改学生信息
 void ModifyStu(StudentList *student);//先查询学生，修改学生信息
-void ModifyStuCode(StudentList *student,char *name);//修改密码
+void ModifyStuCode(StudentList *student,char *id);//修改密码
 //删除学生
 void Delete(StudentList *student);

@@ -9,7 +9,7 @@ void InputStu(StudentList *student){//添加学生
     }
     while(1){
         printf("请输入学号：");
-        scanf("%s",id);
+        scanf(" %s",id);
         int i=checkStuExistence(id,student);
         if(i==1){
             printf("学号重复，请重新输入需添加的学生的学号!\n");
@@ -18,6 +18,10 @@ void InputStu(StudentList *student){//添加学生
         }
     }
     StudentList *newstudent=malloc(sizeof(StudentList));
+    if(newstudent==NULL){
+        printf("内存分配失败！\n");
+        return;
+    }
     strcpy(newstudent->id,id);
     while(1){
         printf("请输入密码:");
@@ -31,30 +35,29 @@ void InputStu(StudentList *student){//添加学生
         }
     }
     printf("\n请输入学生的姓名：");
-    scanf("%s",newstudent->name);
+    scanf(" %s",newstudent->name);
     printf("请输入学生的性别：");
-    scanf("%s",newstudent->gender);
+    scanf(" %s",newstudent->gender);
     printf("请输入学生的班级：");
-    scanf("%s",newstudent->class);
+    scanf(" %s",newstudent->class);
     printf("请输入学生的年龄：");
-    scanf("%d",&newstudent->age);
+    scanf(" %d",&newstudent->age);
     printf("请输入学生的语文成绩：");
-    scanf("%d",&newstudent->chinese);
+    scanf(" %d",&newstudent->chinese);
     printf("请输入学生的数学成绩：");
-    scanf("%d",&newstudent->math);
+    scanf(" %d",&newstudent->math);
     printf("请输入学生的英语成绩：");
-    scanf("%d",&newstudent->english);
+    scanf(" %d",&newstudent->english);
     char *encode=encrypt(code1);
     strcpy(newstudent->code,encode);
     getSumScore(newstudent);
-    newstudent->next=NULL;
     head->next=newstudent;
     head=newstudent;
+    head->next=NULL;
     QueryStuByRankDown(student);
     inPutStuTxt(student->next);
     printf("添加成功!\n");
     free(newstudent);
-    newstudent=NULL;
 }
 int checkStuExistence(char *id,StudentList *student) //验证功能
 {   

@@ -2,23 +2,23 @@
 char *ValidationStu(StudentList *Student) //验证功能
 {
     StudentList *trueuser=Student;
-    char name[20]="0";
+    char id[20]="0";
     char code[20]="0";
     int flag = 2;
     int sc=0;
-    printf("请输入学生用户名：");
-    scanf("%s",name);
+    printf("请输入学生学号：");
+    scanf("%s",id);
     while(trueuser!=NULL)
     {   
-        if(!strcmp(trueuser->name,name)){
+        if(!strcmp(trueuser->id,id)){
             break;
         }
         trueuser=trueuser->next;
         if(trueuser==NULL)
         {
             printf("学生账户不存在,请重新输入!\n");
-            printf("请输入学生用户名：");
-            scanf("%s",name);
+            printf("请输入学生学号：");
+            scanf("%s",id);
             trueuser=Student;
         }
     }
@@ -34,12 +34,12 @@ char *ValidationStu(StudentList *Student) //验证功能
             printf("\n登录成功！\n");
         }
         else{
-            printf("密码错误,你还有%d次输入机会,请重新输入密码！\n",flag);
+            printf("\n密码错误,你还有%d次输入机会,请重新输入密码！\n",flag);
             printf("请输入密码：");
             GetPasscode(code);
             flag--;
         }
     }
-    char *p=name;
+    char *p=id;
     return p; 
 }

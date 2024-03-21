@@ -33,40 +33,47 @@ void ModifyStu(StudentList *student) //修改学生信息
     QueryStuByRankDown(student);
     inPutStuTxt(student->next);
 }
-void ModifyStuCode(StudentList *student,char *name){
+void ModifyStuCode(StudentList *student,char *id){
     StudentList *p=student->next;
     char code[20]="0";
     char code1[20]="0";
     char code2[20]="0";
     int flag=2;
+    printf("%s\n",id);
     while(p!=NULL){
-        if(!strcmp(p->name,name)){
-        while(1)
-            printf("请输入原密码：");
-            GetPasscode(code);
-            char *truecode=decrypt(p->code);
-            if(!strcmp(truecode,code)){
-                while (1){
-                    printf("请输入修改后的密码：");
-                    GetPasscode(code1);
-                    printf("请再次输入修改后的密码：");
-                    GetPasscode(code2);
-                    if(!strcmp(code1,code2)){
-                        char *encode=encrypt(code1);
-                        strcpy(p->code,encode);
-                        printf("修改成功");
-                        return;
-                    }else{
-                        printf("两次密码不一致，请重新输入！\n");
+        if(!strcmp(p->id,id)){
+            break;
+        }
+        p=p->next;
+    }
+    while(1){
+        printf("请输入原密码：");
+        GetPasscode(code);
+        if(!strcmp(p->code,code)){
+            while (1){
+                printf("\n请输入修改后的密码：");
+                GetPasscode(code1);
+                printf("\n请再次输入修改后的密码：");
+                GetPasscode(code2);
+                if(!strcmp(code1,code2)){
+                    char *encode=encrypt(code1);
+                    strcpy(p->code,encode);
+                    printf("\n修改成功!");
+                    inPutStuTxt(student->next);
+                    return;
+                }else{
+                    printf("两次密码不一致，请重新输入！\n");
                     }
                 }
-            }else if(flag==0){
-                printf("原密码输入错误次数过多，请检查后在进行修改！");
-            }else{
-                printf("原密码错误，你还有%d次机会，请重新输入！\n",flag);
+        }else{
+            if(flag==0){
+                printf("\n原密码输入错误次数过多，请检查后在进行修改！\n");
+                return;
+            }
+            else{
+                printf("\n原密码错误，你还有%d次机会，请重新输入！\n",flag);
                 flag--;
             }
         }
     }
-    inPutStuTxt(student->next);
 }
