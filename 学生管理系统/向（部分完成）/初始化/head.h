@@ -7,7 +7,7 @@ typedef struct Student//定义学生结构体
     char username[20];
     char name[20];
     char gender[10];
-    char code[20];
+    int code[20];
     char class[20];
     int math;
     int chinese;
@@ -26,7 +26,7 @@ typedef struct Administrator //定义管理者结构体
 } Administrator;
 
 void Initialface(char *username);//初始界面
-void Validation(char *username,int *usergroup,int *sc);//验证功能
+void Validation(char *username,int *usergroup,int *sc,int *flag);//验证功能
 void Interface(int usergroup,char *username,int *sc);//登录显示界面
 void Input(int usergroup,char username);//录入功能
 void Query(Student s1);//查询功能

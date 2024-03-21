@@ -1,10 +1,12 @@
 #include "head.h"
 
-void Validation(char *username, int *usergroup,int *sc,int *flag) // 验证功能
+void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
 {
-    Student *turestudent = (Student *)malloc(sizeof(Student));
-    Administrator *tureadmin = (Administrator *)malloc(sizeof(Administrator));
+    Student turestudent = {0};
+    Administrator tureadmin = {0};
     int i = 1;
+    int flag = 0;
+    char code[20] = "\0";
     FILE *file_student = fopen("Students.txt", "r");
     if (file_student == NULL)
     {
@@ -21,30 +23,30 @@ void Validation(char *username, int *usergroup,int *sc,int *flag) // 验证功能
     }
     while (i != 3)
     {
-        *flag = 0;
-        while (fread(turestudent, sizeof(Student), 1, file_student) == 1)
+        flag = 0;
+        while (fread(&turestudent, sizeof(Student), 1, file_student) == 1)
         {
-            if (strcmp(username, turestudent->username) == 0)
+            if (strcmp(username, turestudent.username) == 0)
             {
-                printf("欢迎登录！\n");
+                printf("用户名存在！\n");
                 *usergroup = 2;
-                *flag = 2;
+                flag = 2;
                 break;
             }
         }
         rewind(file_student);
-        while (fread(tureadmin, sizeof(Administrator), 1, file_admin) == 1)
+        while (fread(&tureadmin, sizeof(Administrator), 1, file_admin) == 1)
         {
-            if (strcmp(username, tureadmin->username) == 0)
+            if (strcmp(username, tureadmin.username) == 0)
             {
-                printf("欢迎登录！\n");
+                printf("用户名存在！\n");
                 *usergroup = 1;
-                *flag = 2;
+                flag = 2;
                 break;
             }
         }
         rewind(file_admin);
-        if (*flag == 2)
+        if (flag == 2)
         {
             break;
         }
@@ -53,21 +55,117 @@ void Validation(char *username, int *usergroup,int *sc,int *flag) // 验证功能
             printf("用户名不存在！\n");
             printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
             printf("你可以输入“1”重新输入，输入其他退出：");
-            scanf("%d",flag);
-            if (*flag == 1)
+            scanf("%d", &flag);
+            if (flag == 1)
             {
                 printf("请输入用户名:");
-                scanf("%s", username);
+                scanf("%19s", username);
+                i++;
             }
             else
             {
                 break;
             }
         }
-        i++;
+        if (i == 3)
+        {
+            printf("错误三次，程序退出!\n");
+        }
+    }
+    if (*usergroup == 2)
+    {
+        i = 1;
+        flag = 0;
+        printf("请输入密码：");
+        scanf("%19s", code);
+        while (i != 3)
+        {
+            while (fread(&turestudent, sizeof(Student), 1, file_student) == 1)
+            {
+                if (strcmp(code, turestudent.code) == 0)
+                {
+                    printf("欢迎登录！\n");
+                    flag = 2;
+                    break;
+                }
+                rewind(file_student);
+            }
+            if (flag == 2)
+            {
+                break;
+            }
+            else
+            {
+                printf("密码不正确！\n");
+                printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
+                printf("你可以输入“1”重新输入，输入其他退出：");
+                scanf("%d", &flag);
+                if (flag == 1)
+                {
+                    printf("请输入密码:");
+                    scanf("%19s", code);
+                    i++;
+                }
+                else
+                {
+                    *usergroup = 0;
+                    break;
+                }
+            }
+            if (i == 3)
+            {
+                *usergroup = 0;
+                printf("错误三次，程序退出!\n");
+            }
+        }
+    }
+    else if (*usergroup == 1)
+    {
+        i = 1;
+        flag = 0;
+        printf("请输入密码：");
+        scanf("%19s", code);
+        while (i != 3)
+        {
+            while (fread(&tureadmin, sizeof(Administrator), 1, file_admin) == 1)
+            {
+                if (strcmp(code, tureadmin.code) == 0)
+                {
+                    printf("欢迎登录！\n");
+                    flag = 2;
+                    break;
+                }
+            }
+            rewind(file_admin);
+            if (flag == 2)
+            {
+                break;
+            }
+            else
+            {
+                printf("密码不正确！\n");
+                printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
+                printf("你可以输入“1”重新输入，输入其他退出：");
+                scanf("%d", &flag);
+                if (flag == 1)
+                {
+                    printf("请输入密码:");
+                    scanf("%19s", code);
+                    i++;
+                }
+                else
+                {
+                    *usergroup = 0;
+                    break;
+                }
+            }
+            if (i == 3)
+            {
+                *usergroup = 0;
+                printf("错误三次，程序退出!\n");
+            }
+        }
     }
     fclose(file_student);
     fclose(file_admin);
-    free(tureadmin);
-    free(turestudent);
 }

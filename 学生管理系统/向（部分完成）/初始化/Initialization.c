@@ -35,7 +35,7 @@ int main()
             break;
         }
     }
-    FILE *file_write = fopen("admin.txt", "a");
+    FILE *file_write = fopen("Admin.txt", "w");
     if (file_write == NULL)
     {
         printf("创建失败\n");
@@ -44,8 +44,7 @@ int main()
     temp = head;
     while (temp != NULL)
     {
-        fprintf(file_write,"用户名：%s\n",temp->username);
-        fprintf(file_write,"密码：%s\n",temp->code);
+        fwrite(temp,sizeof(Administrator),1,file_write);
         temp = temp->next;
     }
     fclose(file_write);
