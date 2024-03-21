@@ -1,10 +1,9 @@
 #include "head.h"
 
-void Validation(char *username, int *usergroup,int *sc) // 验证功能
+void Validation(char *username, int *usergroup,int *sc,int *flag) // 验证功能
 {
-    Student *turestudent = NULL;
-    Administrator *tureadmin = NULL;
-    int flag = 0;
+    Student *turestudent = (Student *)malloc(sizeof(Student));
+    Administrator *tureadmin = (Administrator *)malloc(sizeof(Administrator));
     int i = 1;
     FILE *file_student = fopen("Students.txt", "r");
     if (file_student == NULL)
@@ -22,14 +21,14 @@ void Validation(char *username, int *usergroup,int *sc) // 验证功能
     }
     while (i != 3)
     {
-        flag = 0;
+        *flag = 0;
         while (fread(turestudent, sizeof(Student), 1, file_student) == 1)
         {
             if (strcmp(username, turestudent->username) == 0)
             {
                 printf("欢迎登录！\n");
                 *usergroup = 2;
-                flag = 2;
+                *flag = 2;
                 break;
             }
         }
@@ -40,12 +39,12 @@ void Validation(char *username, int *usergroup,int *sc) // 验证功能
             {
                 printf("欢迎登录！\n");
                 *usergroup = 1;
-                flag = 2;
+                *flag = 2;
                 break;
             }
         }
         rewind(file_admin);
-        if (flag == 2)
+        if (*flag == 2)
         {
             break;
         }
@@ -54,8 +53,8 @@ void Validation(char *username, int *usergroup,int *sc) // 验证功能
             printf("用户名不存在！\n");
             printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
             printf("你可以输入“1”重新输入，输入其他退出：");
-            scanf("%d",&flag);
-            if (flag == 1)
+            scanf("%d",flag);
+            if (*flag == 1)
             {
                 printf("请输入用户名:");
                 scanf("%s", username);

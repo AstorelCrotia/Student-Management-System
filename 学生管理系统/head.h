@@ -24,7 +24,7 @@ typedef struct Administrator //定义管理者结构体
 } Administrator;
 
 void Initialface(char *username);//初始界面
-void Validation(char *username,int *usergroup,int *sc);//验证功能
+void Validation(char *username,int *usergroup,int *sc,int *flag);//验证功能
 void Interface(int usergroup,char username,int *sc);//登录显示界面
 void Input(int usergroup,char username);//录入功能
 void Query(Student s1);//查询功能

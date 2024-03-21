@@ -6,12 +6,13 @@ int main()
     char username[20] = "0";
     int usergroup = 0;
     int sc = 0;
+    int flag = 0;
     Initialface(&username);
-    Validation(&username,&usergroup,&sc);
+    Validation(&username,&usergroup,&sc,&flag);
     if(sc == 1 && usergroup != 0)
     {
         return 0;
     }
-    Interface(username,usergroup,&sc);
+    Interface(usergroup,username,&sc);
     return 0;
 }
