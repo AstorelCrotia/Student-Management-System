@@ -64,8 +64,6 @@ void Input(int usergroup) // 录入
     else if (sc == 1)
     {
         Student studentuser = {0};
-        Student *head = NULL;
-        Student *temp = NULL;
         char input = '0';
         int flag = 0;
         while (1)
@@ -109,6 +107,7 @@ void Input(int usergroup) // 录入
                 scanf("%f", &student.chinese);
                 printf("请输入学生的英语成绩：");
                 scanf("%f", &student.english);
+                student.sum = student.math + student.chinese + student.english;
                 printf("请输入学生的年龄：");
                 scanf("%d", &student.age);
             }

@@ -111,4 +111,8 @@ void Interface(int usergroup, char *username) // ½çÃæ
             break;
         }
     }
+    else
+    {
+        return;
+    }
 }
