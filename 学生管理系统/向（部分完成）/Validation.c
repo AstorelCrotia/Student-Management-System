@@ -10,6 +10,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
     FILE *file_student = fopen("Students.txt", "r");
     if (file_student == NULL)
     {
+        printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
         printf("连接服务器失败！\n");
         *sc = 1;
         return;
@@ -17,6 +18,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
     FILE *file_admin = fopen("Admin.txt", "r");
     if (file_admin == NULL)
     {
+        printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
         printf("连接服务器失败！\n");
         *sc = 1;
         return;
@@ -28,6 +30,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
         {
             if (strcmp(username, turestudent.username) == 0)
             {
+                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                 printf("用户名存在！\n");
                 *usergroup = 2;
                 flag = 2;
@@ -39,6 +42,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
         {
             if (strcmp(username, tureadmin.username) == 0)
             {
+                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                 printf("用户名存在！\n");
                 *usergroup = 1;
                 flag = 2;
@@ -52,12 +56,14 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
         }
         else
         {
+            printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
             printf("用户名不存在！\n");
             printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
             printf("你可以输入“1”重新输入，输入其他退出：");
             scanf("%d", &flag);
             if (flag == 1)
             {
+                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                 printf("请输入用户名:");
                 scanf("%19s", username);
                 i++;
@@ -69,6 +75,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
         }
         if (i == 3)
         {
+            printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
             printf("错误三次，程序退出!\n");
         }
     }
@@ -76,6 +83,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
     {
         i = 1;
         flag = 0;
+        printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
         printf("请输入密码：");
         scanf("%19s", code);
         while (i != 3)
@@ -84,6 +92,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
             {
                 if (strcmp(code, turestudent.code) == 0)
                 {
+                    printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                     printf("欢迎登录！\n");
                     flag = 2;
                     break;
@@ -96,12 +105,14 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
             }
             else
             {
+                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                 printf("密码不正确！\n");
                 printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
                 printf("你可以输入“1”重新输入，输入其他退出：");
                 scanf("%d", &flag);
                 if (flag == 1)
                 {
+                    printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                     printf("请输入密码:");
                     scanf("%19s", code);
                     i++;
@@ -115,6 +126,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
             if (i == 3)
             {
                 *usergroup = 0;
+                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                 printf("错误三次，程序退出!\n");
             }
         }
@@ -123,6 +135,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
     {
         i = 1;
         flag = 0;
+        printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
         printf("请输入密码：");
         scanf("%19s", code);
         while (i != 3)
@@ -131,6 +144,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
             {
                 if (strcmp(code, tureadmin.code) == 0)
                 {
+                    printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                     printf("欢迎登录！\n");
                     flag = 2;
                     break;
@@ -143,12 +157,14 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
             }
             else
             {
+                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                 printf("密码不正确！\n");
                 printf("这是第%d次输入错误，你还有%d次机会\n", i, 3 - i);
                 printf("你可以输入“1”重新输入，输入其他退出：");
                 scanf("%d", &flag);
                 if (flag == 1)
                 {
+                    printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                     printf("请输入密码:");
                     scanf("%19s", code);
                     i++;
@@ -162,6 +178,7 @@ void Validation(char *username, int *usergroup, int *sc) // 验证用户名功能
             if (i == 3)
             {
                 *usergroup = 0;
+                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
                 printf("错误三次，程序退出!\n");
             }
         }
