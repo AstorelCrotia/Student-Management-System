@@ -3,14 +3,14 @@
 void InterfaceAdmin(int usergroup,Administratorlist *admin,StudentList *student) //界面
 {
     if(usergroup == 1){
-        supAdminFunc(admin,student);
+        supAdminFunc(admin,student);// 超管界面
     }
     if(usergroup == 2)
     {
-        AdminFunc(student);
+        AdminFunc(student);// 管理员界面
     }
 }
-void InterfaceStudent(StudentList *student,char *id){
+void InterfaceStudent(StudentList *student,char *id){// 学生界面
     studentFunc(student,id);
 }
 void supAdminFunc(Administratorlist *admin,StudentList *student){

@@ -1,6 +1,6 @@
 #include "head.h"
 
-char *encrypt(char *code){//ÃÜÂë¼ÓÃÜ
+char *encrypt(char *code){// åŠ å¯†
     int len=strlen(code);
     for(int i=0;i<len;i++){
         char c=code[i];

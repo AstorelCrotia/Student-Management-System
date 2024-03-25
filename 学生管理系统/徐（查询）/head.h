@@ -22,48 +22,50 @@ typedef struct administratorlist{
     char code[20];
     struct administratorlist *next;    
 } Administratorlist;
-//½«ÎÄ¼şÖĞµÄÊı¾İĞ´ÈëÁ´±í
-Administratorlist *CreateAdminList();//´Óadmintxt»ñÈ¡´´½¨Á´±í
-Administratorlist * CreateAdminList1();//Â¼Èë³¬¼¶¹ÜÀíÔ±µÄ£¬¿ÉÒÔ²»¹Ü
-StudentList * CreateStuList() ;//´Óstudenttxt»ñÈ¡´´½¨Á´±í
-//³õÊ¼Ò³ÃæÑ¡Ïî
+// å°†æ–‡ä»¶ä¸­çš„æ•°æ®å†™å…¥é“¾è¡¨
+Administratorlist *CreateAdminList();
+Administratorlist * CreateAdminList1();
+StudentList * CreateStuList() ;
+// åˆå§‹ç•Œé¢ç®¡ç†
 int Initialface();
-//¹ÜÀíÔ±ÓëÑ§ÉúµÇÂ¼ÓëÑéÖ¤
-int ValidationAdmin(Administratorlist *Admin);//¹ÜÀíÔ±µÇÂ¼£¬ÅĞ¶Ï³¬¼¶¹ÜÀíºÍÆÕÍ¨¹ÜÀí
-char *ValidationStu(StudentList *Student);//Ñ§ÉúµÇÂ¼£¬·µ»ØÑ§ÉúĞÕÃû
-//ÃÜÂëÑÚ¸Ç concealCode.c
+// ç®¡ç†å‘˜ä¸å­¦ç”Ÿç™»å½•ä¸éªŒè¯
+int ValidationAdmin(Administratorlist *Admin);
+char *ValidationStu(StudentList *Student);
+// å¯†ç æ©ç›– concealCode.c
 void gotXY(int x,int y);
 int posx();
 int posy();
 void GetPasscode(char* code);
-//½âÃÜÓë¼ÓÃÜÃÜÂë
-char *decrypt(char *code);//½âÃÜ
-char *encrypt(char *code);//¼ÓÃÜ
-//¹ÜÀíÔ±ÓëÑ§Éú¹¦ÄÜÃæ°å
-void InterfaceAdmin(int usergroup,Administratorlist *admin,StudentList *student);//¹ÜÀíµ÷ÓÃº¯Êı
-void InterfaceStudent(StudentList *student,char *id);//Ñ§Éú
-void supAdminFunc(Administratorlist *admin,StudentList *student);//³¬¼¶¹ÜÀíµÄ¹¦ÄÜ
-void AdminFunc(StudentList *student);//ÆÕÍ¨
-void studentFunc(StudentList *student,char *id);//Ñ§Éú
-//¹¦ÄÜÊµÏÖ
-void InputAdmin(Administratorlist *a);//Ìí¼Ó¹ÜÀíÔ±
-int checkAdminExistence(char *name,Administratorlist *admin);//²éÑ¯¹ÜÀíÔ±ÊÇ·ñ´æÔÚ
-void inPutAdminTxt(Administratorlist *head);//±£´æµ½ÎÄ¼şadmin.txt
+// è§£å¯†ä¸åŠ å¯†å¯†ç 
+char *decrypt(char *code);//è§£å¯†
+char *encrypt(char *code);//åŠ å¯†
+// ç®¡ç†å‘˜ä¸å­¦ç”Ÿç®¡ç†ç³»ç»Ÿ
+void InterfaceAdmin(int usergroup,Administratorlist *admin,StudentList *student);
+void InterfaceStudent(StudentList *student,char *id);
+void supAdminFunc(Administratorlist *admin,StudentList *student);
+void AdminFunc(StudentList *student);
+void studentFunc(StudentList *student,char *id);
+// åŠŸèƒ½å®ç°
+void InputAdmin(Administratorlist *a);// æ·»åŠ ç®¡ç†å‘˜
+int checkAdminExistence(char *name,Administratorlist *admin);// æŸ¥è¯¢ç®¡ç†å‘˜æ˜¯å¦å­˜åœ¨
+void inPutAdminTxt(Administratorlist *head);//ä¿å­˜åˆ°æ–‡ä»¶admin.txt
 //
-void InputStu(StudentList *s);//Ìí¼ÓÑ§Éú
-void  getSumScore(StudentList *student);//»ñµÃÑ§Éú×Ü·Ö
-int checkStuExistence(char *id,StudentList *student);//²éÑ¯Ñ§ºÅÊÇ·ñÖØ¸´
-void inPutStuTxt(StudentList *head);//·ÅÈëÑ§Éútxt
-//²éÑ¯²Ù×÷
-int getStu_Count(StudentList *student);//Ñ§ÉúÈËÊı
-void QueryStu(StudentList *student);//²éÑ¯Ãæ°å
-void QueryStuByRankDown(StudentList *student);//Ãû´Î½µĞò
-void QueryStuByRankUp(StudentList *student);//Ãû´ÎÉıĞò
-void QueryStuByName(StudentList *student);//ĞÕÃûÅÅĞò
-void QueryStuByClass(StudentList *student);//°à¼¶ÅÅĞò
-void QueryStuById(StudentList *student);//Ñ§ºÅÅÅĞò
-//ĞŞ¸ÄÑ§ÉúĞÅÏ¢
-void ModifyStu(StudentList *student);//ÏÈ²éÑ¯Ñ§Éú£¬ĞŞ¸ÄÑ§ÉúĞÅÏ¢
-void ModifyStuCode(StudentList *student,char *id);//ĞŞ¸ÄÃÜÂë
-//É¾³ıÑ§Éú
+void InputStu(StudentList *s);// æ·»åŠ å­¦ç”Ÿ
+void  getSumScore(StudentList *student);// è·å¾—å­¦ç”Ÿæ€»åˆ†
+int checkStuExistence(char *id,StudentList *student);//æŸ¥è¯¢å­¦å·æ˜¯å¦é‡å¤
+void inPutStuTxt(StudentList *head);//æ”¾å…¥å­¦ç”Ÿtxt
+// æŸ¥è¯¢æ“ä½œ
+int getStu_Count(StudentList *student);// å­¦ç”Ÿäººæ•°
+void QueryStu(StudentList *student);// æŸ¥è¯¢é¢æ¿
+void QueryStuByRankDown(StudentList *student);// åæ¬¡é™åº
+void QueryStuByName(StudentList *student,char name[]);// æ ¹æ®å§“åæŸ¥è¯¢
+void QueryStuById(StudentList *student,int id);// æ ¹æ®å­¦å·æŸ¥è¯¢
+void QueryStuByChinese(StudentList *student,int chinese);// æ ¹æ®è¯­æ–‡æˆç»©æŸ¥è¯¢
+void QueryStuByMath(StudentList *student,int math);// æ ¹æ®æ•°å­¦æˆç»©æŸ¥è¯¢
+void QueryStuByEnglish(StudentList *student,int english);// æ ¹æ®å¤–è¯­æˆç»©æŸ¥è¯¢
+void QueryStuByRank(StudentList *student,int rank);// æ ¹æ®æ€»æ’åæŸ¥è¯¢
+// ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯
+void ModifyStu(StudentList *student);
+void ModifyStuCode(StudentList *student,char *id);
+// åˆ é™¤å­¦ç”Ÿ
 void Delete(StudentList *student);

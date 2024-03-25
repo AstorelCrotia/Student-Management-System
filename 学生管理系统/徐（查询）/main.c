@@ -11,10 +11,10 @@ int main()
     switch (loginSelect)
     {
     case 1:usergroup=ValidationAdmin(a);
-            InterfaceAdmin(usergroup,a,s);
+            InterfaceAdmin(usergroup,a,s);// 管理员界面
         break;
     case 2:id=ValidationStu(s);
-            InterfaceStudent(s,id);
+            InterfaceStudent(s,id);//  学生界面
             break;
     default:
         break;
