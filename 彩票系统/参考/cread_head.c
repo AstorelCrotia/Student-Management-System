@@ -1,37 +1,37 @@
 
 /*******************************************
-*åŠŸ  èƒ½ï¼š	äº§ç”Ÿå¤´èŠ‚ç‚¹
+*¹¦  ÄÜ£º	²úÉúÍ·½Úµã
 ********************************************/
 
 #include<stdio.h>
 #include<stdlib.h>
 #include"fun.h"
 
-/***********ç”¨æˆ·æ³¨å†Œäº§ç”Ÿå¤´èŠ‚ç‚¹******************/
+/***********ÓÃ»§×¢²á²úÉúÍ·½Úµã******************/
 struct person * person_creat_head(struct person *H)
 {
 	struct person *newnode=NULL;
 	newnode = (struct person *)malloc(sizeof(struct person));
 	if(newnode == NULL)
 	{
-		printf("äº§ç”Ÿå¤´èŠ‚ç‚¹æ—¶ç©ºé—´éžé…é”™è¯¯ï¼\n");
+		printf("²úÉúÍ·½ÚµãÊ±¿Õ¼ä·ÇÅä´íÎó£¡\n");
 		exit(0);
 	}
 	newnode->id = 0;
-	newnode->person_money=admin_init_money;	//ç®¡ç†å‘˜åˆå§‹é‡‘é¢
+	newnode->person_money=admin_init_money;	//¹ÜÀíÔ±³õÊ¼½ð¶î
 	strcpy(newnode->passwd,"admin");
 	strcpy(newnode->name,"admin");
 	newnode->next = NULL;
 	return newnode;
 }
 
-/***********è´­ç¥¨ä¿¡æ¯äº§ç”Ÿå¤´èŠ‚ç‚¹*****************
-*åŠŸ  èƒ½ï¼š	è´­ç¥¨ä¿¡æ¯äº§ç”Ÿå¤´èŠ‚ç‚¹
-*æ  ç¤ºï¼š	å¤´èŠ‚å€Ÿå­˜ç®¡ç†å‘˜æ‘‡å¥–åŽçš„ä¿¡æ¯
-*   idï¼š		å­˜æ”¾ä¸Šä¸€æœŸä½“å½©ä¸­å¥–å·ç 
-*number:	å­˜æ”¾ä¸Šä¸€æœŸæ…ˆå–„å½©ç¥¨ä¸­å¥–å·ç 
-*amount:	å­˜æ”¾ä¸Šä¸€æœŸæ•‘ç¾å½©ç¥¨ä¸­å¥–å·ç 
-*ticket_dayth : å¯å¤Ÿä¹°çš„æœŸå·
+/***********¹ºÆ±ÐÅÏ¢²úÉúÍ·½Úµã*****************
+*¹¦  ÄÜ£º	¹ºÆ±ÐÅÏ¢²úÉúÍ·½Úµã
+*Ìá  Ê¾£º	Í·½Ú½è´æ¹ÜÀíÔ±Ò¡½±ºóµÄÐÅÏ¢
+*   id£º		´æ·ÅÉÏÒ»ÆÚÌå²ÊÖÐ½±ºÅÂë
+*number:	´æ·ÅÉÏÒ»ÆÚ´ÈÉÆ²ÊÆ±ÖÐ½±ºÅÂë
+*amount:	´æ·ÅÉÏÒ»ÆÚ¾ÈÔÖ²ÊÆ±ÖÐ½±ºÅÂë
+*ticket_dayth : ¿É¹»ÂòµÄÆÚºÅ
 ********************************************/
 
 struct buy_ticket * buy_creat_head(struct buy_ticket *buy_H)
@@ -40,21 +40,21 @@ struct buy_ticket * buy_creat_head(struct buy_ticket *buy_H)
 	newnode = (struct buy_ticket *)malloc(sizeof(struct buy_ticket));
 	if(newnode == NULL)
 	{
-		printf("äº§ç”Ÿå¤´èŠ‚ç‚¹æ—¶ç©ºé—´éžé…é”™è¯¯ï¼\n");
+		printf("²úÉúÍ·½ÚµãÊ±¿Õ¼ä·ÇÅä´íÎó£¡\n");
 		exit(0);
 	}
-	newnode->person_id = 0;			//ä¸Šä¸€æœŸä½“å½©ä¸­å¥–å·ç 
-	newnode->ticket_number = 0;		//æ…ˆå–„
-	newnode->ticket_amount = 0;		//æ•‘ç¾å½©ç¥¨
-	newnode->ticket_dayth = 1201;	//åˆå§‹åŒ–ä¸º1201
-	newnode->ticket_winmoney = 0;	//åˆå§‹ä¸­å¥–ä¸º0
+	newnode->person_id = 0;			//ÉÏÒ»ÆÚÌå²ÊÖÐ½±ºÅÂë
+	newnode->ticket_number = 0;		//´ÈÉÆ
+	newnode->ticket_amount = 0;		//¾ÈÔÖ²ÊÆ±
+	newnode->ticket_dayth = 1201;	//³õÊ¼»¯Îª1201
+	newnode->ticket_winmoney = 0;	//³õÊ¼ÖÐ½±Îª0
 	newnode->next = NULL;
 	return newnode;
 }
 
 
-/***********æ¯æœŸä¸­å¥–ä¿¡æ¯äº§ç”Ÿå¤´èŠ‚ç‚¹*****************
-*		å¤´èŠ‚ç‚¹å¯å­˜å‚¨ä¸‹ä¸€æœŸçš„æœŸå·
+/***********Ã¿ÆÚÖÐ½±ÐÅÏ¢²úÉúÍ·½Úµã*****************
+*		Í·½Úµã¿É´æ´¢ÏÂÒ»ÆÚµÄÆÚºÅ
 ********************************************/
 /*
 struct news * win_creat_head(struct news *win_H)
@@ -63,10 +63,10 @@ struct news * win_creat_head(struct news *win_H)
 	newnode = (struct news *)malloc(sizeof(struct news));
 	if(newnode == NULL)
 	{
-		printf("äº§ç”Ÿå¤´èŠ‚ç‚¹æ—¶ç©ºé—´éžé…é”™è¯¯ï¼\n");
+		printf("²úÉúÍ·½ÚµãÊ±¿Õ¼ä·ÇÅä´íÎó£¡\n");
 		exit(0);
 	}
-	newnode->dayth = 1;		//å¤´èŠ‚ç‚¹çš„daythå­˜ç”¨æˆ·å¯ä»¥è´­ä¹°çš„æœŸå·
+	newnode->dayth = 1;		//Í·½ÚµãµÄdayth´æÓÃ»§¿ÉÒÔ¹ºÂòµÄÆÚºÅ
 	newnode->next = NULL;
 	return newnode;
 }

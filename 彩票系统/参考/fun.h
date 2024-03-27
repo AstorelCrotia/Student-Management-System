@@ -1,25 +1,25 @@
 
 /**********************************************
-*åŠŸ  èƒ½ï¼š	å¤´æ–‡ä»¶fun.h
-*ä½œ  è€…ï¼š	Cã€€ï¼­
-*æ—¥æœŸï¼š2.24 12ï¼š08
+*¹¦  ÄÜ£º	Í·ÎÄ¼şfun.h
+*×÷  Õß£º	C¡¡£Í
+*ÈÕÆÚ£º2.24 12£º08
 ************************************************/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<unistd.h>
 
-/*-----------å®å®šä¹‰-------------------*/
-#define user_init_money 10		//æ–°æ³¨å†Œç”¨æˆ·åˆå§‹é‡‘é¢
-#define ticket_value 5			//æ¯å¼ å½©ç¥¨ä»·æ ¼
-#define admin_init_money 500	//å¥–æ± åˆå§‹é‡‘é¢
-#define ticket_win_money 20		//æ¯æŸ±ä¸­å¥–é‡‘é¢
-#define ticket_max 20			//ä¸­å¥–å·ç èŒƒå›´
-#define sport_win 15			//ä½“è‚²å½©ç¥¨ä¸­å¥–é‡‘é¢
-#define love_win 20				//æ…ˆå–„å½©ç¥¨ä¸­å¥–é‡‘é¢
-#define disastor_win 10			//æ•‘ç¾å½©ç¥¨ä¸­å¥–é‡‘é¢
+/*-----------ºê¶¨Òå-------------------*/
+#define user_init_money 10		//ĞÂ×¢²áÓÃ»§³õÊ¼½ğ¶î
+#define ticket_value 5			//Ã¿ÕÅ²ÊÆ±¼Û¸ñ
+#define admin_init_money 500	//½±³Ø³õÊ¼½ğ¶î
+#define ticket_win_money 20		//Ã¿ÖùÖĞ½±½ğ¶î
+#define ticket_max 20			//ÖĞ½±ºÅÂë·¶Î§
+#define sport_win 15			//ÌåÓı²ÊÆ±ÖĞ½±½ğ¶î
+#define love_win 20				//´ÈÉÆ²ÊÆ±ÖĞ½±½ğ¶î
+#define disastor_win 10			//¾ÈÔÖ²ÊÆ±ÖĞ½±½ğ¶î
 
-/*-------å½©ç¥¨ç±»å‹å®šä¹‰-----------------*/
+/*-------²ÊÆ±ÀàĞÍ¶¨Òå-----------------*/
 enum ticket
 {
 	sport_ticket = 1,
@@ -27,16 +27,16 @@ enum ticket
 	disastor_ticket,
 };
 
-/*----------å…¨å±€å˜é‡----------------*/
-int len;			//æ³¨å†Œç”¨æˆ·id
-int len_user;		//æ³¨å†Œç”¨æˆ·æ•°é‡ï¼Œæœ‰åˆ é™¤æ—¶len != len_userå…¶ä»–æ—¶ç›¸ç­‰
-int len_buy;		//è´­ç¥¨ä¿¡æ¯æ•°é‡ï¼Œç”¨æˆ·æ’åº
-int menu_select;	//èœå•é€‰æ‹©
-int save_flag;		//ä¿¡æ¯æ˜¯å¦æœ‰æ”¹åŠ¨æ ‡å¿—ä½
-int ticketdayth;	//å½©ç¥¨æœŸå·
+/*----------È«¾Ö±äÁ¿----------------*/
+int len;			//×¢²áÓÃ»§id
+int len_user;		//×¢²áÓÃ»§ÊıÁ¿£¬ÓĞÉ¾³ıÊ±len != len_userÆäËûÊ±ÏàµÈ
+int len_buy;		//¹ºÆ±ĞÅÏ¢ÊıÁ¿£¬ÓÃ»§ÅÅĞò
+int menu_select;	//²Ëµ¥Ñ¡Ôñ
+int save_flag;		//ĞÅÏ¢ÊÇ·ñÓĞ¸Ä¶¯±êÖ¾Î»
+int ticketdayth;	//²ÊÆ±ÆÚºÅ
 
-/*----------ç»“æ„ä½“å®šä¹‰----------------*/
-struct person		//æ³¨å†Œç”¨æˆ·ï¼Œä¿å­˜åœ¨user.txt
+/*----------½á¹¹Ìå¶¨Òå----------------*/
+struct person		//×¢²áÓÃ»§£¬±£´æÔÚuser.txt
 {
 	int id;
 	char name[20];
@@ -45,7 +45,7 @@ struct person		//æ³¨å†Œç”¨æˆ·ï¼Œä¿å­˜åœ¨user.txt
 	struct person *next;
 };
 
-struct buy_ticket					//è´­ç¥¨ä¿¡æ¯ï¼Œä¿å­˜åœ¨buy_ticket.txt
+struct buy_ticket					//¹ºÆ±ĞÅÏ¢£¬±£´æÔÚbuy_ticket.txt
 {
 	int person_id;
 	char person_name[20];		
@@ -53,14 +53,14 @@ struct buy_ticket					//è´­ç¥¨ä¿¡æ¯ï¼Œä¿å­˜åœ¨buy_ticket.txt
 	int ticket_type;
 	int ticket_number;
 	int ticket_amount;
-	int ticket_status;				//1æœªå¼€å¥–,0
-	int ticket_win;					//1ä¸­å¥–ï¼Œ0æœªä¸­å¥–
-	int ticket_winmoney;			//ä¹°ä¸€æ¬¡ä¸­çš„é‡‘é¢
-	int ticket_sum;					//ä¸ªäººå½“æœŸè´­ç¥¨æ€»é¢
+	int ticket_status;				//1Î´¿ª½±,0
+	int ticket_win;					//1ÖĞ½±£¬0Î´ÖĞ½±
+	int ticket_winmoney;			//ÂòÒ»´ÎÖĞµÄ½ğ¶î
+	int ticket_sum;					//¸öÈËµ±ÆÚ¹ºÆ±×Ü¶î
 	struct buy_ticket *next;
 };
 
-struct winer						//ä¸­å¥–äººä¿¡æ¯ï¼Œä¿å­˜åœ¨winer.txt
+struct winer						//ÖĞ½±ÈËĞÅÏ¢£¬±£´æÔÚwiner.txt
 {
 	int winer_id;
 	char winer_name[20];
@@ -69,7 +69,7 @@ struct winer						//ä¸­å¥–äººä¿¡æ¯ï¼Œä¿å­˜åœ¨winer.txt
 	struct winer *next;
 };
 
-struct news							//æ¯æœŸä¸­å¥–ä¿¡æ¯
+struct news							//Ã¿ÆÚÖĞ½±ĞÅÏ¢
 {
 	int dayth;
 	int sport_ticket;
@@ -84,78 +84,78 @@ struct news							//æ¯æœŸä¸­å¥–ä¿¡æ¯
 	int sec;	
 };
 
-/*----------èœå•å­å‡½æ•°å£°æ˜----------------*/
-void menu_build();				//æ¬¢è¿èœå•
-void main_menu();				//ä¸»èœå•
+/*----------²Ëµ¥×Óº¯ÊıÉùÃ÷----------------*/
+void menu_build();				//»¶Ó­²Ëµ¥
+void main_menu();				//Ö÷²Ëµ¥
 void menu1();					//
 void menu12();					//
 void menu13();					//
-void menu131();					//menu13ä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯å­èœå•
+void menu131();					//menu13ĞŞ¸Ä¹ÜÀíÔ±ĞÅÏ¢×Ó²Ëµ¥
 void menu14();					//
 void menu15();					//
 void menu2();					//
-void menu21();					//menu21ç”¨æˆ·è´­ç¥¨å­èœå•
-void menu23();					//menu23ä¿®æ”¹ç”¨æˆ·ä¸ªäººä¿¡æ¯å­èœå•
-void menu_open(char *address);	//å¯†ç é”™è¯¯æç¤ºå­èœå•
-void apply_success();			//æ³¨å†ŒæˆåŠŸæç¤ºå­èœå•
-void thanks();					//é€€å‡ºæ„Ÿè°¢å­èœå•
-void luck_draw();				//ç³»ç»Ÿæ‘‡å¥–å­å‡½æ•°
-void ht();						//æœ‰å…³æµ·åŒ
-void summary1();				//æ€»ç»“1ï¼Œä¸»å‡½æ•°ä¸‹5è°ƒç”¨,æ˜¾ç¤ºç»“æ„ä½“ç”¨é€”
-void summary2();				//æ€»ç»“2ï¼Œä¸»å‡½æ•°ä¸‹6è°ƒç”¨ï¼Œæ˜¾ç¤ºèœå•ç»“æ„
+void menu21();					//menu21ÓÃ»§¹ºÆ±×Ó²Ëµ¥
+void menu23();					//menu23ĞŞ¸ÄÓÃ»§¸öÈËĞÅÏ¢×Ó²Ëµ¥
+void menu_open(char *address);	//ÃÜÂë´íÎóÌáÊ¾×Ó²Ëµ¥
+void apply_success();			//×¢²á³É¹¦ÌáÊ¾×Ó²Ëµ¥
+void thanks();					//ÍË³ö¸ĞĞ»×Ó²Ëµ¥
+void luck_draw();				//ÏµÍ³Ò¡½±×Óº¯Êı
+void ht();						//ÓĞ¹Øº£Í¬
+void summary1();				//×Ü½á1£¬Ö÷º¯ÊıÏÂ5µ÷ÓÃ,ÏÔÊ¾½á¹¹ÌåÓÃÍ¾
+void summary2();				//×Ü½á2£¬Ö÷º¯ÊıÏÂ6µ÷ÓÃ£¬ÏÔÊ¾²Ëµ¥½á¹¹
 
-void menu_open(char *address);	//æ‰“å¼€èœå•æ–‡ä»¶å­å‡½æ•°
+void menu_open(char *address);	//´ò¿ª²Ëµ¥ÎÄ¼ş×Óº¯Êı
 
-/*---------ç®¡ç†å‘˜ç›¸å…³å­å‡½æ•°å£°æ˜-----------*/
+/*---------¹ÜÀíÔ±Ïà¹Ø×Óº¯ÊıÉùÃ÷-----------*/
 //void admin_menu1(struct person *H,struct buy_ticket *buy_H);	//menu1
-void admin_menu1(struct person *H,struct buy_ticket *buy_H);	//ç®¡ç†å‘˜ç™»å½•
-void people_information(struct person *H);						//ç®¡ç†å‘˜æŸ¥çœ‹å½©æ°‘åŸºæœ¬ä¿¡æ¯
-void admin_view(struct person *H,struct buy_ticket *buy_H);		//ç®¡ç†å‘˜æŸ¥çœ‹ä¿¡æ¯------å‚æ•°æœ‰å¾…ä¿®æ”¹
-void admin_updata(struct person *H);							//ç®¡ç†å‘˜ä¿®æ”¹ä¿¡æ¯ï¼Œmenu13
-//void admin_deldata(struct person *H);							//ç®¡ç†å‘˜åˆ é™¤ä¿¡æ¯ï¼Œmenu14
-void admin_deldata(struct person *H,struct buy_ticket *buy_H);	//ç®¡ç†å‘˜åˆ é™¤ä¿¡æ¯ï¼Œmenu14
-//void admin_sort(struct person *H);							//ç®¡ç†å‘˜å¯¹ä¿¡æ¯æ’åº
-void admin_sort(struct person *H,struct buy_ticket *buy_H);		//ç®¡ç†å‘˜å¯¹ä¿¡æ¯æ’åº
-struct person * admin_find_user(struct person * H);				//ç®¡ç†å‘˜æŸ¥æ‰¾æ³¨å†Œç”¨æˆ·
-void admin_change_information(struct person *p);				//ç®¡ç†å‘˜ä¿®æ”¹ä¿¡æ¯ï¼Œ(åœ°å€ç”±æŸ¥æ‰¾å‡½æ•°ä¼ é€)ï¼Œå¯ç”¨ä½œç”¨æˆ·ä¿®æ”¹ä¸ªäººå¯†ç 
-void adminself_updata(struct person *H);						//ç®¡ç†å‘˜ä¿®æ”¹ä¸ªäººå¯†ç ï¼Œå¯ç”¨ä½œç”¨æˆ·ä¿®æ”¹ä¸ªäººå¯†ç 
-void admin_add_money(struct person *p);							//ç®¡ç†å‘˜è¿½åŠ é‡‘é¢
-void admin_view_buy_news(struct buy_ticket *buy_H);				//ç®¡ç†å‘˜æŸ¥çœ‹æ‰€æœ‰è´­ç¥¨ä¿¡æ¯
-void ID_check_buynews(struct buy_ticket *buy_H);				//ç®¡ç†å‘˜æŒ‰ç…§idæŸ¥æ‰¾è´­ç¥¨ä¿¡æ¯
-void dayth_check_buynews(struct buy_ticket *buy_H);				//ç®¡ç†å‘˜æŒ‰ç…§æœŸå·æŸ¥æ‰¾è´­ç¥¨ä¿¡æ¯
-void id_del_buynews(struct buy_ticket *buy_H);					//ç®¡ç†å‘˜æ ¹æ®IDåˆ é™¤è´­ç¥¨ä¿¡æ¯
-void type_del_buynews(struct buy_ticket *buy_H);				//ç®¡ç†å‘˜æ ¹æ®ç±»å‹åˆ é™¤è´­ç¥¨ä¿¡æ¯
-void dayth_del_buynews(struct buy_ticket *buy_H);				//ç®¡ç†å‘˜æ ¹æ®æœŸå·åˆ é™¤è´­ç¥¨ä¿¡æ¯
-void make_prize(struct person *H, struct buy_ticket *buy_H);	//ç®¡ç†å‘˜æ‘‡å¥–
-void add_winer_money(struct person *H, int id,int money);		//å½©æ°‘è·å¥–åè¿½åŠ é‡‘é¢
-void sortfun(struct person *H,struct buy_ticket *buy_H);		//ç®¡ç†å‘˜æ’åºå­å‡½æ•°
+void admin_menu1(struct person *H,struct buy_ticket *buy_H);	//¹ÜÀíÔ±µÇÂ¼
+void people_information(struct person *H);						//¹ÜÀíÔ±²é¿´²ÊÃñ»ù±¾ĞÅÏ¢
+void admin_view(struct person *H,struct buy_ticket *buy_H);		//¹ÜÀíÔ±²é¿´ĞÅÏ¢------²ÎÊıÓĞ´ıĞŞ¸Ä
+void admin_updata(struct person *H);							//¹ÜÀíÔ±ĞŞ¸ÄĞÅÏ¢£¬menu13
+//void admin_deldata(struct person *H);							//¹ÜÀíÔ±É¾³ıĞÅÏ¢£¬menu14
+void admin_deldata(struct person *H,struct buy_ticket *buy_H);	//¹ÜÀíÔ±É¾³ıĞÅÏ¢£¬menu14
+//void admin_sort(struct person *H);							//¹ÜÀíÔ±¶ÔĞÅÏ¢ÅÅĞò
+void admin_sort(struct person *H,struct buy_ticket *buy_H);		//¹ÜÀíÔ±¶ÔĞÅÏ¢ÅÅĞò
+struct person * admin_find_user(struct person * H);				//¹ÜÀíÔ±²éÕÒ×¢²áÓÃ»§
+void admin_change_information(struct person *p);				//¹ÜÀíÔ±ĞŞ¸ÄĞÅÏ¢£¬(µØÖ·ÓÉ²éÕÒº¯Êı´«ËÍ)£¬¿ÉÓÃ×÷ÓÃ»§ĞŞ¸Ä¸öÈËÃÜÂë
+void adminself_updata(struct person *H);						//¹ÜÀíÔ±ĞŞ¸Ä¸öÈËÃÜÂë£¬¿ÉÓÃ×÷ÓÃ»§ĞŞ¸Ä¸öÈËÃÜÂë
+void admin_add_money(struct person *p);							//¹ÜÀíÔ±×·¼Ó½ğ¶î
+void admin_view_buy_news(struct buy_ticket *buy_H);				//¹ÜÀíÔ±²é¿´ËùÓĞ¹ºÆ±ĞÅÏ¢
+void ID_check_buynews(struct buy_ticket *buy_H);				//¹ÜÀíÔ±°´ÕÕid²éÕÒ¹ºÆ±ĞÅÏ¢
+void dayth_check_buynews(struct buy_ticket *buy_H);				//¹ÜÀíÔ±°´ÕÕÆÚºÅ²éÕÒ¹ºÆ±ĞÅÏ¢
+void id_del_buynews(struct buy_ticket *buy_H);					//¹ÜÀíÔ±¸ù¾İIDÉ¾³ı¹ºÆ±ĞÅÏ¢
+void type_del_buynews(struct buy_ticket *buy_H);				//¹ÜÀíÔ±¸ù¾İÀàĞÍÉ¾³ı¹ºÆ±ĞÅÏ¢
+void dayth_del_buynews(struct buy_ticket *buy_H);				//¹ÜÀíÔ±¸ù¾İÆÚºÅÉ¾³ı¹ºÆ±ĞÅÏ¢
+void make_prize(struct person *H, struct buy_ticket *buy_H);	//¹ÜÀíÔ±Ò¡½±
+void add_winer_money(struct person *H, int id,int money);		//²ÊÃñ»ñ½±ºó×·¼Ó½ğ¶î
+void sortfun(struct person *H,struct buy_ticket *buy_H);		//¹ÜÀíÔ±ÅÅĞò×Óº¯Êı
 
 
-/*----------ç”¨æˆ·ç›¸å…³å­å‡½æ•°å£°æ˜------------*/
-struct person * add_user(struct person *H,struct person *p);	//æ–°ç”¨æˆ·æ³¨å†Œå‡½æ•°		
-struct buy_ticket * person_menu2(struct person *H,struct buy_ticket *buy_p,struct buy_ticket *buy_H);//å½©æ°‘ç™»å½•
-int check_username(struct person *H,char name[20]);				//æ£€æµ‹ç”¨æˆ·åæ˜¯å¦å­˜åœ¨ï¼Œè¿”å›1å­˜åœ¨ï¼Œ0ä¸å­˜åœ¨
-void userself_updata(struct person *H,struct person *p);		//ç”¨æˆ·æ›´æ”¹è‡ªå·±çš„ä¿¡æ¯
-struct buy_ticket * user_buy_tickey(struct buy_ticket *p,struct person *user, struct person *H);	//ç”¨æˆ·è´­ç¥¨å­å‡½æ•°		
-void user_view_ticket(struct person *p,struct buy_ticket *buy_H);	//ç”¨æˆ·æŸ¥çœ‹å½©ç¥¨ä¿¡æ¯
+/*----------ÓÃ»§Ïà¹Ø×Óº¯ÊıÉùÃ÷------------*/
+struct person * add_user(struct person *H,struct person *p);	//ĞÂÓÃ»§×¢²áº¯Êı		
+struct buy_ticket * person_menu2(struct person *H,struct buy_ticket *buy_p,struct buy_ticket *buy_H);//²ÊÃñµÇÂ¼
+int check_username(struct person *H,char name[20]);				//¼ì²âÓÃ»§ÃûÊÇ·ñ´æÔÚ£¬·µ»Ø1´æÔÚ£¬0²»´æÔÚ
+void userself_updata(struct person *H,struct person *p);		//ÓÃ»§¸ü¸Ä×Ô¼ºµÄĞÅÏ¢
+struct buy_ticket * user_buy_tickey(struct buy_ticket *p,struct person *user, struct person *H);	//ÓÃ»§¹ºÆ±×Óº¯Êı		
+void user_view_ticket(struct person *p,struct buy_ticket *buy_H);	//ÓÃ»§²é¿´²ÊÆ±ĞÅÏ¢
 
-/*---------äº§ç”Ÿå¤´èŠ‚ç‚¹----------------*/
-struct person * person_creat_head(struct person *H);			//ç”¨æˆ·æ³¨å†Œäº§ç”Ÿå¤´ç»“ç‚¹
-struct buy_ticket * buy_creat_head(struct buy_ticket *buy_H);	//è´­ç¥¨ä¿¡æ¯äº§ç”Ÿå¤´èŠ‚ç‚¹
-struct news * win_creat_head(struct news *win_H);				//æ¯æœŸè´­ç¥¨ä¿¡æ¯äº§ç”Ÿå¤´ç»“ç‚¹
+/*---------²úÉúÍ·½Úµã----------------*/
+struct person * person_creat_head(struct person *H);			//ÓÃ»§×¢²á²úÉúÍ·½áµã
+struct buy_ticket * buy_creat_head(struct buy_ticket *buy_H);	//¹ºÆ±ĞÅÏ¢²úÉúÍ·½Úµã
+struct news * win_creat_head(struct news *win_H);				//Ã¿ÆÚ¹ºÆ±ĞÅÏ¢²úÉúÍ·½áµã
 
-/*---------æ–‡ä»¶æ“ä½œå‡½æ•°---------------*/
-void w_user_file(struct person *H);								//ç”¨æˆ·ä¿¡æ¯å†™å…¥æ–‡ä»¶ï¼šuser.txt
-struct person *r_user_file(struct person *H);					//ç”¨æˆ·ä¿¡æ¯ä»æ–‡ä»¶è¯»å‡º from user.txt
-void w_buy_file(struct buy_ticket *buy_H);						//å°†è´­ç¥¨ä¿¡æ¯å†™å…¥æ–‡ä»¶
-struct buy_ticket *r_buy_file(struct buy_ticket *buy_H);		//å°†è´­ç¥¨ä¿¡æ¯è¯»å‡ºæ–‡ä»¶
-//void w_wininformation_file(int dayth,int sport,int love,int disastor,int sum);//æ¯æœŸä¸­å¥–ä¿¡æ¯å†™å…¥æ–‡ä»¶
-void w_wininformation_file(struct news temp);//æ¯æœŸä¸­å¥–ä¿¡æ¯å†™å…¥æ–‡ä»¶
-void w_winer_file(struct buy_ticket *temp);						//æ¯æœŸä¸­å¥–äººä¿¡æ¯å†™å…¥æ–‡ä»¶winer.txt
-void r_wininformation_file();									//æ¯æœŸä¸­å¥–å·ç ä»æ–‡ä»¶è¯»å‡ºå¹¶æ˜¾ç¤º
-void r_winer_file();											//æ¯æœŸä¸­å¥–äººä¿¡æ¯ä»æ–‡ä»¶è¯»å‡ºå¹¶æ˜¾ç¤º
-void w_visit_file(int visit);									//è®¿å®¢æ•°é‡å­˜å…¥æ–‡ä»¶
-int r_visit_file();												//è®¿å®¢æ•°é‡è¯»å‡º
+/*---------ÎÄ¼ş²Ù×÷º¯Êı---------------*/
+void w_user_file(struct person *H);								//ÓÃ»§ĞÅÏ¢Ğ´ÈëÎÄ¼ş£ºuser.txt
+struct person *r_user_file(struct person *H);					//ÓÃ»§ĞÅÏ¢´ÓÎÄ¼ş¶Á³ö from user.txt
+void w_buy_file(struct buy_ticket *buy_H);						//½«¹ºÆ±ĞÅÏ¢Ğ´ÈëÎÄ¼ş
+struct buy_ticket *r_buy_file(struct buy_ticket *buy_H);		//½«¹ºÆ±ĞÅÏ¢¶Á³öÎÄ¼ş
+//void w_wininformation_file(int dayth,int sport,int love,int disastor,int sum);//Ã¿ÆÚÖĞ½±ĞÅÏ¢Ğ´ÈëÎÄ¼ş
+void w_wininformation_file(struct news temp);//Ã¿ÆÚÖĞ½±ĞÅÏ¢Ğ´ÈëÎÄ¼ş
+void w_winer_file(struct buy_ticket *temp);						//Ã¿ÆÚÖĞ½±ÈËĞÅÏ¢Ğ´ÈëÎÄ¼şwiner.txt
+void r_wininformation_file();									//Ã¿ÆÚÖĞ½±ºÅÂë´ÓÎÄ¼ş¶Á³ö²¢ÏÔÊ¾
+void r_winer_file();											//Ã¿ÆÚÖĞ½±ÈËĞÅÏ¢´ÓÎÄ¼ş¶Á³ö²¢ÏÔÊ¾
+void w_visit_file(int visit);									//·Ã¿ÍÊıÁ¿´æÈëÎÄ¼ş
+int r_visit_file();												//·Ã¿ÍÊıÁ¿¶Á³ö
 
 
 

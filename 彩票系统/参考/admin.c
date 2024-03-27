@@ -1,29 +1,29 @@
 
 /************************************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜ç›¸å…³
+*¹¦  ÄÜ£º	¹ÜÀíÔ±Ïà¹Ø
 *
 *************************************/
 
 #include"fun.h"
 #include<time.h>
-/********************menu1èœå•-ç®¡ç†å‘˜ç™»å½•**************
-*åŠŸ  èƒ½:		ç®¡ç†å‘˜ç™»å½•
-*å‚  æ•°ï¼š	H ï¼šç”¨æˆ·æ³¨å†Œé“¾è¡¨å¤´ç»“ç‚¹
-*å‚  æ•°ï¼š	buy_H : è´­ç¥¨ä¿¡æ¯é“¾è¡¨å¤´èŠ‚ç‚¹
+/********************menu1²Ëµ¥-¹ÜÀíÔ±µÇÂ¼**************
+*¹¦  ÄÜ:		¹ÜÀíÔ±µÇÂ¼
+*²Î  Êı£º	H £ºÓÃ»§×¢²áÁ´±íÍ·½áµã
+*²Î  Êı£º	buy_H : ¹ºÆ±ĞÅÏ¢Á´±íÍ·½Úµã
 *
 *****************************************************/
-void admin_menu1(struct person *H,struct buy_ticket *buy_H)	//ç®¡ç†å‘˜ç™»å½•
+void admin_menu1(struct person *H,struct buy_ticket *buy_H)	//¹ÜÀíÔ±µÇÂ¼
 {
-	char name_test[20];					//ç”¨æˆ·ç™»å½•æš‚å­˜
-	char passwd_test[8];				//ç”¨æˆ·å¯†ç æš‚å­˜
+	char name_test[20];					//ÓÃ»§µÇÂ¼Ôİ´æ
+	char passwd_test[8];				//ÓÃ»§ÃÜÂëÔİ´æ
 	int i = 0;
 
 	do			
 	{
-		printf("è¯·è¾“å…¥ç”¨æˆ·åï¼š ");
+		printf("ÇëÊäÈëÓÃ»§Ãû£º ");
 		scanf("%s",name_test);	
 
-		strcpy(passwd_test, getpass("è¯·è¾“å…¥ç®¡ç†å‘˜å¯†ç ï¼š"));	
+		strcpy(passwd_test, getpass("ÇëÊäÈë¹ÜÀíÔ±ÃÜÂë£º"));	
 		printf("\n");
 		if(strcmp(H->name,name_test) != 0 || strcmp(H->passwd,passwd_test) != 0)
 			{
@@ -31,12 +31,12 @@ void admin_menu1(struct person *H,struct buy_ticket *buy_H)	//ç®¡ç†å‘˜ç™»å½•
 				if(i>=3)
 				{
 					key_error();
-					printf("\n@_@---> å¯†ç é”™è¯¯æ¬¡æ•°è¶…è¿‡3æ¬¡ï¼ä»»æ„é”®è¿”å›ä¸»èœå•");
-					getchar();			//ä¸€ä¸ªç”¨äºå¸æ”¶scanfåçš„å›è½¦
+					printf("\n@_@---> ÃÜÂë´íÎó´ÎÊı³¬¹ı3´Î£¡ÈÎÒâ¼ü·µ»ØÖ÷²Ëµ¥");
+					getchar();			//Ò»¸öÓÃÓÚÎüÊÕscanfºóµÄ»Ø³µ
 					getchar();
 					break;
 				}
-				printf("\nç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯ï¼è¯·é‡æ–°è¾“å…¥ï¼š\n");
+				printf("\nÓÃ»§Ãû»òÕßÃÜÂë´íÎó£¡ÇëÖØĞÂÊäÈë£º\n");
 			}
 		else
 			{
@@ -44,35 +44,35 @@ void admin_menu1(struct person *H,struct buy_ticket *buy_H)	//ç®¡ç†å‘˜ç™»å½•
 				break;
 			}
 	}while(1);
-	if(i == 0)							//å¯†ç æ­£ç¡®
+	if(i == 0)							//ÃÜÂëÕıÈ·
 	{
-		while(menu_select != 0)			//menu_select==0 ,åˆ™é€€å‡ºå½“å‰èœå•
+		while(menu_select != 0)			//menu_select==0 ,ÔòÍË³öµ±Ç°²Ëµ¥
 		{
 			menu1();
 			scanf("%d",&menu_select);
-			getchar();					//é˜²æ­¢è¾“å…¥å­—ç¬¦æ—¶è¿›å…¥æ­»å¾ªç¯
+			getchar();					//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
 			switch(menu_select)
 			{
-				case 0:					//è¿”å›ä¸»èœå•
+				case 0:					//·µ»ØÖ÷²Ëµ¥
 						menu_select = 0;
 					break;
-				case 1:					//æ‘‡å·
-						make_prize(H,buy_H);//æ‘‡å·é¡ºä¾¿æ¯”è¾ƒ
+				case 1:					//Ò¡ºÅ
+						make_prize(H,buy_H);//Ò¡ºÅË³±ã±È½Ï
 					break;
-				case 2:					//ç®¡ç†å‘˜æŸ¥çœ‹ä¿¡æ¯
+				case 2:					//¹ÜÀíÔ±²é¿´ĞÅÏ¢
 						admin_view(H,buy_H);	
 					break;
-				case 3:					//ä¿®æ”¹ä¿¡æ¯
+				case 3:					//ĞŞ¸ÄĞÅÏ¢
 						admin_updata(H);
 					break;
-				case 4:					//åˆ é™¤ä¿¡æ¯
+				case 4:					//É¾³ıĞÅÏ¢
 						admin_deldata(H,buy_H);
 					break;
-				case 5:					//æ’åº
+				case 5:					//ÅÅĞò
 						admin_sort(H,buy_H);
 					break;
 				default:
-					printf("\n@_@---> é€‰æ‹©æœ‰è¯¯ï¼ä»»æ„é”®è¿”å›èœå•ï¼");
+					printf("\n@_@---> Ñ¡ÔñÓĞÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡");
 					getchar();
 					menu_select = 0;
 					break;	
@@ -80,166 +80,166 @@ void admin_menu1(struct person *H,struct buy_ticket *buy_H)	//ç®¡ç†å‘˜ç™»å½•
 		}
 	}
 }
-/*****************ç®¡ç†å‘˜æ‘‡å·***********************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜æ‘‡å·ï¼Œå¹¶ç»Ÿè®¡è·å¥–æƒ…å†µ
-*å‚  æ•°ï¼š	H ï¼šç”¨æˆ·ä¿¡æ¯å¤´ç»“ç‚¹ï¼Œå¥–æ± é‡‘é¢åœ¨å¤´ç»“ç‚¹
-*å‚  æ•°ï¼š	buy_H ï¼šè´­ç¥¨ä¿¡æ¯å¤´ç»“ç‚¹ï¼Œæ¯”è¾ƒè·å¥–æƒ…å†µ
-*æ³¨  æ„ï¼š	æ¯æœŸä¸­å¥–ä¿¡æ¯å¾€æ–‡ä»¶å­˜æ—¶å¹¶æ²¡æœ‰å»ºé“¾è¡¨
+/*****************¹ÜÀíÔ±Ò¡ºÅ***********************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±Ò¡ºÅ£¬²¢Í³¼Æ»ñ½±Çé¿ö
+*²Î  Êı£º	H £ºÓÃ»§ĞÅÏ¢Í·½áµã£¬½±³Ø½ğ¶îÔÚÍ·½áµã
+*²Î  Êı£º	buy_H £º¹ºÆ±ĞÅÏ¢Í·½áµã£¬±È½Ï»ñ½±Çé¿ö
+*×¢  Òâ£º	Ã¿ÆÚÖĞ½±ĞÅÏ¢ÍùÎÄ¼ş´æÊ±²¢Ã»ÓĞ½¨Á´±í
 **********************************************/
 void make_prize(struct person *H, struct buy_ticket *buy_H)
 {
 	struct news	prize;
-	int flag = 0;					//æ˜¯å¦æœ‰äººä¸­å¥–ï¼›1æœ‰0æ— 
+	int flag = 0;					//ÊÇ·ñÓĞÈËÖĞ½±£»1ÓĞ0ÎŞ
 	struct buy_ticket *temp = buy_H;
-	int x = 0, y = 0, z = 0;		//x,y,zä¸‰ç§å½©ç¥¨ä¸­å¥–å·ç 
-	printf("æ˜¯å¦å¼€å§‹ç¬¬%dæœŸçš„æ‘‡å¥–(y/n)?",buy_H->ticket_dayth);
-	if(getchar() == 'y')			//å¼€å§‹æ‘‡å¥–
+	int x = 0, y = 0, z = 0;		//x,y,zÈıÖÖ²ÊÆ±ÖĞ½±ºÅÂë
+	printf("ÊÇ·ñ¿ªÊ¼µÚ%dÆÚµÄÒ¡½±(y/n)?",buy_H->ticket_dayth);
+	if(getchar() == 'y')			//¿ªÊ¼Ò¡½±
 	{
 		srand((unsigned)time(NULL));
-		x = rand()%20+1;			//ä½“å½©
-		y = rand()%20+1;			//æ…ˆå–„
-		z = rand()%20+1;			//æ•‘ç¾å½©ç¥¨
-		buy_H->person_id = x;		//ä½“å½©
-		buy_H->ticket_number = y;	//æ…ˆå–„
-		buy_H->ticket_amount = z;	//æ•‘ç¾å½©ç¥¨
-		buy_H->ticket_sum = 0;		//åˆå§‹åŒ–å½“æœŸè·å¥–æ€»é‡‘é¢
-		luck_draw();				//ç³»ç»Ÿæ‘‡å¥–ä¸­Â·Â·Â·
-		/*------ä¸‹-å»¶æ—¶å‡½æ•°-------------*/
-		time_t start,end;						//å®šä¹‰æ—¶é—´å¼€å§‹ä¸ç»“æŸ
+		x = rand()%20+1;			//Ìå²Ê
+		y = rand()%20+1;			//´ÈÉÆ
+		z = rand()%20+1;			//¾ÈÔÖ²ÊÆ±
+		buy_H->person_id = x;		//Ìå²Ê
+		buy_H->ticket_number = y;	//´ÈÉÆ
+		buy_H->ticket_amount = z;	//¾ÈÔÖ²ÊÆ±
+		buy_H->ticket_sum = 0;		//³õÊ¼»¯µ±ÆÚ»ñ½±×Ü½ğ¶î
+		luck_draw();				//ÏµÍ³Ò¡½±ÖĞ¡¤¡¤¡¤
+		/*------ÏÂ-ÑÓÊ±º¯Êı-------------*/
+		time_t start,end;						//¶¨ÒåÊ±¼ä¿ªÊ¼Óë½áÊø
 		double dif;
 		time (&start);
-		while(dif <5)							//æ—¶é—´å°äº5sä¸€ç›´åœ¨å¾ªç¯
+		while(dif <5)							//Ê±¼äĞ¡ÓÚ5sÒ»Ö±ÔÚÑ­»·
 		{
 			time (&end);
 			dif = difftime (end,start);
 		}
-		/*------ä¸Š-å»¶æ—¶å‡½æ•°-------------*/
-		/*------ä¸‹-æ˜¾ç¤ºæ—¶é—´---------------*/
+		/*------ÉÏ-ÑÓÊ±º¯Êı-------------*/
+		/*------ÏÂ-ÏÔÊ¾Ê±¼ä---------------*/
 		struct tm *tm_ptr;
 		time_t the_time;
 		(void) time(&the_time);
 		tm_ptr=localtime(&the_time);
-		/*------ä¸Š-æ˜¾ç¤ºæ—¶é—´---------------*/
+		/*------ÉÏ-ÏÔÊ¾Ê±¼ä---------------*/
 		
-		printf("\n\t\tç¬¬%dæœŸçš„ä¸­å¥–å·ç ä¸ºï¼š\n",buy_H->ticket_dayth);
-		printf("\t\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n");
-		printf("\t\tä½“è‚²å½©ç¥¨ï¼š %d\n",x);
-		printf("\t\tæ…ˆå–„å½©ç¥¨ï¼š %d\n",y);
-		printf("\t\tæ•‘ç¾å½©ç¥¨ï¼š %d\n\n",z);
-		printf("\t\tæŠ½å¥–æ—¶é—´:%02då¹´%02dæœˆ%02dæ—¥  %02d-%02d-%02d\n",
-												tm_ptr->tm_year-100,	//å¹´
-												tm_ptr->tm_mon+1,		//æœˆ
-												tm_ptr->tm_mday,		//æ—¥
-												tm_ptr->tm_hour,		//æ—¶
-												tm_ptr->tm_min,			//åˆ†
-												tm_ptr->tm_sec);		//ç§’
-		printf("\t\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n");
+		printf("\n\t\tµÚ%dÆÚµÄÖĞ½±ºÅÂëÎª£º\n",buy_H->ticket_dayth);
+		printf("\t\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
+		printf("\t\tÌåÓı²ÊÆ±£º %d\n",x);
+		printf("\t\t´ÈÉÆ²ÊÆ±£º %d\n",y);
+		printf("\t\t¾ÈÔÖ²ÊÆ±£º %d\n\n",z);
+		printf("\t\t³é½±Ê±¼ä:%02dÄê%02dÔÂ%02dÈÕ  %02d-%02d-%02d\n",
+												tm_ptr->tm_year-100,	//Äê
+												tm_ptr->tm_mon+1,		//ÔÂ
+												tm_ptr->tm_mday,		//ÈÕ
+												tm_ptr->tm_hour,		//Ê±
+												tm_ptr->tm_min,			//·Ö
+												tm_ptr->tm_sec);		//Ãë
+		printf("\t\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
 		
-		printf("\t\tä¸­å¥–äººä¿¡æ¯ï¼š\n");
-		printf("\t\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n");
-		printf("\t\tID\tå§“å\tæœŸå·\t  ç±»å‹\t\tå·ç \tæ•°é‡\tå¼€å¥–çŠ¶æ€  ä¸­å¥–æƒ…å†µ  ä¸­å¥–é‡‘é¢ \n");
+		printf("\t\tÖĞ½±ÈËĞÅÏ¢£º\n");
+		printf("\t\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
+		printf("\t\tID\tĞÕÃû\tÆÚºÅ\t  ÀàĞÍ\t\tºÅÂë\tÊıÁ¿\t¿ª½±×´Ì¬  ÖĞ½±Çé¿ö  ÖĞ½±½ğ¶î \n");
 	
 		while(temp->next != NULL)
 		{
-			if(temp->next->ticket_dayth == buy_H->ticket_dayth)	//è´­ä¹°å½“æœŸæ‰åˆ¤æ–­,ä¸­å¥–çš„è¯å¥–æ± å‡å°‘ï¼Œå½©æ°‘å¢åŠ 		
+			if(temp->next->ticket_dayth == buy_H->ticket_dayth)	//¹ºÂòµ±ÆÚ²ÅÅĞ¶Ï,ÖĞ½±µÄ»°½±³Ø¼õÉÙ£¬²ÊÃñÔö¼Ó		
 			{
-				temp->next->ticket_status = 0 ;					//å¼€å¥–çŠ¶æ€ä¸ºå¼€å¥–0ï¼šå¼€å¥–
+				temp->next->ticket_status = 0 ;					//¿ª½±×´Ì¬Îª¿ª½±0£º¿ª½±
 				switch(temp->next->ticket_type)
 				{
 					case sport_ticket :
 							if(temp->next->ticket_number == x)
 							{
-							temp->next->ticket_win =1;			//ä¸­å¥–
-							temp->next->ticket_winmoney = temp->next->ticket_amount * sport_win;	//ä¸ªäººæœ¬æœŸä¸­å¥–é‡‘é¢
-							buy_H->ticket_sum += temp->next->ticket_winmoney;	//ç®—å‡ºä¸­å‡ºå¥–æ€»é‡‘é¢	
-							add_winer_money(H,temp->next->person_id,temp->next->ticket_amount * sport_win);//ä¸­å¥–å¢åŠ é‡‘é¢
+							temp->next->ticket_win =1;			//ÖĞ½±
+							temp->next->ticket_winmoney = temp->next->ticket_amount * sport_win;	//¸öÈË±¾ÆÚÖĞ½±½ğ¶î
+							buy_H->ticket_sum += temp->next->ticket_winmoney;	//Ëã³öÖĞ³ö½±×Ü½ğ¶î	
+							add_winer_money(H,temp->next->person_id,temp->next->ticket_amount * sport_win);//ÖĞ½±Ôö¼Ó½ğ¶î
 							}
 						break;
 					case love_ticket :
 							if(temp->next->ticket_number == y)
 							{
-								temp->next->ticket_win =1;		//ä¸­å¥–
-								temp->next->ticket_winmoney = temp->next->ticket_amount * love_win ;//æœ¬æ¬¡ä¸­å¥–é‡‘é¢
+								temp->next->ticket_win =1;		//ÖĞ½±
+								temp->next->ticket_winmoney = temp->next->ticket_amount * love_win ;//±¾´ÎÖĞ½±½ğ¶î
 								buy_H->ticket_sum += temp->next->ticket_winmoney;
-								add_winer_money(H,temp->next->person_id,temp->next->ticket_amount * love_win);//å¢åŠ é‡‘é¢
+								add_winer_money(H,temp->next->person_id,temp->next->ticket_amount * love_win);//Ôö¼Ó½ğ¶î
 							}
 						break;
 					case disastor_ticket:
 							if(temp->next->ticket_number == z)
 							{
-							temp->next->ticket_win =1;			//ä¸­å¥–
+							temp->next->ticket_win =1;			//ÖĞ½±
 							temp->next->ticket_winmoney = temp->next->ticket_amount * disastor_win ;
 							buy_H->ticket_sum += temp->next->ticket_winmoney;	
-							add_winer_money(H,temp->next->person_id,temp->next->ticket_amount * disastor_win);//å¢åŠ é‡‘é¢
+							add_winer_money(H,temp->next->person_id,temp->next->ticket_amount * disastor_win);//Ôö¼Ó½ğ¶î
 							}
 						break;
 					default:
 						break;
 				}
 				
-				if(temp->next->ticket_win)	//ä¸­å¥–çš„è¯,å†™å…¥æ–‡ä»¶
+				if(temp->next->ticket_win)	//ÖĞ½±µÄ»°,Ğ´ÈëÎÄ¼ş
 				{
-						flag = 1;			//ä¸­å¥–æ ‡å¿—æ”¹ä¸º1,æ–¹ä¾¿æ— ä¸­å¥–æ—¶ï¼Œè¾“å‡ºæç¤º
+						flag = 1;			//ÖĞ½±±êÖ¾¸ÄÎª1,·½±ãÎŞÖĞ½±Ê±£¬Êä³öÌáÊ¾
 						printf("\t\t%d\t%s\t%d",
 							temp->next->person_id,
 							temp->next->person_name,
 							temp->next->ticket_dayth);
 						if(temp->next->ticket_type == sport_ticket)
-							printf("\tä½“è‚²å½©ç¥¨");
+							printf("\tÌåÓı²ÊÆ±");
 						else if(temp->next->ticket_type == love_ticket)
-							printf("\tæ…ˆå–„å½©ç¥¨");
+							printf("\t´ÈÉÆ²ÊÆ±");
 						else
-							printf("\tæ•‘ç¾å½©ç¥¨");
+							printf("\t¾ÈÔÖ²ÊÆ±");
 						printf("\t%d\t%d",
 										temp->next->ticket_number,
 										temp->next->ticket_amount);
 						if(temp->next->ticket_status)
-								printf("\tæœªå¼€å¥–");
+								printf("\tÎ´¿ª½±");
 						else
-								printf("\tå·²å¼€å¥–");
+								printf("\tÒÑ¿ª½±");
 						if(temp->next->ticket_win)
-							printf("    ä¸­  å¥–");
+							printf("    ÖĞ  ½±");
 						else
-							printf("    æœªä¸­å¥–");
-						printf("\t%d\n",temp->next->ticket_winmoney);	//ä¸­å¥–é‡‘é¢
-					w_winer_file(temp->next);							//ç”¨æˆ·èŠ‚ç‚¹ï¼Œå°†ç”¨æˆ·ä¿¡æ¯å†™å…¥æ–‡ä»¶,
+							printf("    Î´ÖĞ½±");
+						printf("\t%d\n",temp->next->ticket_winmoney);	//ÖĞ½±½ğ¶î
+					w_winer_file(temp->next);							//ÓÃ»§½Úµã£¬½«ÓÃ»§ĞÅÏ¢Ğ´ÈëÎÄ¼ş,
 				}
 			}
 			temp = temp->next;	
 		}
 		if(!flag)
-			printf("\n\t\t^_^æœ¬æœŸæ— å½©æ°‘ä¸­å¥–ï¼--");
+			printf("\n\t\t^_^±¾ÆÚÎŞ²ÊÃñÖĞ½±£¡--");
 			
-		H->person_money -= buy_H->ticket_sum;	//ä¿®æ”¹å°†æ± é‡‘é¢:æ€»é‡‘é¢-å½“æœŸä¸­å¥–æ€»é‡‘é¢ï¼ˆå­˜åœ¨buy_Hå¤´ç»“ç‚¹ä¸­ï¼‰ï¼Œ
-		printf("å¥–æ± é‡‘é¢ä¸ºï¼š%d å…ƒ\n",H->person_money);
-		prize.dayth = buy_H->ticket_dayth;	//æœŸå·
-		prize.sport_ticket = x;				//ä½“è‚²å½©ç¥¨
-		prize.love_ticket  = y;				//æ…ˆå–„
-		prize.disastor_ticket = z;			//æ•‘ç¾
-		prize.sum = buy_H->ticket_sum;		//æ€»é‡‘é¢
-		prize.year = tm_ptr->tm_year-100;	//å¹´
-		prize.month = tm_ptr->tm_mon+1;		//æœˆ
-		prize.day = tm_ptr->tm_mday;		//æ—¥
-		prize.hour = tm_ptr->tm_hour;		//æ—¶
-		prize.min = tm_ptr->tm_min;			//åˆ†
-		prize.sec = tm_ptr->tm_sec;			//ç§’
+		H->person_money -= buy_H->ticket_sum;	//ĞŞ¸Ä½«³Ø½ğ¶î:×Ü½ğ¶î-µ±ÆÚÖĞ½±×Ü½ğ¶î£¨´æÔÚbuy_HÍ·½áµãÖĞ£©£¬
+		printf("½±³Ø½ğ¶îÎª£º%d Ôª\n",H->person_money);
+		prize.dayth = buy_H->ticket_dayth;	//ÆÚºÅ
+		prize.sport_ticket = x;				//ÌåÓı²ÊÆ±
+		prize.love_ticket  = y;				//´ÈÉÆ
+		prize.disastor_ticket = z;			//¾ÈÔÖ
+		prize.sum = buy_H->ticket_sum;		//×Ü½ğ¶î
+		prize.year = tm_ptr->tm_year-100;	//Äê
+		prize.month = tm_ptr->tm_mon+1;		//ÔÂ
+		prize.day = tm_ptr->tm_mday;		//ÈÕ
+		prize.hour = tm_ptr->tm_hour;		//Ê±
+		prize.min = tm_ptr->tm_min;			//·Ö
+		prize.sec = tm_ptr->tm_sec;			//Ãë
 													
-		/*-æ¯æœŸä¸­å¥–ä¿¡æ¯ä¿å­˜ï¼Œæ— éœ€é“¾è¡¨,éœ€ä¿å­˜ï¼šæœŸå·ï¼Œä¸‰ç§ä¸­å¥–å·ç ï¼Œæ€»é‡‘é¢-----*/
+		/*-Ã¿ÆÚÖĞ½±ĞÅÏ¢±£´æ£¬ÎŞĞèÁ´±í,Ğè±£´æ£ºÆÚºÅ£¬ÈıÖÖÖĞ½±ºÅÂë£¬×Ü½ğ¶î-----*/
 		w_wininformation_file(prize);
-		buy_H->ticket_dayth ++;					//åŠ ä¸€å¼€é€šä¸‹æ¬¡æœŸå·
+		buy_H->ticket_dayth ++;					//¼ÓÒ»¿ªÍ¨ÏÂ´ÎÆÚºÅ
 		
-		printf("ä»»æ„é”®è¿”å›-->");
+		printf("ÈÎÒâ¼ü·µ»Ø-->");
 		getchar();
 		getchar();
 
 	}
 }
 
-/*****************å½©æ°‘è¿½åŠ é‡‘é¢********************
-*åŠŸ  èƒ½ï¼š	è¿½åŠ å½©æ°‘é‡‘é¢
-*å‚  æ•°ï¼š	H ï¼šç”¨æˆ·é“¾è¡¨å¤´ç»“ç‚¹
-*å‚  æ•°ï¼š    idï¼š	è¾“å…¥æŸ¥æ‰¾çš„id
-*å‚  æ•°ï¼š	money:è¦è¿½åŠ çš„é‡‘é¢
+/*****************²ÊÃñ×·¼Ó½ğ¶î********************
+*¹¦  ÄÜ£º	×·¼Ó²ÊÃñ½ğ¶î
+*²Î  Êı£º	H £ºÓÃ»§Á´±íÍ·½áµã
+*²Î  Êı£º    id£º	ÊäÈë²éÕÒµÄid
+*²Î  Êı£º	money:Òª×·¼ÓµÄ½ğ¶î
 ************************************************/
 void add_winer_money(struct person *H, int id,int money)
 {
@@ -254,15 +254,15 @@ void add_winer_money(struct person *H, int id,int money)
 	}
 }
 
-/****************æŸ¥çœ‹å½©æ°‘åŸºæœ¬ä¿¡æ¯********************
-*åŠŸ  èƒ½ï¼š	æŸ¥çœ‹å½©æ°‘åŸºæœ¬ä¿¡æ¯
-*å‚  æ•°ï¼š	H ï¼šç”¨æˆ·ä¿¡æ¯å¤´ç»“ç‚¹
+/****************²é¿´²ÊÃñ»ù±¾ĞÅÏ¢********************
+*¹¦  ÄÜ£º	²é¿´²ÊÃñ»ù±¾ĞÅÏ¢
+*²Î  Êı£º	H £ºÓÃ»§ĞÅÏ¢Í·½áµã
 ***************************************************/
 void people_information(struct person *H)
 {
-	printf("\t\tå½©æ°‘åŸºæœ¬ä¿¡æ¯ä¸ºï¼š\n");
+	printf("\t\t²ÊÃñ»ù±¾ĞÅÏ¢Îª£º\n");
 	printf("\t\t-------------------------------\n");
-	printf("\t\tid\tå§“å\tå¯†ç \té‡‘é¢(å…ƒ)\n");
+	printf("\t\tid\tĞÕÃû\tÃÜÂë\t½ğ¶î(Ôª)\n");
 	printf("\t\t-------------------------------\n");
 	while(H->next != NULL)
 	{
@@ -273,15 +273,15 @@ void people_information(struct person *H)
 								H->next->person_money);
 		H = H->next;
 	}
-	printf("-->ä»»æ„é”®è¿”å›");
+	printf("-->ÈÎÒâ¼ü·µ»Ø");
 	getchar();
 
 }
 
-/***************menu12èœå•-ç®¡ç†å‘˜æŸ¥çœ‹ä¿¡æ¯*******************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜æŸ¥çœ‹ä¿¡æ¯
-*å‚  æ•°ï¼š	H ï¼š ç”¨æˆ·é“¾è¡¨ï¼Œç”¨äºæŸ¥æ‰¾ç”¨æˆ·
-*å‚  æ•°ï¼š	buy_H : è´­ç¥¨ä¿¡æ¯å¤´ç»“ç‚¹
+/***************menu12²Ëµ¥-¹ÜÀíÔ±²é¿´ĞÅÏ¢*******************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±²é¿´ĞÅÏ¢
+*²Î  Êı£º	H £º ÓÃ»§Á´±í£¬ÓÃÓÚ²éÕÒÓÃ»§
+*²Î  Êı£º	buy_H : ¹ºÆ±ĞÅÏ¢Í·½áµã
 *********************************************************/
 void admin_view(struct person *H,struct buy_ticket *buy_H)
 {
@@ -289,67 +289,67 @@ void admin_view(struct person *H,struct buy_ticket *buy_H)
 	{
 		menu12();
 		scanf("%d",&menu_select);
-		getchar();				//é˜²æ­¢è¾“å…¥å­—ç¬¦æ—¶è¿›å…¥æ­»å¾ªç¯
+		getchar();				//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
 		switch(menu_select)
 		{
-			case 0:				//è¿”å›ä¸Šä¸€çº§
+			case 0:				//·µ»ØÉÏÒ»¼¶
 				break;
-			case 1:				//ç®¡ç†å‘˜ä¿¡æ¯
-					printf("\t\tid\tå§“å\tå¯†ç \tå¥–æ± é‡‘é¢(å…ƒ)\n");
+			case 1:				//¹ÜÀíÔ±ĞÅÏ¢
+					printf("\t\tid\tĞÕÃû\tÃÜÂë\t½±³Ø½ğ¶î(Ôª)\n");
 					printf("\t\t-------------------------------\n");
 					printf("\t\t%d\t%s\t%s\t%d\n",
 									H->id, 
 									H->name, 
 									H->passwd, 
 									H->person_money);
-					printf("ä»»æ„é”®é€€å‡º-->");
+					printf("ÈÎÒâ¼üÍË³ö-->");
 					getchar();
 				break;
-			case 2:				//æ¯æœŸå½©ç¥¨ä¿¡æ¯
+			case 2:				//Ã¿ÆÚ²ÊÆ±ĞÅÏ¢
 					r_wininformation_file();
-					printf("ä»»æ„é”®è¿”å›ï¼");
+					printf("ÈÎÒâ¼ü·µ»Ø£¡");
 					getchar();
 				break;
-			case 3:				//ä¸­å¥–äººä¿¡æ¯
+			case 3:				//ÖĞ½±ÈËĞÅÏ¢
 					r_winer_file();
-					printf("ä»»æ„é”®è¿”å›ï¼");
+					printf("ÈÎÒâ¼ü·µ»Ø£¡");
 					getchar();
 				break;
-			case 4:				//å½©æ°‘åŸºæœ¬ä¿¡æ¯
+			case 4:				//²ÊÃñ»ù±¾ĞÅÏ¢
 					people_information(H);
 				break;
-			case 5:				//æ‰€æœ‰è´­ç¥¨ä¿¡æ¯
+			case 5:				//ËùÓĞ¹ºÆ±ĞÅÏ¢
 					admin_view_buy_news(buy_H);
 				break;
-			case 6:				//æ ¹æ®IDæŸ¥æ‰¾è´­ç¥¨ä¿¡æ¯	
+			case 6:				//¸ù¾İID²éÕÒ¹ºÆ±ĞÅÏ¢	
 					ID_check_buynews(buy_H);	
 				break;
-			case 7:				//æ ¹æ®æœŸå·æŸ¥æ‰¾ä¿¡æ¯
+			case 7:				//¸ù¾İÆÚºÅ²éÕÒĞÅÏ¢
 					dayth_check_buynews(buy_H);
 				break;
 			default:	
 					menu_select = 0;
-					printf("\n@_@---> é€‰æ‹©æœ‰è¯¯ï¼ä»»æ„é”®è¿”å›èœå•ï¼");
+					printf("\n@_@---> Ñ¡ÔñÓĞÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡");
 					getchar();		
 				break;
 		}
 		if(menu_select == 0)
 		{
-			menu_select =1;		//ä¸Šçº§èœå•å…¥å£å‚æ•°ä¸º1
-			break;				//é€€å‡ºwhile(),ä¸é€€å‡ºä¼šæ­»å¾ªç¯
+			menu_select =1;		//ÉÏ¼¶²Ëµ¥Èë¿Ú²ÎÊıÎª1
+			break;				//ÍË³öwhile(),²»ÍË³ö»áËÀÑ­»·
 		}
 	}
 }
-/*********************ç®¡ç†å‘˜æŸ¥çœ‹æ‰€æœ‰è´­ç¥¨ä¿¡æ¯*******************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜æŸ¥çœ‹æ‰€æœ‰è´­ç¥¨ä¿¡æ¯
-*å‚  æ•°ï¼š	buy_H : è´­ç¥¨ä¿¡æ¯å¤´ç»“ç‚¹
+/*********************¹ÜÀíÔ±²é¿´ËùÓĞ¹ºÆ±ĞÅÏ¢*******************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±²é¿´ËùÓĞ¹ºÆ±ĞÅÏ¢
+*²Î  Êı£º	buy_H : ¹ºÆ±ĞÅÏ¢Í·½áµã
 *********************************************************/
-/*------------æŸ¥çœ‹æ‰€æœ‰è´­ç¥¨ä¿¡æ¯-------------------------*/
+/*------------²é¿´ËùÓĞ¹ºÆ±ĞÅÏ¢-------------------------*/
 void admin_view_buy_news(struct buy_ticket *buy_H)
 {
-	printf("\tæ‰€æœ‰è´­ç¥¨ä¿¡æ¯ï¼š\n");
-	printf("\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n");
-	printf("\tID\tå§“å\tæœŸå·\t  ç±»å‹\t\tå·ç \tæ•°é‡\tå¼€å¥–çŠ¶æ€  ä¸­å¥–æƒ…å†µ  è´­ç¥¨é‡‘é¢ \n");
+	printf("\tËùÓĞ¹ºÆ±ĞÅÏ¢£º\n");
+	printf("\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
+	printf("\tID\tĞÕÃû\tÆÚºÅ\t  ÀàĞÍ\t\tºÅÂë\tÊıÁ¿\t¿ª½±×´Ì¬  ÖĞ½±Çé¿ö  ¹ºÆ±½ğ¶î \n");
 	while(buy_H->next != NULL)
 	{
 		printf("\t%d\t%s\t%d",
@@ -357,40 +357,40 @@ void admin_view_buy_news(struct buy_ticket *buy_H)
 						buy_H->next->person_name,
 						buy_H->next->ticket_dayth);
 		if(buy_H->next->ticket_type == sport_ticket)
-			printf("\tä½“è‚²å½©ç¥¨");
+			printf("\tÌåÓı²ÊÆ±");
 		else if(buy_H->next->ticket_type == love_ticket)
-			printf("\tæ…ˆå–„å½©ç¥¨");
+			printf("\t´ÈÉÆ²ÊÆ±");
 		else
-			printf("\tæ•‘ç¾å½©ç¥¨");
+			printf("\t¾ÈÔÖ²ÊÆ±");
 		printf("\t%d\t%d",
 						buy_H->next->ticket_number,
 						buy_H->next->ticket_amount);
 		if(buy_H->next->ticket_status)
-				printf("\tæœªå¼€å¥–");
+				printf("\tÎ´¿ª½±");
 		else
-				printf("\tå·²å¼€å¥–");
+				printf("\tÒÑ¿ª½±");
 		if(buy_H->next->ticket_win)
-			printf("    ä¸­  å¥–");
+			printf("    ÖĞ  ½±");
 		else
-			printf("    æœªä¸­å¥–");
+			printf("    Î´ÖĞ½±");
 		printf("\t%d\n",buy_H->next->ticket_sum);
 		buy_H = buy_H->next;
 	}
-	printf("\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n");
-	printf("ä»»æ„é”®è¿”å›-->");
+	printf("\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
+	printf("ÈÎÒâ¼ü·µ»Ø-->");
 	getchar();
 }
 
-/*------------æ ¹æ®IDæŸ¥æ‰¾è´­ç¥¨ä¿¡æ¯-------------------------*/
+/*------------¸ù¾İID²éÕÒ¹ºÆ±ĞÅÏ¢-------------------------*/
 void ID_check_buynews(struct buy_ticket *buy_H)
 {
 	int id_find;
-	printf("è¯·è¾“å…¥æŸ¥æ‰¾çš„IDï¼š");
+	printf("ÇëÊäÈë²éÕÒµÄID£º");
 	scanf("%d",&id_find);
 
-	printf("\tæŸ¥æ‰¾çš„è´­ç¥¨ä¿¡æ¯ä¸ºï¼š\n");
-	printf("\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n");
-	printf("\tID\tå§“å\tæœŸå·\t  ç±»å‹\t\tå·ç \tæ•°é‡\tå¼€å¥–çŠ¶æ€  ä¸­å¥–æƒ…å†µ  è´­ç¥¨é‡‘é¢ \n");
+	printf("\t²éÕÒµÄ¹ºÆ±ĞÅÏ¢Îª£º\n");
+	printf("\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
+	printf("\tID\tĞÕÃû\tÆÚºÅ\t  ÀàĞÍ\t\tºÅÂë\tÊıÁ¿\t¿ª½±×´Ì¬  ÖĞ½±Çé¿ö  ¹ºÆ±½ğ¶î \n");
 	while(buy_H->next != NULL)
 	{
 		if(buy_H->next->person_id == id_find)
@@ -400,43 +400,43 @@ void ID_check_buynews(struct buy_ticket *buy_H)
 						buy_H->next->person_name,
 						buy_H->next->ticket_dayth);
 			if(buy_H->next->ticket_type == sport_ticket)
-				printf("\tä½“è‚²å½©ç¥¨");
+				printf("\tÌåÓı²ÊÆ±");
 			else if(buy_H->next->ticket_type == love_ticket)
-				printf("\tæ…ˆå–„å½©ç¥¨");
+				printf("\t´ÈÉÆ²ÊÆ±");
 			else
-				printf("\tæ•‘ç¾å½©ç¥¨");
+				printf("\t¾ÈÔÖ²ÊÆ±");
 			printf("\t%d\t%d",
 							buy_H->next->ticket_number,
 							buy_H->next->ticket_amount);
 			if(buy_H->next->ticket_status)
-					printf("\tæœªå¼€å¥–");
+					printf("\tÎ´¿ª½±");
 			else
-					printf("\tå·²å¼€å¥–");
+					printf("\tÒÑ¿ª½±");
 			if(buy_H->next->ticket_win)
-				printf("    ä¸­å¥–");
+				printf("    ÖĞ½±");
 			else
-				printf("    æœªä¸­å¥–");
+				printf("    Î´ÖĞ½±");
 			printf("\t%d\n",buy_H->next->ticket_sum);
 		}
 
 		buy_H = buy_H->next;
 	}
-	printf("ä»»æ„é”®è¿”å›-->");
+	printf("ÈÎÒâ¼ü·µ»Ø-->");
 	getchar();
 	getchar();
 }
 
 
-/*------------æ ¹æ®æœŸå·æŸ¥æ‰¾æ‰€æœ‰è´­ç¥¨ä¿¡æ¯-------------------------*/
+/*------------¸ù¾İÆÚºÅ²éÕÒËùÓĞ¹ºÆ±ĞÅÏ¢-------------------------*/
 void dayth_check_buynews(struct buy_ticket *buy_H)
 {
 	int dayth_find;
-	printf("è¯·è¾“å…¥æŸ¥æ‰¾çš„æœŸå·ï¼š");
+	printf("ÇëÊäÈë²éÕÒµÄÆÚºÅ£º");
 	scanf("%d",&dayth_find);
 
-	printf("\tæŸ¥æ‰¾çš„è´­ç¥¨ä¿¡æ¯ä¸ºï¼š\n");
-	printf("\tâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n");
-	printf("\tID\tå§“å\tæœŸå·\t  ç±»å‹\t\tå·ç \tæ•°é‡\tå¼€å¥–çŠ¶æ€  ä¸­å¥–æƒ…å†µ  è´­ç¥¨é‡‘é¢ \n");
+	printf("\t²éÕÒµÄ¹ºÆ±ĞÅÏ¢Îª£º\n");
+	printf("\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
+	printf("\tID\tĞÕÃû\tÆÚºÅ\t  ÀàĞÍ\t\tºÅÂë\tÊıÁ¿\t¿ª½±×´Ì¬  ÖĞ½±Çé¿ö  ¹ºÆ±½ğ¶î \n");
 	while(buy_H->next != NULL)
 	{
 		if(buy_H->next->ticket_dayth == dayth_find)
@@ -446,34 +446,34 @@ void dayth_check_buynews(struct buy_ticket *buy_H)
 						buy_H->next->person_name,
 						buy_H->next->ticket_dayth);
 			if(buy_H->next->ticket_type == sport_ticket)
-				printf("\tä½“è‚²å½©ç¥¨");
+				printf("\tÌåÓı²ÊÆ±");
 			else if(buy_H->next->ticket_type == love_ticket)
-				printf("\tæ…ˆå–„å½©ç¥¨");
+				printf("\t´ÈÉÆ²ÊÆ±");
 			else
-				printf("\tæ•‘ç¾å½©ç¥¨");
+				printf("\t¾ÈÔÖ²ÊÆ±");
 			printf("\t%d\t%d",
 							buy_H->next->ticket_number,
 							buy_H->next->ticket_amount);
 			if(buy_H->next->ticket_status)
-					printf("\tæœªå¼€å¥–");
+					printf("\tÎ´¿ª½±");
 			else
-					printf("\tå·²å¼€å¥–");
+					printf("\tÒÑ¿ª½±");
 			if(buy_H->next->ticket_win)
-				printf("    ä¸­å¥–");
+				printf("    ÖĞ½±");
 			else
-				printf("    æœªä¸­å¥–");
+				printf("    Î´ÖĞ½±");
 			printf("\t%d\n",buy_H->next->ticket_sum);
 		}
 
 		buy_H = buy_H->next;
 	}
-	printf("ä»»æ„é”®è¿”å›-->");
+	printf("ÈÎÒâ¼ü·µ»Ø-->");
 	getchar();
 	getchar();
 }
 
 
-/*------------menu13èœå•-ç®¡ç†å‘˜ä¿®æ”¹ä¿¡æ¯-------------------------*/
+/*------------menu13²Ëµ¥-¹ÜÀíÔ±ĞŞ¸ÄĞÅÏ¢-------------------------*/
 void admin_updata(struct person *H)
 {
 	struct person *p;
@@ -481,50 +481,50 @@ void admin_updata(struct person *H)
 	{
 		menu13();
 		scanf("%d",&menu_select);
-		getchar();				//é˜²æ­¢è¾“å…¥å­—ç¬¦æ—¶è¿›å…¥æ­»å¾ªç¯
+		getchar();				//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
 		switch(menu_select)
 		{
-			case 0:				//è¿”å›ä¸Šä¸€çº§
+			case 0:				//·µ»ØÉÏÒ»¼¶
 				break;
-			case 1:				//ä¿®æ”¹ç®¡ç†å‘˜å¯†ç 
+			case 1:				//ĞŞ¸Ä¹ÜÀíÔ±ÃÜÂë
 					adminself_updata(H);
 				break;
-			case 2:				//ä¿®æ”¹å½©æ°‘å¯†ç 
+			case 2:				//ĞŞ¸Ä²ÊÃñÃÜÂë
 					p = admin_find_user(H);
 					if(p != NULL)
 					{
-						p = p->next;	//ç”±äºadmin_find_userå‡½æ•°çš„è¿”å›å€¼ç”±H->next,æ”¹ä¸ºäº†H
+						p = p->next;	//ÓÉÓÚadmin_find_userº¯ÊıµÄ·µ»ØÖµÓÉH->next,¸ÄÎªÁËH
 						admin_change_information(p);
 					}
 					else
 					{
-						printf("æœªæ‰¾åˆ°è¯¥ä¿¡æ¯ï¼ä»»æ„é”®è¿”å›ï¼");
+						printf("Î´ÕÒµ½¸ÃĞÅÏ¢£¡ÈÎÒâ¼ü·µ»Ø£¡");
 						getchar();
 					}
 				break;
-			case 3:						//è¿½åŠ é‡‘é¢
+			case 3:						//×·¼Ó½ğ¶î
 					p = admin_find_user(H);
-					p = p->next;		//ç”±äºadmin_find_userå‡½æ•°çš„è¿”å›å€¼ç”±H->next,æ”¹ä¸ºäº†H
+					p = p->next;		//ÓÉÓÚadmin_find_userº¯ÊıµÄ·µ»ØÖµÓÉH->next,¸ÄÎªÁËH
 					admin_add_money(p);
 				break;
 			default:	
 					menu_select = 0;
-					printf("\n@_@---> é€‰æ‹©æœ‰è¯¯ï¼ä»»æ„é”®è¿”å›èœå•ï¼");
+					printf("\n@_@---> Ñ¡ÔñÓĞÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡");
 					getchar();			
 				break;
 		}
 		if(menu_select == 0)
 		{
-			menu_select =1;		//ä¸Šçº§èœå•å…¥å£å‚æ•°ä¸º1
-			break;				//é€€å‡ºwhile(),ä¸é€€å‡ºä¼šæ­»å¾ªç¯
+			menu_select =1;		//ÉÏ¼¶²Ëµ¥Èë¿Ú²ÎÊıÎª1
+			break;				//ÍË³öwhile(),²»ÍË³ö»áËÀÑ­»·
 		}
 	}
 }
 
-/*******************menu14èœå•-ç®¡ç†å‘˜åˆ é™¤ä¿¡æ¯*********************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜åˆ é™¤ä¿¡æ¯
-*å‚  æ•°ï¼š	H ï¼šç”¨æˆ·ä¿¡æ¯å¤´ç»“ç‚¹
-*å‚  æ•°ï¼š	buy_H: ç”¨æˆ·è´­ç¥¨ä¿¡æ¯å¤´ç»“ç‚¹
+/*******************menu14²Ëµ¥-¹ÜÀíÔ±É¾³ıĞÅÏ¢*********************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±É¾³ıĞÅÏ¢
+*²Î  Êı£º	H £ºÓÃ»§ĞÅÏ¢Í·½áµã
+*²Î  Êı£º	buy_H: ÓÃ»§¹ºÆ±ĞÅÏ¢Í·½áµã
 ****************************************************************/
 void admin_deldata(struct person *H,struct buy_ticket *buy_H)
 {
@@ -534,39 +534,39 @@ void admin_deldata(struct person *H,struct buy_ticket *buy_H)
 	{
 		menu14();
 		scanf("%d",&menu_select);
-		getchar();				//é˜²æ­¢è¾“å…¥å­—ç¬¦æ—¶è¿›å…¥æ­»å¾ªç¯
+		getchar();				//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
 		switch(menu_select)
 		{
-			case 0:				//è¿”å›ä¸Šä¸€çº§
+			case 0:				//·µ»ØÉÏÒ»¼¶
 				break;
-			case 1:				//åˆ é™¤æ³¨å†Œç”¨æˆ·
+			case 1:				//É¾³ı×¢²áÓÃ»§
 					p = admin_find_user(H);
 					if(p != NULL)
 					{
-						printf("\t\tè¯¥å½©æ°‘åŸºæœ¬ä¿¡æ¯ä¸ºï¼š\n");
-						printf("\t\tid\tå§“å\tå¯†ç \té‡‘é¢(å…ƒ)\n");
+						printf("\t\t¸Ã²ÊÃñ»ù±¾ĞÅÏ¢Îª£º\n");
+						printf("\t\tid\tĞÕÃû\tÃÜÂë\t½ğ¶î(Ôª)\n");
 						printf("\t\t-------------------------------\n");
 						printf("\t\t%d\t%s\t%s\t%d\n",
-										p->next->id, 		//pä¹‹å‰å†™æˆäº†H->
+										p->next->id, 		//pÖ®Ç°Ğ´³ÉÁËH->
 										p->next->name, 
 										p->next->passwd, 
 										p->next->person_money);
-						printf("ç¡®è®¤åˆ é™¤ %s (y/n)ï¼Ÿ ",p->next->name);
+						printf("È·ÈÏÉ¾³ı %s (y/n)£¿ ",p->next->name);
 						if(getchar() == 'y')
 						{
-							len_buy--;					//æ³¨å†Œç”¨æˆ·æ•°å‡1
-							save_flag = 1;				//ä¿¡æ¯æ›´æ–°æç¤º
+							len_buy--;					//×¢²áÓÃ»§Êı¼õ1
+							save_flag = 1;				//ĞÅÏ¢¸üĞÂÌáÊ¾
 							temp = p->next;
 							p->next = temp->next;
-							printf("\t%s åˆ é™¤æˆåŠŸ!\n",temp->name);
-							printf("\tç»“ç‚¹:   %p å·²ç»é”€æ¯ï¼ä»»æ„é”®è¿”å›",temp);
+							printf("\t%s É¾³ı³É¹¦!\n",temp->name);
+							printf("\t½áµã:   %p ÒÑ¾­Ïú»Ù£¡ÈÎÒâ¼ü·µ»Ø",temp);
 							free(temp);
 							getchar();
 							getchar();	
 						}
 						else
 						{
-							printf("å·²å–æ¶ˆåˆ é™¤ï¼ä»»æ„é”®è¿”å›");
+							printf("ÒÑÈ¡ÏûÉ¾³ı£¡ÈÎÒâ¼ü·µ»Ø");
 							getchar();
 							getchar();
 						}
@@ -574,149 +574,149 @@ void admin_deldata(struct person *H,struct buy_ticket *buy_H)
 					}
 					else
 					{
-						printf("æ‰€æŸ¥æ‰¾çš„å­¦ç”Ÿä¸å­˜åœ¨ï¼\n");
+						printf("Ëù²éÕÒµÄÑ§Éú²»´æÔÚ£¡\n");
 						getchar();
 					}
 								
 				break;
-			case 2:				//æ ¹æ®IDåˆ é™¤è´­ç¥¨ä¿¡æ¯
+			case 2:				//¸ù¾İIDÉ¾³ı¹ºÆ±ĞÅÏ¢
 					id_del_buynews(buy_H);
 				break;
-			case 3:				//æ ¹æ®ç±»å‹åˆ é™¤è´­ç¥¨ä¿¡æ¯
+			case 3:				//¸ù¾İÀàĞÍÉ¾³ı¹ºÆ±ĞÅÏ¢
 					type_del_buynews(buy_H);
 				break;
-			case 4:				//æ ¹æ®æœŸå·åˆ é™¤è´­ç¥¨ä¿¡æ¯
+			case 4:				//¸ù¾İÆÚºÅÉ¾³ı¹ºÆ±ĞÅÏ¢
 					dayth_del_buynews(buy_H);
 				break;
 			default:	
 					menu_select = 0;
-					printf("\n@_@---> é€‰æ‹©æœ‰è¯¯ï¼ä»»æ„é”®è¿”å›èœå•ï¼");
+					printf("\n@_@---> Ñ¡ÔñÓĞÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡");
 					getchar();		
 				break;
 		}
 		if(menu_select == 0)
 		{
-			menu_select =1;		//ä¸Šçº§èœå•å…¥å£å‚æ•°ä¸º1
-			break;				//é€€å‡ºwhile(),ä¸é€€å‡ºä¼šæ­»å¾ªç¯
+			menu_select =1;		//ÉÏ¼¶²Ëµ¥Èë¿Ú²ÎÊıÎª1
+			break;				//ÍË³öwhile(),²»ÍË³ö»áËÀÑ­»·
 		}
 	}
 }
 
-/*------------æ ¹æ®IDåˆ é™¤è´­ç¥¨ä¿¡æ¯-------------------------*/
+/*------------¸ù¾İIDÉ¾³ı¹ºÆ±ĞÅÏ¢-------------------------*/
 void id_del_buynews(struct buy_ticket *buy_H)
 {
 	int id_find;
 	struct buy_ticket *temp = NULL;
-	printf("è¯·è¾“å…¥è¦åˆ é™¤ä¿¡æ¯çš„IDï¼š");
+	printf("ÇëÊäÈëÒªÉ¾³ıĞÅÏ¢µÄID£º");
 	scanf("%d",&id_find);
 	getchar();
-	printf("ç¡®å®šåˆ é™¤ä¿¡æ¯(y/n)?");
+	printf("È·¶¨É¾³ıĞÅÏ¢(y/n)?");
 	if(getchar() == 'y')
 	{
 		while(buy_H->next != NULL)
 		{
-			if(buy_H->next->person_id == id_find && buy_H->next->ticket_status == 0)	//å¹¶ä¸”å·²å¼€å¥–
+			if(buy_H->next->person_id == id_find && buy_H->next->ticket_status == 0)	//²¢ÇÒÒÑ¿ª½±
 			{
 				temp = buy_H->next;			
-				buy_H->next = buy_H->next->next;	//åˆ é™¤èŠ‚ç‚¹ï¼Œä¸‹ä¸€ä¸ªæ¥ä¸Š
-				printf("åˆ é™¤æˆåŠŸï¼ŒèŠ‚ç‚¹ %p å·²é”€æ¯!\n",temp);
+				buy_H->next = buy_H->next->next;	//É¾³ı½Úµã£¬ÏÂÒ»¸ö½ÓÉÏ
+				printf("É¾³ı³É¹¦£¬½Úµã %p ÒÑÏú»Ù!\n",temp);
 				free(temp);
-				len_buy--;		//è´­ç¥¨ä¿¡æ¯ä¸ªæ•°å‡1
+				len_buy--;		//¹ºÆ±ĞÅÏ¢¸öÊı¼õ1
 			}
 			else
 				buy_H = buy_H->next;
 		}
-		printf("æç¤ºï¼šæœªå¼€å¥–çš„æ— æ³•åˆ é™¤,ä»»æ„é”®è¿”å›-->");
+		printf("ÌáÊ¾£ºÎ´¿ª½±µÄÎŞ·¨É¾³ı,ÈÎÒâ¼ü·µ»Ø-->");
 		getchar();
 		getchar();
 	}
 	else
 	{
-		printf("å·²æ”¾å¼ƒï¼ä»»æ„é”®è¿”å›-->");
+		printf("ÒÑ·ÅÆú£¡ÈÎÒâ¼ü·µ»Ø-->");
 		getchar();
 		getchar();
 	}
 	
 }
 
-/*------------æ ¹æ®ç±»å‹åˆ é™¤è´­ç¥¨ä¿¡æ¯-------------------------*/
+/*------------¸ù¾İÀàĞÍÉ¾³ı¹ºÆ±ĞÅÏ¢-------------------------*/
 void type_del_buynews(struct buy_ticket *buy_H)
 {
 	int type_find;
 	struct buy_ticket *temp = NULL;
-	printf("è¯·é€‰æ‹©è¦åˆ é™¤ä¿¡æ¯çš„ç±»å‹(1Â·ä½“è‚²å½©ç¥¨  2Â·æ…ˆå–„å½©ç¥¨ 3Â·æ•‘ç¾å½©ç¥¨)ï¼š");
+	printf("ÇëÑ¡ÔñÒªÉ¾³ıĞÅÏ¢µÄÀàĞÍ(1¡¤ÌåÓı²ÊÆ±  2¡¤´ÈÉÆ²ÊÆ± 3¡¤¾ÈÔÖ²ÊÆ±)£º");
 	scanf("%d",&type_find);
 	getchar();
-	printf("ç¡®å®šåˆ é™¤ä¿¡æ¯(y/n)?");
+	printf("È·¶¨É¾³ıĞÅÏ¢(y/n)?");
 	if(getchar() == 'y')
 	{
 		while(buy_H->next != NULL)
 		{
-			if(buy_H->next->ticket_type == type_find && buy_H->next->ticket_status == 0)//å¹¶ä¸”å·²å¼€å¥–
+			if(buy_H->next->ticket_type == type_find && buy_H->next->ticket_status == 0)//²¢ÇÒÒÑ¿ª½±
 			{
 				temp = buy_H->next;			
-				buy_H->next = buy_H->next->next;	//åˆ é™¤èŠ‚ç‚¹ï¼Œä¸‹ä¸€ä¸ªæ¥ä¸Š
-				printf("åˆ é™¤æˆåŠŸï¼ŒèŠ‚ç‚¹ %p å·²é”€æ¯!\n",temp);
+				buy_H->next = buy_H->next->next;	//É¾³ı½Úµã£¬ÏÂÒ»¸ö½ÓÉÏ
+				printf("É¾³ı³É¹¦£¬½Úµã %p ÒÑÏú»Ù!\n",temp);
 				free(temp);
-				len_buy--;		//è´­ç¥¨ä¿¡æ¯ä¸ªæ•°å‡1
+				len_buy--;		//¹ºÆ±ĞÅÏ¢¸öÊı¼õ1
 			}
 			else
 				buy_H = buy_H->next;
 		}
-		printf("æç¤ºï¼šæœªå¼€å¥–çš„æ— æ³•åˆ é™¤,ä»»æ„é”®è¿”å›-->");
+		printf("ÌáÊ¾£ºÎ´¿ª½±µÄÎŞ·¨É¾³ı,ÈÎÒâ¼ü·µ»Ø-->");
 		getchar();
 		getchar();
 	}
 	else
 	{
-		printf("å·²æ”¾å¼ƒï¼ä»»æ„é”®è¿”å›-->");
+		printf("ÒÑ·ÅÆú£¡ÈÎÒâ¼ü·µ»Ø-->");
 		getchar();
 		getchar();
 	}
 	
 }
 
-/*------------æ ¹æ®æœŸå·åˆ é™¤è´­ç¥¨ä¿¡æ¯-------------------------*/
+/*------------¸ù¾İÆÚºÅÉ¾³ı¹ºÆ±ĞÅÏ¢-------------------------*/
 void dayth_del_buynews(struct buy_ticket *buy_H)
 {
 	int dayth_find;
 	struct buy_ticket *temp = NULL;
-	printf("è¯·è¾“å…¥è¦åˆ é™¤ä¿¡æ¯çš„æœŸå·ï¼š");
+	printf("ÇëÊäÈëÒªÉ¾³ıĞÅÏ¢µÄÆÚºÅ£º");
 	scanf("%d",&dayth_find);
 	getchar();
-	printf("ç¡®å®šåˆ é™¤ä¿¡æ¯(y/n)?");
+	printf("È·¶¨É¾³ıĞÅÏ¢(y/n)?");
 	if(getchar() == 'y')
 	{
 		while(buy_H->next != NULL)
 		{
-			if(buy_H->next->ticket_dayth == dayth_find && buy_H->next->ticket_status == 0)	//å¹¶ä¸”å·²å¼€å¥–
+			if(buy_H->next->ticket_dayth == dayth_find && buy_H->next->ticket_status == 0)	//²¢ÇÒÒÑ¿ª½±
 			{
 				temp = buy_H->next;			
-				buy_H->next = buy_H->next->next;	//åˆ é™¤èŠ‚ç‚¹ï¼Œä¸‹ä¸€ä¸ªæ¥ä¸Š
-				printf("åˆ é™¤æˆåŠŸï¼ŒèŠ‚ç‚¹ %p å·²é”€æ¯!\n",temp);
+				buy_H->next = buy_H->next->next;	//É¾³ı½Úµã£¬ÏÂÒ»¸ö½ÓÉÏ
+				printf("É¾³ı³É¹¦£¬½Úµã %p ÒÑÏú»Ù!\n",temp);
 				free(temp);
-				len_buy--;		//è´­ç¥¨ä¿¡æ¯ä¸ªæ•°å‡1
+				len_buy--;		//¹ºÆ±ĞÅÏ¢¸öÊı¼õ1
 			}
 			else
 				buy_H = buy_H->next;
 		}
-		printf("æç¤ºï¼šæœªå¼€å¥–çš„æ— æ³•åˆ é™¤,ä»»æ„é”®è¿”å›-->");
+		printf("ÌáÊ¾£ºÎ´¿ª½±µÄÎŞ·¨É¾³ı,ÈÎÒâ¼ü·µ»Ø-->");
 		getchar();
 		getchar();
 	}
 	else
 	{
-		printf("å·²æ”¾å¼ƒï¼ä»»æ„é”®è¿”å›-->");
+		printf("ÒÑ·ÅÆú£¡ÈÎÒâ¼ü·µ»Ø-->");
 		getchar();
 		getchar();
 	}
 	
 }
 
-/****************menu15èœå•-ç®¡ç†å‘˜å¯¹ä¿¡æ¯æ’åº*******************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜æ’åº
-*å‚  æ•°ï¼š	H ï¼š ç”¨æˆ·å¤´ç»“ç‚¹ï¼Œå¯¹ç”¨æˆ·æ’åº
-*å‚  æ•°ï¼š	buy_H : è´­ç¥¨ä¿¡æ¯å¤´ç»“ç‚¹ï¼Œå¯¹è´­ç¥¨ä¿¡æ¯æ’åº
+/****************menu15²Ëµ¥-¹ÜÀíÔ±¶ÔĞÅÏ¢ÅÅĞò*******************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±ÅÅĞò
+*²Î  Êı£º	H £º ÓÃ»§Í·½áµã£¬¶ÔÓÃ»§ÅÅĞò
+*²Î  Êı£º	buy_H : ¹ºÆ±ĞÅÏ¢Í·½áµã£¬¶Ô¹ºÆ±ĞÅÏ¢ÅÅĞò
 ************************************************************/
 void admin_sort(struct person *H,struct buy_ticket *buy_H)
 {
@@ -724,42 +724,42 @@ void admin_sort(struct person *H,struct buy_ticket *buy_H)
 	{
 		menu15();
 		scanf("%d",&menu_select);
-		getchar();				//é˜²æ­¢è¾“å…¥å­—ç¬¦æ—¶è¿›å…¥æ­»å¾ªç¯
+		getchar();				//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
 		switch(menu_select)
 		{
-			case 0:				//è¿”å›ä¸Šä¸€çº§
+			case 0:				//·µ»ØÉÏÒ»¼¶
 				break;
-			case 1:				//æŒ‰ç…§å¸å·ä½™é¢æ’åºï¼ˆæ’ç”¨æˆ·ï¼‰æ’å®Œå¹¶æ˜¾ç¤º
+			case 1:				//°´ÕÕÕÊºÅÓà¶îÅÅĞò£¨ÅÅÓÃ»§£©ÅÅÍê²¢ÏÔÊ¾
 					sortfun(H,buy_H);
 				break;
-			case 2:				//æŒ‰ç…§æœŸå·æ’åº
+			case 2:				//°´ÕÕÆÚºÅÅÅĞò
 					sortfun(H,buy_H);
 				break;
-			case 3:				//æŒ‰è´­ç¥¨æ€»æ•°æ’åº
+			case 3:				//°´¹ºÆ±×ÜÊıÅÅĞò
 					sortfun(H,buy_H);
 				break;
 			default:	
 					menu_select = 0;
-					printf("\n@_@---> é€‰æ‹©æœ‰è¯¯ï¼ä»»æ„é”®è¿”å›èœå•ï¼");
+					printf("\n@_@---> Ñ¡ÔñÓĞÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡");
 					getchar();			
 				break;
 		}
 		if(menu_select == 0)
 		{
-			menu_select =1;		//ä¸Šçº§èœå•å…¥å£å‚æ•°ä¸º1
-			break;				//é€€å‡ºwhile(),ä¸é€€å‡ºä¼šæ­»å¾ªç¯
+			menu_select =1;		//ÉÏ¼¶²Ëµ¥Èë¿Ú²ÎÊıÎª1
+			break;				//ÍË³öwhile(),²»ÍË³ö»áËÀÑ­»·
 		}
 	}
 }
 
-/************************ç®¡ç†å‘˜æ’åºå­å‡½æ•°*********************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†æ’åºå­å‡½æ•°
-*å‚  æ•°ï¼š	H ï¼šç”¨æˆ·å¤´ç»“ç‚¹
-*å‚  æ•°ï¼š	buy_H : è´­ç¥¨ä¿¡æ¯å¤´ç»“ç‚¹
-*æ  ç¤ºï¼š
-*    1Â·å¯¹ç”¨æˆ·æ’åºï¼ˆmenu_select == 1ï¼‰
-*    2Â·å¯¹è´­ç¥¨ä¿¡æ¯æ’åºï¼ˆmenu_select ==2 3ï¼‰
-*    len_user ç”¨æˆ·ä¸ªæ•°		len_buy è´­ç¥¨ä¿¡æ¯ä¸ªæ•°  å…¨å±€å˜é‡
+/************************¹ÜÀíÔ±ÅÅĞò×Óº¯Êı*********************
+*¹¦  ÄÜ£º	¹ÜÀíÅÅĞò×Óº¯Êı
+*²Î  Êı£º	H £ºÓÃ»§Í·½áµã
+*²Î  Êı£º	buy_H : ¹ºÆ±ĞÅÏ¢Í·½áµã
+*Ìá  Ê¾£º
+*    1¡¤¶ÔÓÃ»§ÅÅĞò£¨menu_select == 1£©
+*    2¡¤¶Ô¹ºÆ±ĞÅÏ¢ÅÅĞò£¨menu_select ==2 3£©
+*    len_user ÓÃ»§¸öÊı		len_buy ¹ºÆ±ĞÅÏ¢¸öÊı  È«¾Ö±äÁ¿
 ************************************************************/
 void sortfun(struct person *H,struct buy_ticket *buy_H)
 {
@@ -768,107 +768,107 @@ void sortfun(struct person *H,struct buy_ticket *buy_H)
 	struct person *temp = NULL;
 	struct buy_ticket *buy_p = buy_H;
 	struct buy_ticket *buy_temp = NULL;
-	if(menu_select == 1)					//å¯¹æ³¨å†Œç”¨æˆ·ï¼Œä½™é¢ä»å¤§åˆ°å°æ’åº
+	if(menu_select == 1)					//¶Ô×¢²áÓÃ»§£¬Óà¶î´Ó´óµ½Ğ¡ÅÅĞò
 	{
 		for(i=len_user-2;i>0;i--)
 		{
 			for(j=0;j<i;j++)
 			{
-				if(p->next->person_money < p->next->next->person_money)		//p->nextä¸p->next->nextæ¯”è¾ƒ
+				if(p->next->person_money < p->next->next->person_money)		//p->nextÓëp->next->next±È½Ï
 				{
-					temp = p->next;			//ä»¥ä¸‹å››è¡Œï¼Œä¸ºäº¤æ¢ä¸¤ä¸ªç›¸é‚»ç»“ç‚¹ï¼Œå¯ç”¨ä½œå†’æ³¡æ’åº,p->nextä¸p->next->nextæ¯”è¾ƒ
+					temp = p->next;			//ÒÔÏÂËÄĞĞ£¬Îª½»»»Á½¸öÏàÁÚ½áµã£¬¿ÉÓÃ×÷Ã°ÅİÅÅĞò,p->nextÓëp->next->next±È½Ï
 					p->next = temp->next;
 					temp->next = p->next->next;
-					p->next->next = temp;	//ä»¥ä¸Šå››è¡Œï¼Œä¸ºäº¤æ¢ä¸¤ä¸ªç›¸é‚»ç»“ç‚¹ï¼Œå¯ç”¨ä½œå†’æ³¡æ’åº
+					p->next->next = temp;	//ÒÔÉÏËÄĞĞ£¬Îª½»»»Á½¸öÏàÁÚ½áµã£¬¿ÉÓÃ×÷Ã°ÅİÅÅĞò
 				}
 				p = p->next;
 			}
 			p = H;
 		}
-		printf("\t\tæ’åºå>>\n");
+		printf("\t\tÅÅĞòºó>>\n");
 		people_information(H);
 	}
-	else if(menu_select == 2)				//å¯¹è´­ç¥¨ä¿¡æ¯çš„æœŸå·æ’åºï¼Œä»å°åˆ°å¤§
+	else if(menu_select == 2)				//¶Ô¹ºÆ±ĞÅÏ¢µÄÆÚºÅÅÅĞò£¬´ÓĞ¡µ½´ó
 	{
 		for(i=len_buy-1;i>0;i--)
 		{
 			for(j=0;j<i;j++)
 			{
-				if(buy_p->next->ticket_dayth > buy_p->next->next->ticket_dayth)		//p->nextä¸p->next->nextæ¯”è¾ƒ
+				if(buy_p->next->ticket_dayth > buy_p->next->next->ticket_dayth)		//p->nextÓëp->next->next±È½Ï
 				{
-					buy_temp = buy_p->next;			//ä»¥ä¸‹å››è¡Œï¼Œä¸ºäº¤æ¢ä¸¤ä¸ªç›¸é‚»ç»“ç‚¹ï¼Œå¯ç”¨ä½œå†’æ³¡æ’åº,p->nextä¸p->next->nextæ¯”è¾ƒ
+					buy_temp = buy_p->next;			//ÒÔÏÂËÄĞĞ£¬Îª½»»»Á½¸öÏàÁÚ½áµã£¬¿ÉÓÃ×÷Ã°ÅİÅÅĞò,p->nextÓëp->next->next±È½Ï
 					buy_p->next = buy_temp->next;
 					buy_temp->next = buy_p->next->next;
-					buy_p->next->next = buy_temp;	//ä»¥ä¸Šå››è¡Œï¼Œä¸ºäº¤æ¢ä¸¤ä¸ªç›¸é‚»ç»“ç‚¹ï¼Œå¯ç”¨ä½œå†’æ³¡æ’åº
+					buy_p->next->next = buy_temp;	//ÒÔÉÏËÄĞĞ£¬Îª½»»»Á½¸öÏàÁÚ½áµã£¬¿ÉÓÃ×÷Ã°ÅİÅÅĞò
 				}
 				buy_p = buy_p->next;
 			}
 			buy_p = buy_H;
 		}
-		printf("\tæ’åºåè´­ç¥¨ä¿¡æ¯ä¸ºï¼š\n");
+		printf("\tÅÅĞòºó¹ºÆ±ĞÅÏ¢Îª£º\n");
 		admin_view_buy_news(buy_H);
 	}
-	else											//å¯¹è´­ç¥¨ä¿¡æ¯çš„ï¼Œç”¨æˆ·å½“æ¬¡è´­ç¥¨æ€»æ•°,ä»å¤§åˆ°å°
+	else											//¶Ô¹ºÆ±ĞÅÏ¢µÄ£¬ÓÃ»§µ±´Î¹ºÆ±×ÜÊı,´Ó´óµ½Ğ¡
 	{
 		for(i=len_buy-1;i>0;i--)
 		{
 			for(j=0;j<i;j++)
 			{
-				if(buy_p->next->ticket_amount < buy_p->next->next->ticket_amount)		//p->nextä¸p->next->nextæ¯”è¾ƒ
+				if(buy_p->next->ticket_amount < buy_p->next->next->ticket_amount)		//p->nextÓëp->next->next±È½Ï
 				{
-					buy_temp = buy_p->next;			//ä»¥ä¸‹å››è¡Œï¼Œä¸ºäº¤æ¢ä¸¤ä¸ªç›¸é‚»ç»“ç‚¹ï¼Œå¯ç”¨ä½œå†’æ³¡æ’åº,p->nextä¸p->next->nextæ¯”è¾ƒ
+					buy_temp = buy_p->next;			//ÒÔÏÂËÄĞĞ£¬Îª½»»»Á½¸öÏàÁÚ½áµã£¬¿ÉÓÃ×÷Ã°ÅİÅÅĞò,p->nextÓëp->next->next±È½Ï
 					buy_p->next = buy_temp->next;
 					buy_temp->next = buy_p->next->next;
-					buy_p->next->next = buy_temp;	//ä»¥ä¸Šå››è¡Œï¼Œä¸ºäº¤æ¢ä¸¤ä¸ªç›¸é‚»ç»“ç‚¹ï¼Œå¯ç”¨ä½œå†’æ³¡æ’åº
+					buy_p->next->next = buy_temp;	//ÒÔÉÏËÄĞĞ£¬Îª½»»»Á½¸öÏàÁÚ½áµã£¬¿ÉÓÃ×÷Ã°ÅİÅÅĞò
 				}
 				buy_p = buy_p->next;
 			}
 			buy_p = buy_H;
 		}
-		printf("\tæ’åºåè´­ç¥¨ä¿¡æ¯ä¸ºï¼š\n");
+		printf("\tÅÅĞòºó¹ºÆ±ĞÅÏ¢Îª£º\n");
 		admin_view_buy_news(buy_H);
 	}
 }
 
-/**************ç®¡ç†å‘˜äº§æŸ¥æ‰¾å†Œç”¨æˆ·*********************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜æŸ¥æ‰¾æ³¨å†Œç”¨æˆ·
-*å‚  æ•°ï¼š	H ï¼š ç”¨æˆ·å¤´ç»“ç‚¹
-*æ”¶  è·ï¼š	è¾“å…¥ å§“å id è‡ªåŠ¨åŒºåˆ†
-*è¿”å›å€¼ï¼š		æ‰¾åˆ°å­¦ç”Ÿè¿”å›å…¶ç»“ç‚¹åœ°å€ï¼Œæœªæ‰¾åˆ°è¿”å› NULL
+/**************¹ÜÀíÔ±²ú²éÕÒ²áÓÃ»§*********************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±²éÕÒ×¢²áÓÃ»§
+*²Î  Êı£º	H £º ÓÃ»§Í·½áµã
+*ÊÕ  »ñ£º	ÊäÈë ĞÕÃû id ×Ô¶¯Çø·Ö
+*·µ»ØÖµ£º		ÕÒµ½Ñ§Éú·µ»ØÆä½áµãµØÖ·£¬Î´ÕÒµ½·µ»Ø NULL
 ***************************************************/
 struct person * admin_find_user(struct person * H)
 {
 	int id = 0;
 	char name[20];	
-	printf("\nè¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å§“åæˆ–IDï¼š");
+	printf("\nÇëÊäÈëÒª²éÕÒµÄĞÕÃû»òID£º");
 //	scanf("%s",name);
 	fflush(stdin);
-	scanf("%d",&id);			//è‡ªåŠ¨åŒºåˆ†å§“åå’Œid
+	scanf("%d",&id);			//×Ô¶¯Çø·ÖĞÕÃûºÍid
 	gets(name);
 		while(H->next != NULL)
 		{
-			if((H->next->id == id) || (strcmp(H->next->name,name) == 0))	//å§“åæˆ–è€…idç›¸åŒ
+			if((H->next->id == id) || (strcmp(H->next->name,name) == 0))	//ĞÕÃû»òÕßidÏàÍ¬
 			{
 				return H;
 			}
 			H = H->next;
 		}
-		if(H->next == NULL)		//æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿ
+		if(H->next == NULL)		//Î´ÕÒµ½¸ÃÑ§Éú
 			return NULL;
 }
 
-/******************ç®¡ç†å‘˜ä¿®æ”¹å·²çŸ¥åœ°å€çš„ä¿¡æ¯*************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜ä¿®æ”¹ä¿¡æ¯
-*å‚  æ•°ï¼š	p : è¦ä¿®æ”¹å­¦ç”Ÿçš„åœ°å€
+/******************¹ÜÀíÔ±ĞŞ¸ÄÒÑÖªµØÖ·µÄĞÅÏ¢*************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±ĞŞ¸ÄĞÅÏ¢
+*²Î  Êı£º	p : ÒªĞŞ¸ÄÑ§ÉúµÄµØÖ·
 *****************************************************/
-void admin_change_information(struct person *p)		//pæŒ‡å‘è¦æ”¹åŠ¨çš„èŠ‚ç‚¹ï¼Œç”±findæä¾›
+void admin_change_information(struct person *p)		//pÖ¸ÏòÒª¸Ä¶¯µÄ½Úµã£¬ÓÉfindÌá¹©
 {
 	char passwd_test[8];
 	char passwd_test1[8];
 	int i = 0;
-	printf("è¯¥å½©æ°‘ä¿¡æ¯ä¸ºï¼š\n");
+	printf("¸Ã²ÊÃñĞÅÏ¢Îª£º\n");
 	printf("\t\t-------------------------------\n");
-	printf("\t\tid\tå§“å\tå¯†ç \té‡‘é¢(å…ƒ)\n");
+	printf("\t\tid\tĞÕÃû\tÃÜÂë\t½ğ¶î(Ôª)\n");
 	printf("\t\t%d\t%s\t%s\t%d\n",
 					p->id, 
 					p->name, 
@@ -877,70 +877,70 @@ void admin_change_information(struct person *p)		//pæŒ‡å‘è¦æ”¹åŠ¨çš„èŠ‚ç‚¹ï¼Œç
 	
 	do
 	{
-		if(i>2)			//è¾“å…¥3æ¬¡ï¼Œåˆ™æ”¾å¼ƒæ›´æ–°
+		if(i>2)			//ÊäÈë3´Î£¬Ôò·ÅÆú¸üĞÂ
 		{
-			printf("é”™è¯¯æ¬¡æ•°è¶…è¿‡3æ¬¡ï¼ä»»æ„é”®è¿”å›");
+			printf("´íÎó´ÎÊı³¬¹ı3´Î£¡ÈÎÒâ¼ü·µ»Ø");
 			getchar();
 			getchar();
 			break;
 		}				
-		printf("è¯·è¾“å…¥æ–°å¯†ç ï¼š");
+		printf("ÇëÊäÈëĞÂÃÜÂë£º");
 		scanf("%s",passwd_test);
-		printf("è¯·å†æ¬¡è¾“å…¥å¯†ç :");
+		printf("ÇëÔÙ´ÎÊäÈëÃÜÂë:");
 		scanf("%s",passwd_test1);
 		if(strcmp(passwd_test1,passwd_test)== 0)
 		{
-			save_flag = 1;		//ä¿¡æ¯å·²ç»æ›´æ–°
+			save_flag = 1;		//ĞÅÏ¢ÒÑ¾­¸üĞÂ
 			strcpy(p->passwd,passwd_test1);
-			printf("å¯†ç å·²æ›´æ–°ï¼ä»»æ„é”®è¿”å›ï¼");
-			getchar();			//éœ€è¦ä¸¤ä¸ªï¼Œä¸€ä¸ªå¸æ”¶ä¹‹å‰çš„scanfåçš„
+			printf("ÃÜÂëÒÑ¸üĞÂ£¡ÈÎÒâ¼ü·µ»Ø£¡");
+			getchar();			//ĞèÒªÁ½¸ö£¬Ò»¸öÎüÊÕÖ®Ç°µÄscanfºóµÄ
 			getchar();
 			break;
 		}
 		else
 		{
 			i++;
-			printf("ä¸¤æ¬¡å¯†ç ä¸åŒ¹é…ï¼è¯·é‡æ–°è¾“å…¥ï¼\n");
+			printf("Á½´ÎÃÜÂë²»Æ¥Åä£¡ÇëÖØĞÂÊäÈë£¡\n");
 		}
 		
 	}while(1);
 }
 
-/******************ç®¡ç†å‘˜è¿½åŠ é‡‘é¢***************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜è¿½åŠ é‡‘é¢
-*å‚  æ•°ï¼š	p : è¦è¿½åŠ å­¦ç”Ÿçš„åœ°å€
+/******************¹ÜÀíÔ±×·¼Ó½ğ¶î***************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±×·¼Ó½ğ¶î
+*²Î  Êı£º	p : Òª×·¼ÓÑ§ÉúµÄµØÖ·
 **********************************************/
 void admin_add_money(struct person *p)
 {
 	int money;
 
-	printf("ä½™é¢ä¸ºï¼š");
-	printf("%d å…ƒ\n",p->person_money);
-	printf("è¯·è¾“å…¥è¿½åŠ çš„é‡‘é¢ :");
+	printf("Óà¶îÎª£º");
+	printf("%d Ôª\n",p->person_money);
+	printf("ÇëÊäÈë×·¼ÓµÄ½ğ¶î :");
 	scanf("%d",&money);
 	getchar();
-	printf("ç¡®è®¤è¿½åŠ ï¼Ÿ (y/n)");
+	printf("È·ÈÏ×·¼Ó£¿ (y/n)");
 	if(getchar() == 'y')
 	{
-		save_flag = 1;	//ä¿¡æ¯æ›´æ–°æç¤º
+		save_flag = 1;	//ĞÅÏ¢¸üĞÂÌáÊ¾
 		p->person_money += money;
-		printf("è¿½åŠ åçš„ä½™é¢ä¸ºï¼š"); 
-		printf("%d å…ƒ\n",p->person_money);
+		printf("×·¼ÓºóµÄÓà¶îÎª£º"); 
+		printf("%d Ôª\n",p->person_money);
 		getchar();
-		printf("ä»»æ„é”®é€€å‡º-->");
+		printf("ÈÎÒâ¼üÍË³ö-->");
 		getchar();
 	}
 	else
 	{
-		printf("å·²æ”¾å¼ƒè¿½åŠ ï¼");
+		printf("ÒÑ·ÅÆú×·¼Ó£¡");
 	}
 	
 	
 }
 
-/***************ç®¡ç†å‘˜ä¿®æ”¹ä¸ªäººä¿¡æ¯*********************
-*åŠŸ  èƒ½ï¼š	ç®¡ç†å‘˜ä¿®æ”¹ä¸ªäººä¿¡æ¯
-*å‚  æ•°ï¼š	ç”¨æˆ·å¤´ç»“ç‚¹ï¼Œç®¡ç†å‘˜ä¿¡æ¯åœ¨ç”¨æˆ·é“¾è¡¨å¤´ç»“ç‚¹	
+/***************¹ÜÀíÔ±ĞŞ¸Ä¸öÈËĞÅÏ¢*********************
+*¹¦  ÄÜ£º	¹ÜÀíÔ±ĞŞ¸Ä¸öÈËĞÅÏ¢
+*²Î  Êı£º	ÓÃ»§Í·½áµã£¬¹ÜÀíÔ±ĞÅÏ¢ÔÚÓÃ»§Á´±íÍ·½áµã	
 *****************************************************/
 void adminself_updata(struct person *H)
 {
@@ -955,81 +955,81 @@ void adminself_updata(struct person *H)
 	{
 		menu131();
 		scanf("%d",&menu_select);
-		getchar();						//é˜²æ­¢è¾“å…¥å­—ç¬¦æ—¶è¿›å…¥æ­»å¾ªç¯
+		getchar();						//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
 		switch(menu_select)
 		{
-			case 0:						//è¿”å›ä¸Šä¸€çº§
+			case 0:						//·µ»ØÉÏÒ»¼¶
 				break;
-			case 1:						//ä¿®æ”¹ç®¡ç†å‘˜å§“å
-					printf("è¯·è¾“å…¥æ–°ç”¨æˆ·åï¼š");
+			case 1:						//ĞŞ¸Ä¹ÜÀíÔ±ĞÕÃû
+					printf("ÇëÊäÈëĞÂÓÃ»§Ãû£º");
 					scanf("%s",name);
 					getchar();
-					printf("ç¡®è®¤ä¿®æ”¹ç”¨æˆ·å (y/n)?");
+					printf("È·ÈÏĞŞ¸ÄÓÃ»§Ãû (y/n)?");
 					if(getchar() == 'y')
 					{
-						save_flag = 1;	//ä¿¡æ¯æ›´æ–°æç¤º
+						save_flag = 1;	//ĞÅÏ¢¸üĞÂÌáÊ¾
 						strcpy(H->name,name);
-						printf("ä¿®æ”¹æˆåŠŸï¼ä»»æ„é”®è¿”å›ï¼");
+						printf("ĞŞ¸Ä³É¹¦£¡ÈÎÒâ¼ü·µ»Ø£¡");
 						getchar();
 						getchar();
 					}
 					else
 					{
-						printf("å·²æ”¾å¼ƒä¿®æ”¹ï¼ä»»æ„é”®è¿”å›ï¼");
+						printf("ÒÑ·ÅÆúĞŞ¸Ä£¡ÈÎÒâ¼ü·µ»Ø£¡");
 						getchar();
 					}
 				break;
-			case 2:						//ä¿®æ”¹ç®¡ç†å‘˜å¯†ç 
-					strcpy(admin_passwd,getpass("è¯·è¾“å…¥æ—§å¯†ç ï¼š"));	
+			case 2:						//ĞŞ¸Ä¹ÜÀíÔ±ÃÜÂë
+					strcpy(admin_passwd,getpass("ÇëÊäÈë¾ÉÃÜÂë£º"));	
 					if(strcmp(admin_passwd,H->passwd) == 0)
 					{
 						do
 						{
-							if(i>2)		//è¾“å…¥3æ¬¡ï¼Œåˆ™æ”¾å¼ƒæ›´æ–°
+							if(i>2)		//ÊäÈë3´Î£¬Ôò·ÅÆú¸üĞÂ
 							{
-								printf("é”™è¯¯æ¬¡æ•°è¶…è¿‡3æ¬¡ï¼ä»»æ„é”®è¿”å›");
+								printf("´íÎó´ÎÊı³¬¹ı3´Î£¡ÈÎÒâ¼ü·µ»Ø");
 								getchar();
 								getchar();
 								break;
 							}	
-							strcpy(passwd_test,getpass("è¯·è¾“å…¥æ–°å¯†ç ï¼š"));	
-							strcpy(passwd_test1,getpass("è¯·å†æ¬¡è¾“å…¥å¯†ç ï¼š"));				
+							strcpy(passwd_test,getpass("ÇëÊäÈëĞÂÃÜÂë£º"));	
+							strcpy(passwd_test1,getpass("ÇëÔÙ´ÎÊäÈëÃÜÂë£º"));				
 							if(strcmp(passwd_test1,passwd_test)== 0)
 							{
-								save_flag = 1;		//ä¿¡æ¯å·²ç»æ›´æ–°
+								save_flag = 1;		//ĞÅÏ¢ÒÑ¾­¸üĞÂ
 								strcpy(H->passwd,passwd_test1);
-								printf("å¯†ç å·²æ›´æ–°ï¼ä»»æ„é”®è¿”å›ï¼");
+								printf("ÃÜÂëÒÑ¸üĞÂ£¡ÈÎÒâ¼ü·µ»Ø£¡");
 								getchar();
 								break;
 							}
 							else
 							{
 								i++;
-								printf("ä¸¤æ¬¡å¯†ç ä¸åŒ¹é…ï¼è¯·é‡æ–°è¾“å…¥ï¼\n");
+								printf("Á½´ÎÃÜÂë²»Æ¥Åä£¡ÇëÖØĞÂÊäÈë£¡\n");
 							}
 	
 						}while(1);	
 					}
 					else
 					{
-						printf("å¯†ç é”™è¯¯ï¼ä»»æ„é”®è¿”å›ï¼");
+						printf("ÃÜÂë´íÎó£¡ÈÎÒâ¼ü·µ»Ø£¡");
 						getchar();
 					}
-					//---------ä¿®æ”¹ç®¡ç†å‘˜å¯†ç end
+					//---------ĞŞ¸Ä¹ÜÀíÔ±ÃÜÂëend
 				break;
-			case 3:							//è¿½åŠ å¥–æ± é‡‘é¢
-					admin_add_money(H);		//è°ƒç”¨ç®¡ç†å‘˜è¿½åŠ ç”¨æˆ·ä½™é¢ç¨‹åº
+			case 3:							//×·¼Ó½±³Ø½ğ¶î
+					admin_add_money(H);		//µ÷ÓÃ¹ÜÀíÔ±×·¼ÓÓÃ»§Óà¶î³ÌĞò
 				break;
 			default:	
 					menu_select = 0;
-					printf("\n@_@---> é€‰æ‹©æœ‰è¯¯ï¼ä»»æ„é”®è¿”å›èœå•ï¼");
+					printf("\n@_@---> Ñ¡ÔñÓĞÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡");
 					getchar();			
 				break;
 		}
 		if(menu_select == 0)
 		{
-			menu_select =3;		//ä¸Šçº§èœå•menu13å…¥å£å‚æ•°ä¸º3
-			break;				//é€€å‡ºwhile(),ä¸é€€å‡ºä¼šæ­»å¾ªç¯
+			menu_select =3;		//ÉÏ¼¶²Ëµ¥menu13Èë¿Ú²ÎÊıÎª3
+			break;				//ÍË³öwhile(),²»ÍË³ö»áËÀÑ­»·
 		}
 	}
 

@@ -1,153 +1,153 @@
 
 /***************************************
-*åŠŸ  èƒ½ï¼š	èœå•ç›¸å…³
-*è¯´  æ˜Žï¼š	æ‰€æœ‰èœå•å‡½æ•°å‡è°ƒç”¨menu_open
+*¹¦  ÄÜ£º	²Ëµ¥Ïà¹Ø
+*Ëµ  Ã÷£º	ËùÓÐ²Ëµ¥º¯Êý¾ùµ÷ÓÃmenu_open
 ****************************************/
 
 #include"fun.h"
 
-/*---------æ¬¢è¿Žèœå•------------------*/
+/*---------»¶Ó­²Ëµ¥------------------*/
 void menu_build()
 {
 	char *address ="char_menu/menu_build.txt";
 	menu_open(address);
 }
-/*---------ä¸»èœå•------------------*/
+/*---------Ö÷²Ëµ¥------------------*/
 void main_menu()
 {
 	//char *address ="char_menu/main_menu.txt";
 	char *address ="char_menu/main_menu_ht.txt";
 	menu_open(address);
 }
-/*---------ç®¡ç†å‘˜ç™»å½•å­èœå•----------*/
+/*---------¹ÜÀíÔ±µÇÂ¼×Ó²Ëµ¥----------*/
 void menu1()
 {
 	char *address ="char_menu/menu1.txt";
 	menu_open(address);
 }
 
-/*---------å½©æ°‘ç™»å½•å­èœå•------------*/
+/*---------²ÊÃñµÇÂ¼×Ó²Ëµ¥------------*/
 void menu2()
 {
 	char *address ="char_menu/menu2.txt";
 	menu_open(address);
 }
 
-/*---------menu21ç”¨æˆ·è´­ç¥¨å­èœå•--------*/
+/*---------menu21ÓÃ»§¹ºÆ±×Ó²Ëµ¥--------*/
 void menu21()
 {
-	printf("\n\t\tä¸»èœå•>>å½©æ°‘ç™»å½•>>è´­ç¥¨\n");
+	printf("\n\t\tÖ÷²Ëµ¥>>²ÊÃñµÇÂ¼>>¹ºÆ±\n");
 	printf("\t\t----------------------------\n");
-	printf("\t\t   ----> ç¬¬%d æœŸå½©ç¥¨ <----\n",ticketdayth);
+	printf("\t\t   ----> µÚ%d ÆÚ²ÊÆ± <----\n",ticketdayth);
 	printf("\t\t----------------------------\n");
-	printf("\t\t1-> ä½“ è‚² å½© ç¥¨\n");
-	printf("\t\t2-> æ…ˆ å–„ å½© ç¥¨\n");
-	printf("\t\t3-> æ•‘ ç¾ å½© ç¥¨\n\n");
-	printf("\t\t0-> è¿” å›ž ä¸Š ä¸€ çº§\n");
+	printf("\t\t1-> Ìå Óý ²Ê Æ±\n");
+	printf("\t\t2-> ´È ÉÆ ²Ê Æ±\n");
+	printf("\t\t3-> ¾È ÔÖ ²Ê Æ±\n\n");
+	printf("\t\t0-> ·µ »Ø ÉÏ Ò» ¼¶\n");
 	printf("\t\t-------------------------------\n\n");
-	printf("è¯·é€‰æ‹©-->");
+	printf("ÇëÑ¡Ôñ-->");
 }
 
-/*---------menu23ä¿®æ”¹ç”¨æˆ·ä¸ªäººä¿¡æ¯å­èœå•--------*/
+/*---------menu23ÐÞ¸ÄÓÃ»§¸öÈËÐÅÏ¢×Ó²Ëµ¥--------*/
 void menu23()
 {
 	char *address ="char_menu/menu23.txt";
 	menu_open(address);
 }
 
-/*---------menu1æŸ¥çœ‹ä¿¡æ¯å­èœå•----------------*/
+/*---------menu1²é¿´ÐÅÏ¢×Ó²Ëµ¥----------------*/
 void menu12()
 {
 	char *address ="char_menu/menu12.txt";
 	menu_open(address);
 }
-/*---------menu1ä¿®æ”¹ä¿¡æ¯å­èœå•----------------*/
+/*---------menu1ÐÞ¸ÄÐÅÏ¢×Ó²Ëµ¥----------------*/
 void menu13()
 {
 	char *address ="char_menu/menu13.txt";
 	menu_open(address);
 }
 
-/*---------menu131ä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯å­èœå•----------*/
+/*---------menu131ÐÞ¸Ä¹ÜÀíÔ±ÐÅÏ¢×Ó²Ëµ¥----------*/
 void menu131()
 {
-	printf("\n\t\tä¸»èœå•>>ç®¡ç†å‘˜ç™»å½•>>ä¿®æ”¹ä¿¡æ¯\n");
-	printf("\t\t>>ä¿®æ”¹ç®¡ç†å‘˜ä¿¡æ¯\n");
+	printf("\n\t\tÖ÷²Ëµ¥>>¹ÜÀíÔ±µÇÂ¼>>ÐÞ¸ÄÐÅÏ¢\n");
+	printf("\t\t>>ÐÞ¸Ä¹ÜÀíÔ±ÐÅÏ¢\n");
 	printf("\t\t----------------------------\n");
-	printf("\t\t1-> ä¿® æ”¹ å§“ å\n");
-	printf("\t\t2-> ä¿® æ”¹ å¯† ç \n");
-	printf("\t\t3-> ä¿® æ”¹ å¥– æ±  é‡‘ é¢\n\n");
-	printf("\t\t0-> è¿” å›ž ä¸Š ä¸€ çº§\n");
+	printf("\t\t1-> ÐÞ ¸Ä ÐÕ Ãû\n");
+	printf("\t\t2-> ÐÞ ¸Ä ÃÜ Âë\n");
+	printf("\t\t3-> ÐÞ ¸Ä ½± ³Ø ½ð ¶î\n\n");
+	printf("\t\t0-> ·µ »Ø ÉÏ Ò» ¼¶\n");
 	printf("\t\t-------------------------------\n\n");
-	printf("è¯·é€‰æ‹©-->");
+	printf("ÇëÑ¡Ôñ-->");
 }
 
-/*---------menu1åˆ é™¤ä¿¡æ¯å­èœå•------------------*/
+/*---------menu1É¾³ýÐÅÏ¢×Ó²Ëµ¥------------------*/
 void menu14()
 {
 	char *address ="char_menu/menu14.txt";
 	menu_open(address);
 }
 
-/*---------menu1æŽ’åºä¿¡æ¯å­èœå•------------------*/
+/*---------menu1ÅÅÐòÐÅÏ¢×Ó²Ëµ¥------------------*/
 void menu15()
 {
 	char *address ="char_menu/menu15.txt";
 	menu_open(address);
 }
 
-/*---------å¯†ç é”™è¯¯æç¤ºå­èœå•------------------*/
+/*---------ÃÜÂë´íÎóÌáÊ¾×Ó²Ëµ¥------------------*/
 void key_error()
 {
 	char *address ="char_menu/key_error.txt";
 	menu_open(address);
 }
-/*---------æ³¨å†ŒæˆåŠŸæç¤ºå­èœå•------------------*/
+/*---------×¢²á³É¹¦ÌáÊ¾×Ó²Ëµ¥------------------*/
 void apply_success()
 {
 	char *address ="char_menu/apply_success.txt";
 	menu_open(address);
 }
 
-/*---------é€€å‡ºæ„Ÿè°¢å­èœå•------------------*/
+/*---------ÍË³ö¸ÐÐ»×Ó²Ëµ¥------------------*/
 void thanks()
 {
 	char *address ="char_menu/thanks.txt";
 	menu_open(address);
 }
-/*---------ç³»ç»Ÿæ‘‡å¥–å­èœå•------------------*/
+/*---------ÏµÍ³Ò¡½±×Ó²Ëµ¥------------------*/
 void luck_draw()
 {
 	char *address ="char_menu/luck_draw.txt";
 	menu_open(address);
 }
-/*---------æœ‰å…³æµ·åŒ----------------------*/
+/*---------ÓÐ¹Øº£Í¬----------------------*/
 void ht()
 {
 	char *address ="char_menu/ht.txt";
 	menu_open(address);
 }
-/*---------æ€»ç»“1---ç»“æž„ä½“è¯´æ˜Ž---------------*/
+/*---------×Ü½á1---½á¹¹ÌåËµÃ÷---------------*/
 void summary1()
 {
 	char *address ="char_menu/summary1.txt";
 	menu_open(address);
 }
 
-/*---------æ€»ç»“2--èœå•æ¡†æž¶----------------*/
+/*---------×Ü½á2--²Ëµ¥¿ò¼Ü----------------*/
 void summary2()
 {
 	char *address ="char_menu/summary2.txt";
 	menu_open(address);
 }
 
-/*---------æ–‡ä»¶æ‰“å¼€å­å‡½æ•°------------------*/
+/*---------ÎÄ¼þ´ò¿ª×Óº¯Êý------------------*/
 void menu_open(char *address)
 {
 	FILE *fp;
 	if((fp = fopen(address,"rt"))==NULL)
 	{
-		printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼");
+		printf("´ò¿ªÎÄ¼þÊ§°Ü£¡");
 		exit(0);
 	}
 	while(!feof(fp))
@@ -155,5 +155,5 @@ void menu_open(char *address)
 		printf("%c",fgetc(fp));
 	}
 	fclose(fp);
-	printf("è¯·é€‰æ‹©-->");
+	printf("ÇëÑ¡Ôñ-->");
 }
