@@ -1,0 +1,47 @@
+
+           @___c 语言项目总结___@
+              
+一：四个结构体、两个链表、四个文件
+   1、用户注册结构体-->用户链表-->文件user.txt
+      struct person
+      {                            《头节点借存内容》
+		int id; ------------------->管理员的id=0
+		char name[20]; ------------>管理员用户名
+		char passwd[8]; ----------->管理员密码
+		int person_money; --------->奖池金额
+		struct person *next;      
+      }
+    2、购票信息结构体-->购票链表-->文件buy_ticket.txt
+      struct buy_ticket	//购票信息，保存在buy_ticket.txt
+      {                                           《头节点借存内容》
+		int person_id; ------------------------->上一期体彩中奖号码
+		char person_name[20];
+		int ticket_dayth; ---------------------->未开奖期号(1201)
+		int ticket_type; 
+		int ticket_number; --------------------->上一期慈彩中奖号码
+		int ticket_amount; --------------------->上一期救彩中奖号码
+		int ticket_status;   //（1未开奖,0）
+		int ticket_win;	     //（1中奖，0未中奖）
+		int ticket_winmoney; //（买一次中的金额）-->上一期中出金额
+		int ticket_sum;	     //（个人当期购票总额）
+		struct buy_ticket *next;
+	  };
+	3、中奖人信息结构体-->文件winer.txt
+	  struct winer
+      {
+		int winer_id;
+		char winer_name[20];
+		int winer_dayth;
+		int winer_money;
+		struct winer *next;
+      };
+    4、每期中奖信息-->文件wininformation.txt
+     struct news	
+     {
+		int dayth;
+		int sport_ticket;
+		int love_ticket;
+		int disastor_ticket;
+		int sum;	//每期中出奖的金额
+		struct news *next;
+     };
