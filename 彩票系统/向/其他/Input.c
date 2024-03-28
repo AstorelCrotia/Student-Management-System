@@ -3,7 +3,7 @@
 void Input(int usergroup) // 录入
 {
     int sc = 0;
-    printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+    printf("=============================================\n");
     printf("请选择你需要的功能！”\n");
     printf("录入学生信息请输入“1”        录入新管理员请输入“2”\n");
     printf("退出录入功能输入其它:");
@@ -19,19 +19,19 @@ void Input(int usergroup) // 录入
             FILE *file_read = fopen("Admin.txt", "r");
             if (file_read == NULL)
             {
-                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                printf("=============================================\n");
                 printf("服务器连接失败\n");
                 return;
             }
             Administrator admin = {0};
-            printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+            printf("=============================================\n");
             printf("请输入要录入的用户名：");
             scanf("%s", admin.username);
             while (fread(&adminuser, sizeof(Administrator), 1, file_read) == 1)
             {
                 if (strcmp(admin.username, adminuser.username) == 0)
                 {
-                    printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                    printf("=============================================\n");
                     printf("用户名已经存在！\n");
                     flag = 1;
                     break;
@@ -39,20 +39,20 @@ void Input(int usergroup) // 录入
             }
             if (flag == 0)
             {
-                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                printf("=============================================\n");
                 printf("请输入密码：");
                 scanf("%19s", admin.code);
             }
             FILE *file_write = fopen("Admin.txt", "a");
             if (file_write == NULL)
             {
-                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                printf("=============================================\n");
                 printf("连接服务器失败\n");
                 return;
             }
             fwrite(&admin, sizeof(Administrator), 1, file_write);
             fclose(file_write);
-            printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+            printf("=============================================\n");
             printf("是否继续：（Y/N） \n");
             scanf(" %c", &input);
             if (input == 'n' || input == 'N')
@@ -72,19 +72,19 @@ void Input(int usergroup) // 录入
             FILE *file_read = fopen("Students.txt", "r");
             if (file_read == NULL)
             {
-                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                printf("=============================================\n");
                 printf("服务器连接失败\n");
                 return;
             }
             Student student = {0};
-            printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+            printf("=============================================\n");
             printf("请输入要录入的学生学号：");
             scanf("%s", student.username);
             while (fread(&studentuser, sizeof(Student), 1, file_read) == 1)
             {
                 if (strcmp(student.username, studentuser.username) == 0)
                 {
-                    printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                    printf("=============================================\n");
                     printf("用户名已经存在！\n");
                     flag = 1;
                     break;
@@ -92,7 +92,7 @@ void Input(int usergroup) // 录入
             }
             if (flag == 0)
             {
-                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                printf("=============================================\n");
                 printf("请输入学生的姓名：");
                 scanf("%19s", student.name);
                 printf("请输入学生的性别：");
@@ -114,13 +114,13 @@ void Input(int usergroup) // 录入
             FILE *file_write = fopen("Students.txt", "a");
             if (file_write == NULL)
             {
-                printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+                printf("=============================================\n");
                 printf("连接服务器失败\n");
                 return;
             }
             fwrite(&student, sizeof(Student), 1, file_write);
             fclose(file_write);
-            printf("0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#\n");
+            printf("=============================================\n");
             printf("是否继续：（Y/N） \n");
             scanf(" %c", &input);
             if (input == 'n' || input == 'N')
