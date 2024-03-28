@@ -1,6 +1,6 @@
 #include "head.h"
 
-void Query(int usergroup) // 查询
+void conditionQueryuser() // 条件查询用户
 {
     int rk = 0;
     int i = 0;

@@ -20,7 +20,8 @@ typedef struct lottery
     char number[20];
     int draw;
     int win;
-    time_t date;
+    time_t buydate;
+    time_t windate;
     struct lottery *next;
 } lottery;
 
@@ -37,3 +38,5 @@ void Adminface(int *sc,char *id); //管理员界面
 void Superface(int *sc); //超管界面
 void Userface(int *sc,char *id); //用户界面
 void Back(int *sc); //返回初始界面
+void adminQuery(int *sc); // 管理员查询
+void userQuery(int *sc); // 用户查询
