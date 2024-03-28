@@ -32,32 +32,57 @@ void Register() // 注册
     printf("=============================================\n");
     printf("请输入用户名:");
     scanf("%19s", user.uid);
-    while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
+    while (1)
     {
-        if (strcmp(user.uid, tureuid.uid) == 0)
+        while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
         {
-            printf("============================\n");
-            printf("|  用户名存在！            |\n");
-            printf("============================\n");
-            flag = 2;
-            break;
+            if (strcmp(user.uid, tureuid.uid) == 0)
+            {
+                printf("============================\n");
+                printf("|  用户名已存在！          |\n");
+                printf("============================\n");
+                flag = 1;
+                break;
+            }
         }
-    }
-    while (fread(&tureuid, sizeof(User), 1, file_admin) == 1)
-    {
-        if (strcmp(user.uid, tureuid.uid) == 0)
+        while (fread(&tureuid, sizeof(User), 1, file_admin) == 1)
         {
-            printf("============================\n");
-            printf("|  用户名存在！            |\n");
-            printf("============================\n");
-            flag = 2;
+            if (strcmp(user.uid, tureuid.uid) == 0)
+            {
+                printf("============================\n");
+                printf("|  用户名已存在！          |\n");
+                printf("============================\n");
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1)
+        {
+            printf("=============================================\n");
+            printf("你可以输入“1”重新尝试输入，或输入其他退出：");
+            scanf("%d", &flag);
+            if (flag == 1)
+            {
+                printf("=============================================\n");
+                printf("请输入用户名:");
+                scanf("%19s", user.uid);
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            flag = 1;
             break;
         }
     }
     fclose(file_uid);
     fclose(file_admin);
-    if (flag == 2)
+    if (flag != 1)
     {
+        fclose(file_write);
         return;
     }
     printf("=============================================\n");
