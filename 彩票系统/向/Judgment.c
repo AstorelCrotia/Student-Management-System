@@ -44,7 +44,24 @@ void userjudgment(int *sc, int *group, char *id)
         }
         else
         {
-            Superface(sc);
+            while (*sc != 5)
+            {
+                Adminface(sc, id);
+                switch (*sc)
+                {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    *sc = 5;
+                    break;
+                }
+            }
         }
     }
 }

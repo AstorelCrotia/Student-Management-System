@@ -22,7 +22,7 @@ void Userface(int *sc,char *id) //用户界面
     printf("====================================\n");
     printf("|  欢迎用户：%s登录彩票系统！      |\n",id);
     printf("|                                |\n");
-    printf("|  请选择你需要的功能！           |\n");
+    printf("|  请选择你需要的功能！          |\n");
     printf("|                                |\n");
     printf("|  购买彩票输入“1”               |\n");
     printf("|                                |\n");
@@ -43,7 +43,7 @@ void Adminface(int *sc,char *id) //管理员界面
     printf("====================================\n");
     printf("|  欢迎用户：%s登录彩票系统！      |\n",id);
     printf("|                                |\n");
-    printf("|  请选择你需要的功能！           |\n");
+    printf("|  请选择你需要的功能！          |\n");
     printf("|                                |\n");
     printf("|  彩票开奖输入“1”               |\n");
     printf("|                                |\n");
