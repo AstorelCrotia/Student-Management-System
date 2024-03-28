@@ -2,6 +2,9 @@
 
 void Validation(char *id, int *group) // 验证用户名功能
 {
+    printf("============================\n");
+    printf("请输入用户名:");
+    scanf("%19s", id);
     User tureuid = {0};
     User tureadmin = {0};
     int i = 1;
