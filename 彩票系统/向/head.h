@@ -25,8 +25,10 @@ typedef struct lottery
     struct lottery *next;
 } lottery;
 
-void InDate(lottery *date);//写入日期
-void OutDate(lottery *date);//读出日期
+void InbuyDate(lottery *date);//写入购买日期
+void InwinDate(lottery *date);//写入开奖日期
+void OutbuyDate(lottery *date);//读出购买日期
+void OutwinDate(lottery *date);//读出开奖日期
 void Initialface(int *sc);//初始界面
 void Initialization();//系统初始化，写入超管
 void Validation(char *id, int *group); // 验证用户名功能
@@ -40,3 +42,4 @@ void Userface(int *sc,char *id); //用户界面
 void Back(int *sc); //返回初始界面
 void adminQuery(int *sc); // 管理员查询
 void userQuery(int *sc); // 用户查询
+void conditionQueryuser(); // 条件查询用户
