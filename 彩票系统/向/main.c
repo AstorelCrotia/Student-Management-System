@@ -4,16 +4,14 @@ int main()
 {
     char id[20];
     int group = 0;
-    int sc = 0;
+    int sc = 1;
     Initialization();
-    Initialface(&sc);
-    Mjudgment(&sc,&group,id);
-    if (group == 0)
+    while (sc == 1 || sc == 2)
     {
-        return 0;
+        Initialface(&sc);
+        Mjudgment(&sc, &group, id);
     }
     return 0;
 }
 
-
-    //printf("%d\n",sc);
+// printf("%d\n",sc);
