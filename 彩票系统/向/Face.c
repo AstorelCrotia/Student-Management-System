@@ -35,7 +35,7 @@ void Userface(int *sc,char *id) //用户界面
     printf("|  退出系统输入其他              |\n");
     printf("====================================\n");
     printf("你的输入：");
-    scanf(" %d",sc);
+    scanf("%d",sc);
 }
 
 void Adminface(int *sc,char *id) //管理员界面
@@ -56,7 +56,8 @@ void Adminface(int *sc,char *id) //管理员界面
     printf("|  退出系统输入其他              |\n");
     printf("====================================\n");
     printf("你的输入：");
-    scanf(" %d",sc);
+    scanf("%d",sc);
+    printf("%d\n",sc);
 }
 
 void Superface(int *sc) //超管界面
