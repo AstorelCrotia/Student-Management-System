@@ -2,6 +2,8 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.encoding": "gbk",
     "files.associations": {
-        "head.h": "c"
+        "head.h": "c",
+        "stdio.h": "c",
+        "typeinfo": "c"
     }
 }
