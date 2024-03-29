@@ -55,8 +55,10 @@ void userjudgment(int *sc, int *group, char *id)
                     adminQuery(sc);
                     break;
                 case 3:
+                    Modify(sc);
                     break;
                 case 4:
+                    Delete(sc);
                     break;
                 default:
                     *sc = 5;

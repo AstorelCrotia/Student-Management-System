@@ -39,6 +39,7 @@ void adminQuery(int *sc) // 管理员查询
         case 3:
             break;
         case 4:
+            allQueryuser();
             break;
         case 5:
             break;
