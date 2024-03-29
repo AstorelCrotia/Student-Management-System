@@ -3,7 +3,7 @@
 void adminQuery(int *sc) // 管理员查询
 {
     *sc = 0;
-    while (*sc == 8)
+    while (*sc != 8)
     {
         *sc = 0;
         printf("====================================\n");

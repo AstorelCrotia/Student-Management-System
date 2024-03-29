@@ -45,10 +45,7 @@ void userjudgment(int *sc, int *group, char *id)
         else
         {
             while (*sc != 5)
-            {   
-                int a = 0;
-                a = *sc;
-                printf("%d\n",a);
+            {
                 Adminface(sc, id);
                 switch (*sc)
                 {

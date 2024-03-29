@@ -57,7 +57,6 @@ void Adminface(int *sc,char *id) //管理员界面
     printf("====================================\n");
     printf("你的输入：");
     scanf("%d",sc);
-    printf("%d\n",sc);
 }
 
 void Superface(int *sc) //超管界面
