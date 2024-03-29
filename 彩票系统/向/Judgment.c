@@ -34,13 +34,13 @@ void userjudgment(int *sc, int *group, char *id)
                 Showuser(id);
                 break;
             case 3:
-                adminModify(sc);
+                usermoneyModify(id, 1);
                 break;
             case 4:
-                Delete(sc);
+                usermoneyModify(id, 2);
                 break;
             case 5:
-                Delete(sc);
+                usercodeModify(id);
                 break;
             default:
                 *sc = 6;

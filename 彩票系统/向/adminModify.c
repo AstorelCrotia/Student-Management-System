@@ -77,7 +77,7 @@ void admincodeModify() // 密码修改
             printf("============================\n");
             printf("|  内存分配失败！          |\n");
             printf("============================\n");
-            break;
+            return;
         }
     }
     fclose(file_read);
@@ -202,7 +202,7 @@ void adminmoneyModify() // 余额修改
             printf("============================\n");
             printf("|  内存分配失败！          |\n");
             printf("============================\n");
-            break;
+            return;
         }
     }
     fclose(file_read);

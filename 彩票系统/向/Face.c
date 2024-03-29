@@ -26,7 +26,7 @@ void Userface(int *sc,char *id) //用户界面
     printf("|                                |\n");
     printf("|  购买彩票输入“1”               |\n");
     printf("|                                |\n");
-    printf("|  查询信息输入“2”               |\n");
+    printf("|  显示信息输入“2”               |\n");
     printf("|                                |\n");
     printf("|  提取余额输入“3”               |\n");
     printf("|                                |\n");

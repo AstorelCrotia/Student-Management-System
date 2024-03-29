@@ -35,6 +35,7 @@ void Registeruser() // 注册用户
     scanf("%19s", user.uid);
     while (1)
     {
+        flag = 0;
         while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
         {
             if (strcmp(user.uid, tureuid.uid) == 0)
@@ -149,6 +150,7 @@ void Registeradmin() // 注册管理员
     scanf("%19s", user.uid);
     while (1)
     {
+        flag = 0;
         while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
         {
             if (strcmp(user.uid, tureuid.uid) == 0)
