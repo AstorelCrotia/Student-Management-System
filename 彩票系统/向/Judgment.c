@@ -50,16 +50,13 @@ void userjudgment(int *sc, int *group, char *id)
                 switch (*sc)
                 {
                 case 1:
-                    adminQuery(sc);
                     break;
                 case 2:
                     adminQuery(sc);
                     break;
                 case 3:
-                    adminQuery(sc);
                     break;
                 case 4:
-                    adminQuery(sc);
                     break;
                 default:
                     *sc = 5;
