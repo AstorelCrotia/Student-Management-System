@@ -35,6 +35,7 @@ void Deleteuser() // 删除功能
     User *head = NULL;
     User *temp = NULL;
     User *delete = NULL;
+    char input[20] = "\0";
     User *user = (User *)malloc(sizeof(User));
     if (user == NULL)
     {
@@ -43,9 +44,6 @@ void Deleteuser() // 删除功能
         printf("============================\n");
         return;
     }
-    char input[20] = "\0";
-    char code1[20] = "\0";
-    char code2[20] = "\0";
     FILE *file_read = fopen("users.txt", "r");
     if (file_read == NULL)
     {
@@ -90,7 +88,7 @@ void Deleteuser() // 删除功能
     }
     else
     {
-        while (temp != NULL)
+        while (temp->next != NULL)
         {
             if (strcmp(input, temp->next->uid) == 0)
             {
@@ -108,7 +106,6 @@ void Deleteuser() // 删除功能
         printf("|  没有找到用户名为%s的用户!    |\n", input);
         printf("================================\n");
         temp = head;
-        free(delete);
         while (temp != NULL)
         {
             User *toFree = temp;
@@ -116,18 +113,11 @@ void Deleteuser() // 删除功能
             free(toFree);
         }
         free(head);
+        free(delete);
         return;
     }
     FILE *file_write = fopen("users.txt", "w");
     if (file_write == NULL)
-    {
-        printf("============================\n");
-        printf("|  连接服务器失败！        |\n");
-        printf("============================\n");
-        return;
-    }
-    FILE *file_wdelete = fopen("delete.txt", "a");
-    if (file_wdelete == NULL)
     {
         printf("============================\n");
         printf("|  连接服务器失败！        |\n");
@@ -140,11 +130,18 @@ void Deleteuser() // 删除功能
         fwrite(temp, sizeof(User), 1, file_write);
         temp = temp->next;
     }
-    fwrite(delete, sizeof(User), 1, file_wdelete);
     fclose(file_write);
+    FILE *file_wdelete = fopen("delete.txt", "a");
+    if (file_wdelete == NULL)
+    {
+        printf("============================\n");
+        printf("|  连接服务器失败！        |\n");
+        printf("============================\n");
+        return;
+    }
+    fwrite(delete, sizeof(User), 1, file_wdelete);
     fclose(file_wdelete);
     temp = head;
-    free(delete);
     while (temp != NULL)
     {
         User *toFree = temp;
@@ -152,7 +149,8 @@ void Deleteuser() // 删除功能
         free(toFree);
     }
     free(head);
+    free(delete);
     printf("============================\n");
-    printf("|  %s用户已经删除！      |\n",input);
+    printf("|  %s用户已经删除！      |\n", input);
     printf("============================\n");
 }
