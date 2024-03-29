@@ -44,9 +44,8 @@ void adminQuery(int *sc);                         // 管理员查询
 void userQuery(int *sc);                          // 用户查询
 void conditionQueryuser();                        // 条件查询用户
 void allQueryuser();                              // 查询所有用户信息
-
-void Modify(int *sc);                             // 修改界面
-void codeModify();                                // 密码修改
-void moneyModify();                               // 余额修改
+void adminModify(int *sc);                        // 修改界面
+void admincodeModify();                           // 密码修改
+void adminmoneyModify();                          // 余额修改
 void Delete(int *sc);                             // 删除界面
 void Deleteuser();                                // 删除功能

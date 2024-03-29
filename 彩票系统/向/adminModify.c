@@ -1,6 +1,6 @@
 #include "head.h"
 
-void Modify(int *sc) // 修改界面
+void adminModify(int *sc) // 修改界面
 {
     *sc = 0;
     while (*sc != 3)
@@ -22,10 +22,10 @@ void Modify(int *sc) // 修改界面
         switch (*sc)
         {
         case 1:
-            codeModify();
+            admincodeModify();
             break;
         case 2:
-            moneyModify();
+            adminmoneyModify();
             break;
         default:
             *sc = 3;
@@ -34,7 +34,7 @@ void Modify(int *sc) // 修改界面
     }
 }
 
-void codeModify() // 密码修改
+void admincodeModify() // 密码修改
 {
     int i = 0;
     User *head = NULL;
@@ -159,7 +159,7 @@ void codeModify() // 密码修改
     head = NULL;
 }
 
-void moneyModify() // 余额修改
+void adminmoneyModify() // 余额修改
 {
     int i = 0;
     User *head = NULL;
