@@ -23,7 +23,30 @@ void userjudgment(int *sc, int *group, char *id)
 {
     if (*group == 1)
     {
-        Userface(sc, id);
+        while (*sc != 6)
+        {
+            Userface(sc, id);
+            switch (*sc)
+            {
+            case 1:
+                break;
+            case 2:
+                Showuser(id);
+                break;
+            case 3:
+                adminModify(sc);
+                break;
+            case 4:
+                Delete(sc);
+                break;
+            case 5:
+                Delete(sc);
+                break;
+            default:
+                *sc = 6;
+                break;
+            }
+        }
     }
     else if (*group == 2)
     {

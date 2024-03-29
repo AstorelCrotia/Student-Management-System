@@ -4,6 +4,7 @@ void Registeruser() // 注册用户
 {
     User user = {0};
     User tureuid = {0};
+    char code1[20] = "\0";
     int flag = 0;
     FILE *file_write = fopen("users.txt", "a");
     if (file_write == NULL)
@@ -85,9 +86,29 @@ void Registeruser() // 注册用户
         fclose(file_write);
         return;
     }
-    printf("=============================================\n");
-    printf("请输入密码:");
-    scanf("%19s", user.code);
+    while (1)
+    {
+        printf("============================\n");
+        printf("请输入用户的密码：");
+        scanf("%19s", user.code);
+        printf("============================\n");
+        printf("请再次输入用户的密码：");
+        scanf("%19s", code1);
+        if (strcmp(user.code, code1) == 0)
+        {
+            strcpy(user.code, code1);
+            printf("============================\n");
+            printf("|  用户注册成功！          |\n");
+            printf("============================\n");
+            break;
+        }
+        else
+        {
+            printf("============================\n");
+            printf("|  密码输入不一请重新尝试！ |\n");
+            printf("============================\n");
+        }
+    }
     fwrite(&user, sizeof(User), 1, file_write);
     fclose(file_write);
     return;
@@ -97,6 +118,7 @@ void Registeradmin() // 注册管理员
 {
     User user = {0};
     User tureuid = {0};
+    char code1[20] = "\0";
     int flag = 0;
     FILE *file_write = fopen("admin.txt", "a");
     if (file_write == NULL)
@@ -178,9 +200,29 @@ void Registeradmin() // 注册管理员
         fclose(file_write);
         return;
     }
-    printf("=============================================\n");
-    printf("请输入密码:");
-    scanf("%19s", user.code);
+    while (1)
+    {
+        printf("============================\n");
+        printf("请输入用户的密码：");
+        scanf("%19s", user.code);
+        printf("============================\n");
+        printf("请再次输入用户的密码：");
+        scanf("%19s", code1);
+        if (strcmp(user.code, code1) == 0)
+        {
+            strcpy(user.code, code1);
+            printf("============================\n");
+            printf("|  用户注册成功！          |\n");
+            printf("============================\n");
+            break;
+        }
+        else
+        {
+            printf("============================\n");
+            printf("|  密码输入不一请重新尝试！ |\n");
+            printf("============================\n");
+        }
+    }
     fwrite(&user, sizeof(User), 1, file_write);
     fclose(file_write);
     return;
