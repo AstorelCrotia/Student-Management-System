@@ -56,9 +56,11 @@ void usercodeModify(char *id) // 密码修改
                 printf("============================\n");
                 printf("请输入用户的新密码：");
                 scanf("%19s", code1);
+                while (getchar() != '\n');
                 printf("============================\n");
                 printf("请再次输入用户的新密码：");
                 scanf("%19s", code2);
+                while (getchar() != '\n');
                 if (strcmp(code1, code2) == 0)
                 {
                     strcpy(temp->code, code1);

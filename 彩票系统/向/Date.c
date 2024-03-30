@@ -1,18 +1,18 @@
 #include "head.h"
 
-void InbuyDate(lottery *date)
+void InbuyDate(Lottery *date) 
 {
     date->buydate = time(NULL);
     return;
 }
 
-void InwinDate(lottery *date)
+void InwinDate(Lottery *date)
 {
     date->windate = time(NULL);
     return;
 }
 
-void OutbuyDate(lottery *date)
+void OutbuyDate(Lottery *date)
 {
     struct tm *localTime;
     localTime = localtime(&date->buydate);
@@ -22,7 +22,7 @@ void OutbuyDate(lottery *date)
     return;
 }
 
-void OutwinDate(lottery *date)
+void OutwinDate(Lottery *date)
 {
     struct tm *localTime;
     localTime = localtime(&date->windate);

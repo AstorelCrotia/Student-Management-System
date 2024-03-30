@@ -33,6 +33,7 @@ void Registeruser() // 注册用户
     printf("=============================================\n");
     printf("请输入用户名:");
     scanf("%19s", user.uid);
+    while (getchar() != '\n');
     while (1)
     {
         flag = 0;
@@ -68,6 +69,7 @@ void Registeruser() // 注册用户
                 printf("=============================================\n");
                 printf("请输入用户名:");
                 scanf("%19s", user.uid);
+                while (getchar() != '\n');
             }
             else
             {
@@ -92,9 +94,11 @@ void Registeruser() // 注册用户
         printf("============================\n");
         printf("请输入用户的密码：");
         scanf("%19s", user.code);
+        while (getchar() != '\n');
         printf("============================\n");
         printf("请再次输入用户的密码：");
         scanf("%19s", code1);
+        while (getchar() != '\n');
         if (strcmp(user.code, code1) == 0)
         {
             strcpy(user.code, code1);
@@ -148,6 +152,7 @@ void Registeradmin() // 注册管理员
     printf("=============================================\n");
     printf("请输入用户名:");
     scanf("%19s", user.uid);
+    while (getchar() != '\n');
     while (1)
     {
         flag = 0;
@@ -183,6 +188,7 @@ void Registeradmin() // 注册管理员
                 printf("=============================================\n");
                 printf("请输入用户名:");
                 scanf("%19s", user.uid);
+                while (getchar() != '\n');
             }
             else
             {
@@ -207,9 +213,11 @@ void Registeradmin() // 注册管理员
         printf("============================\n");
         printf("请输入用户的密码：");
         scanf("%19s", user.code);
+        while (getchar() != '\n');
         printf("============================\n");
         printf("请再次输入用户的密码：");
         scanf("%19s", code1);
+        while (getchar() != '\n');
         if (strcmp(user.code, code1) == 0)
         {
             strcpy(user.code, code1);

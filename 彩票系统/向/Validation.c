@@ -5,6 +5,7 @@ void Validation(char *id, int *group) // 验证用户名功能
     printf("============================\n");
     printf("请输入用户名:");
     scanf("%19s", id);
+    while (getchar() != '\n');
     User tureuid = {0};
     User tureadmin = {0};
     int i = 1;
@@ -72,6 +73,7 @@ void Validation(char *id, int *group) // 验证用户名功能
                 printf("=============================================\n");
                 printf("请输入用户名:");
                 scanf("%19s", id);
+                while (getchar() != '\n');
                 i++;
             }
             else
@@ -92,6 +94,7 @@ void Validation(char *id, int *group) // 验证用户名功能
         printf("=============================================\n");
         printf("请输入密码：");
         scanf("%19s", code);
+        while (getchar() != '\n');
         while (i != 3)
         {
             while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
@@ -122,6 +125,7 @@ void Validation(char *id, int *group) // 验证用户名功能
                     printf("=============================================\n");
                     printf("请输入密码:");
                     scanf("%19s", code);
+                    while (getchar() != '\n');
                     i++;
                 }
                 else
@@ -145,6 +149,7 @@ void Validation(char *id, int *group) // 验证用户名功能
         printf("=============================================\n");
         printf("请输入密码：");
         scanf("%19s", code);
+        while (getchar() != '\n');
         while (i != 3)
         {
             while (fread(&tureadmin, sizeof(User), 1, file_admin) == 1)
@@ -175,6 +180,7 @@ void Validation(char *id, int *group) // 验证用户名功能
                     printf("=============================================\n");
                     printf("请输入密码:");
                     scanf("%19s", code);
+                    while (getchar() != '\n');
                     i++;
                 }
                 else

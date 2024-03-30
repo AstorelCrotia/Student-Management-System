@@ -1,6 +1,6 @@
 #include "head.h"
 
-void Initialface(int *sc) //初始界面
+void Initialface(int *sc) // 初始界面
 {
     printf("============================\n");
     printf("|  欢迎登录彩票系统！      |\n");
@@ -14,19 +14,19 @@ void Initialface(int *sc) //初始界面
     printf("|  退出系统输入其他        |\n");
     printf("============================\n");
     printf("你的输入：");
-    scanf(" %d",sc);
+    scanf(" %d", sc);
 }
 
-void Userface(int *sc,char *id) //用户界面
+void Userface(int *sc, char *id) // 用户界面
 {
     printf("====================================\n");
-    printf("|  欢迎用户：%s登录彩票系统！      |\n",id);
+    printf("|  欢迎用户：%s登录彩票系统！      |\n", id);
     printf("|                                |\n");
     printf("|  请选择你需要的功能！          |\n");
     printf("|                                |\n");
     printf("|  购买彩票输入“1”               |\n");
     printf("|                                |\n");
-    printf("|  显示信息输入“2”               |\n");
+    printf("|  查询信息输入“2”               |\n");
     printf("|                                |\n");
     printf("|  提取余额输入“3”               |\n");
     printf("|                                |\n");
@@ -37,13 +37,13 @@ void Userface(int *sc,char *id) //用户界面
     printf("|  退出系统输入其他              |\n");
     printf("====================================\n");
     printf("你的输入：");
-    scanf("%d",sc);
+    scanf("%d", sc);
 }
 
-void Adminface(int *sc,char *id) //管理员界面
+void Adminface(int *sc, char *id) // 管理员界面
 {
     printf("====================================\n");
-    printf("|  欢迎用户：%s登录彩票系统！      |\n",id);
+    printf("|  欢迎用户：%s登录彩票系统！      |\n", id);
     printf("|                                |\n");
     printf("|  请选择你需要的功能！          |\n");
     printf("|                                |\n");
@@ -58,10 +58,10 @@ void Adminface(int *sc,char *id) //管理员界面
     printf("|  退出系统输入其他              |\n");
     printf("====================================\n");
     printf("你的输入：");
-    scanf("%d",sc);
+    scanf("%d", sc);
 }
 
-void Superface(int *sc) //超管界面
+void Superface(int *sc) // 超管界面
 {
     printf("============================\n");
     printf("|  欢迎超管登录彩票系统！   |\n");
@@ -73,5 +73,5 @@ void Superface(int *sc) //超管界面
     printf("|  退出系统输入其他        |\n");
     printf("============================\n");
     printf("你的输入：");
-    scanf(" %d",sc);
+    scanf(" %d", sc);
 }

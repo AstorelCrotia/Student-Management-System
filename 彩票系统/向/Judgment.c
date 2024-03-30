@@ -23,27 +23,33 @@ void userjudgment(int *sc, int *group, char *id)
 {
     if (*group == 1)
     {
-        while (*sc != 6)
+        while (*sc != 7)
         {
             Userface(sc, id);
             switch (*sc)
             {
             case 1:
+                Buy(sc,id);
+                *sc = 0;
                 break;
             case 2:
-                Showuser(id);
+                userQuery(sc, id);
+                *sc = 0;
                 break;
             case 3:
                 usermoneyModify(id, 1);
+                *sc = 0;
                 break;
             case 4:
                 usermoneyModify(id, 2);
+                *sc = 0;
                 break;
             case 5:
                 usercodeModify(id);
+                *sc = 0;
                 break;
             default:
-                *sc = 6;
+                *sc = 7;
                 break;
             }
         }
@@ -73,15 +79,19 @@ void userjudgment(int *sc, int *group, char *id)
                 switch (*sc)
                 {
                 case 1:
+                    *sc = 0;
                     break;
                 case 2:
                     adminQuery(sc);
+                    *sc = 0;
                     break;
                 case 3:
                     adminModify(sc);
+                    *sc = 0;
                     break;
                 case 4:
                     Delete(sc);
+                    *sc = 0;
                     break;
                 default:
                     *sc = 5;

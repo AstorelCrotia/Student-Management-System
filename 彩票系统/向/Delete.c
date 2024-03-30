@@ -79,6 +79,7 @@ void Deleteuser() // 删除功能
     printf("============================\n");
     printf("请输入你要删除的用户名：");
     scanf("%19s", input);
+    while (getchar() != '\n');
     temp = head;
     if (strcmp(input, temp->uid) == 0)
     {

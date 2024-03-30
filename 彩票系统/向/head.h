@@ -11,9 +11,9 @@ typedef struct User
     struct User *next;
 } User;
 
-typedef struct lottery
+typedef struct Lottery
 {
-    char tid[20];
+    char tid[25];
     char uid[20];
     char did[20];
     int category;
@@ -22,13 +22,13 @@ typedef struct lottery
     int win;
     time_t buydate;
     time_t windate;
-    struct lottery *next;
-} lottery;
+    struct Lottery *next;
+} Lottery;
 
-void InbuyDate(lottery *date);                    // 写入购买日期
-void InwinDate(lottery *date);                    // 写入开奖日期
-void OutbuyDate(lottery *date);                   // 读出购买日期
-void OutwinDate(lottery *date);                   // 读出开奖日期
+void InbuyDate(Lottery *date);                    // 写入购买日期
+void InwinDate(Lottery *date);                    // 写入开奖日期
+void OutbuyDate(Lottery *date);                   // 读出购买日期
+void OutwinDate(Lottery *date);                   // 读出开奖日期
 void Initialface(int *sc);                        // 初始界面
 void Initialization();                            // 系统初始化，写入超管
 void Validation(char *id, int *group);            // 验证用户名功能
@@ -41,7 +41,7 @@ void Superface(int *sc);                          // 超管界面
 void Userface(int *sc, char *id);                 // 用户界面
 void Back(int *sc);                               // 返回初始界面
 void adminQuery(int *sc);                         // 管理员查询
-void userQuery(int *sc);                          // 用户查询
+void userQuery(int *sc, char *id);                // 用户查询
 void conditionQueryuser();                        // 条件查询用户
 void allQueryuser();                              // 查询所有用户信息
 void Showuser(char *id);                          // 用户查询自己信息
@@ -52,3 +52,5 @@ void usermoneyModify(char *id, int flag);         // 用户余额修改
 void adminmoneyModify();                          // 余额修改
 void Delete(int *sc);                             // 删除界面
 void Deleteuser();                                // 删除功能
+void Drawing();                                   // 彩票开奖
+void Buy(int *sc, char *id);                      // 购买彩票

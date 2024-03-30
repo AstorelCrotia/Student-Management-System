@@ -54,7 +54,7 @@ void adminQuery(int *sc) // 管理员查询
     }
 }
 
-void userQuery(int *sc) // 用户查询
+void userQuery(int *sc, char *id) // 用户查询
 {
     *sc = 0;
     while (*sc == 6)
@@ -82,6 +82,7 @@ void userQuery(int *sc) // 用户查询
         switch (*sc)
         {
         case 1:
+            Showuser(id);
             break;
         case 2:
             break;
