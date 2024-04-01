@@ -54,3 +54,4 @@ void Delete(int *sc);                             // 删除界面
 void Deleteuser();                                // 删除功能
 void Drawing();                                   // 彩票开奖
 void Buy(int *sc, char *id);                      // 购买彩票
+void buyModify(char *id, float money, int *sc);   // 购买时余额修改

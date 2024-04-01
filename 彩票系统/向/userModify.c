@@ -56,11 +56,13 @@ void usercodeModify(char *id) // 密码修改
                 printf("============================\n");
                 printf("请输入用户的新密码：");
                 scanf("%19s", code1);
-                while (getchar() != '\n');
+                while (getchar() != '\n')
+                    ;
                 printf("============================\n");
                 printf("请再次输入用户的新密码：");
                 scanf("%19s", code2);
-                while (getchar() != '\n');
+                while (getchar() != '\n')
+                    ;
                 if (strcmp(code1, code2) == 0)
                 {
                     strcpy(temp->code, code1);
@@ -266,4 +268,103 @@ void usermoneyModify(char *id, int flag) // 余额修改
         }
         head = NULL;
     }
+}
+
+void buyModify(char *id, float money,int *sc) // 购买时余额修改
+{
+    int i = 1;
+    User *head = NULL;
+    User *temp = NULL;
+    User *user = (User *)malloc(sizeof(User));
+    if (user == NULL)
+    {
+        printf("============================\n");
+        printf("|  内存分配失败！          |\n");
+        printf("============================\n");
+        return;
+    }
+    FILE *file_read = fopen("users.txt", "r");
+    if (file_read == NULL)
+    {
+        printf("============================\n");
+        printf("|  连接服务器失败！        |\n");
+        printf("============================\n");
+        return;
+    }
+    while (fread(user, sizeof(User), 1, file_read) == 1)
+    {
+        user->next = NULL;
+        if (head == NULL)
+        {
+            head = user;
+            temp = user;
+        }
+        else
+        {
+            temp->next = user;
+            temp = user;
+        }
+        user = (User *)malloc(sizeof(User));
+        if (user == NULL)
+        {
+            printf("============================\n");
+            printf("|  内存分配失败！          |\n");
+            printf("============================\n");
+            return;
+        }
+    }
+    fclose(file_read);
+    free(user);
+    temp = head;
+    while (temp != NULL)
+    {
+        if (strcmp(id, temp->uid) == 0)
+        {
+            if (money <= temp->balance)
+            {
+                temp->balance -= money;
+            }
+            else
+            {
+                printf("============================\n");
+                printf("|  账户的余额不足！        |\n");
+                printf("============================\n");
+                temp = head;
+                while (temp != NULL)
+                {
+                    User *toFree = temp;
+                    temp = temp->next;
+                    free(toFree);
+                }
+                head = NULL;
+                *sc = 0;
+                return;
+            }
+        }
+        break;
+    }
+    temp = temp->next;
+    FILE *file_write = fopen("users.txt", "w");
+    if (file_write == NULL)
+    {
+        printf("============================\n");
+        printf("|  连接服务器失败！        |\n");
+        printf("============================\n");
+        return;
+    }
+    temp = head;
+    while (temp != NULL)
+    {
+        fwrite(temp, sizeof(User), 1, file_write);
+        temp = temp->next;
+    }
+    fclose(file_write);
+    temp = head;
+    while (temp != NULL)
+    {
+        User *toFree = temp;
+        temp = temp->next;
+        free(toFree);
+    }
+    head = NULL;
 }
