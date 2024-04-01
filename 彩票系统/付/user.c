@@ -1,714 +1,392 @@
-#include<stdlib.h>
-#include"head.h"
-
-struct person * add_user(struct person *H,struct person *p)
+#include "head.h"
+// æ–°ç”¨æˆ·æ³¨å†Œ
+struct Person *signup(struct Person *p, struct Person *q)
 {
-	char passwd1[8],passwd2[8];
-	char name[20];
-	int i=0,flag = 1;			//ÓÃ»§ÃûÊÇ·ñ´æÔÚ1,´æÔÚ
-	struct person *newnode=NULL;
-	while(1)
+    char passwd1[20];
+    char passwd2[20];
+    char name[20];
+    int i = 0;
+    int flag = 1;
+    struct Person *newuser = NULL;
+    while (1)
     {
-		printf("ÇëÊäÈëÐÕÃû(²»×¼°üº¬Êý×Ö)£º");
-		scanf("%s",name);
-		flag = check_username(H,name);
-		if(flag == 0)			//0£¬ÓÃ»§Ãû²»´æÔÚ
-			{
-				i = 0;
-				break;
-			}
+        printf("è¯·è¾“å…¥ç”¨æˆ·åï¼š");
+        scanf("%s", name);
+        flag = check_user(name, p);
+        if (flag == 0)
+        {
+            i = 0;
+            break;
+        }
+        else
+        {
+            printf("ç”¨æˆ·åå·²å­˜åœ¨ï¼\n");
+            i++;
+            if (i == 3)
+            {
+                printf("é”™è¯¯è¾“å…¥ä¸‰æ¬¡ï¼Œä»»æ„é”®è¿”å›žä¸»èœå•ï¼\n");
+                getchar();
+                getchar();
+                break;
+            }
+        }
+    }
+    if (!flag)
+    {
+        while (1)
+        {
+            printf("è¯·è¾“å…¥å¯†ç ï¼š");
+            scanf("%s", passwd1);
+            printf("\n");
+            printf("å†æ¬¡è¾“å…¥ç¡®è®¤å¯†ç ï¼š");
+            scanf("%s", passwd2);
+            printf("\n");
+            i++;
+            if (i == 3)
+            {
+                printf("è¾“å…¥è¶…è¿‡ä¸‰æ¬¡ï¼ä»»æ„é”®è¿”å›žä¸»èœå•!\n");
+                getchar();
+                getchar();
+                break;
+            }
 
-		else
-			{
-				printf("\nÓÃ»§ÃûÒÑ´æÔÚ£¡");
-				i++;
-				if(i == 3)		//ÏÞ¶¨ÊäÈë´ÎÊý
-				{
-					key_error();
-					printf("\nÊäÈë³¬¹ý3´Î£¡ÈÎÒâ¼ü·µ»ØÖ÷²Ëµ¥£¡ \n");
-					getchar();
-					getchar();
-					break;
-				}
-			}
-	}
-	if(!flag)
-	{
-		while(1)
-		{
-		    printf("ÇëÊäÈëÃÜÂë:");
-            GetPasscode(passwd1);
-            printf("\nÇëÔÙ´ÎÊäÈëÃÜÂë:");
-            GetPasscode(passwd2);	
-			i++;
-			if(i == 3)			//ÏÞ¶¨ÊäÈë´ÎÊý
-			{
-				printf("\nÊäÈë³¬¹ý3´Î£¡ÈÎÒâ¼ü·µ»ØÖ÷²Ëµ¥£¡ \n");
-				getchar();
-				getchar();
-				break;
-			}
+            if (strcmp(passwd1, passwd2) == 0)
+            {
+                break; // å¯†ç æ­£ç¡®
+            }
+            else
+                printf("å¯†ç è¾“å…¥ä¸ä¸€è‡´ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n");
+        }
+        if (i != 3)
+        {
+            len++;
+            len_user++;
+            save_flag = 1;
+            newuser = (struct Person *)malloc(sizeof(struct Person));
+            if (newuser == NULL)
+            {
+                printf("åˆ†é…ç©ºé—´é”™è¯¯ï¼\n");
+                exit(0); // ç¨‹åºé”™è¯¯é€€å‡ºï¼›
+            }
+            newuser->next = NULL;
+            newuser->id = len;
+            strcpy(newuser->password, passwd1); // å¯†ç å†™å…¥
+            strcpy(newuser->name, name);        // ç”¨æˆ·åå†™å…¥
+            newuser->balance = user_init_money;
+            printf("æ³¨å†ŒæˆåŠŸï¼ä»»æ„é”®è¿”å›žä¸»èœå•!\n");
+            getchar();
+            getchar();
+            q->next = newuser;
+            q = newuser;
+        }
+    }
+    return q;
+};
 
-			if(strcmp(passwd1,passwd2) == 0)
-			{
-				break;			//ÃÜÂëÕýÈ·ÔòÍË³ö
-			}
-			else
-				printf("Á½´ÎÃÜÂëÊäÈë²»Æ¥Åä£¡ÇëÖØÐÂÉèÖÃÃÜÂë£¡\n");	
-		}
-		if(i!=3)				//×¢²á³É¹¦
-		{
-			len++;
-			len_user++;
-			//×¢²á³É¹¦ÔÚÉêÇë½áµã
-			save_flag = 1;		//ÐÅÏ¢¸üÐÂÌáÊ¾
-			newnode = (struct person *)malloc(sizeof(struct person));
-				if(newnode == NULL)
-				{
-					printf("²úÉúÍ·½ÚµãÊ±¿Õ¼ä·ÇÅä´íÎó£¡\n");
-					exit(0);
-				}
-				newnode->next = NULL;
-			newnode->id = len;
-			strcpy(newnode->passwd,passwd1);			//ÃÜÂë
-			strcpy(newnode->name,name);					//ÐÕÃû
-			newnode->person_money = user_init_money;	//³õÊ¼½ð¶î
-			apply_success();							//×¢²á³É¹¦ÌáÊ¾ÔÚ²Ëµ¥
-			printf("*********************************\n");
-			printf("************×¢²á³É¹¦£¡************");
-			printf("*******¹§Ï²£¡%s (ÏÈÉú/Å®Ê¿)*******",newnode->name);
-			printf("*********ÏµÍ³½«ÔùËÍÄú%dÔª*********",user_init_money);
-			printf("*********************************\n\n");
-			printf("ÈÎÒâ¼ü·µ»Ø...");
-			getchar();
-			getchar();
-			p->next = newnode;
-			p = newnode;
-		}
-	}
-	return p;
+struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy_ticket *buy_q)
+{
+    char name[20];
+    char password[8];
+    struct Person *q = p;
+    int i = 0;
+
+    while (1)
+    {
+        printf("è¯·è¾“å…¥ç”¨æˆ·åï¼š");
+        scanf("%s", name);
+        printf("è¯·è¾“å…¥å¯†ç ï¼š");
+        scanf("%s", password);
+        while (q->next != NULL)
+        {
+            if (strcmp(q->next->name, name) == 0 && strcmp(q->next->password, password) == 0)
+            {
+                break;
+            }
+            q = q->next;
+        }
+        if (q->next == NULL)
+        {
+            i++;
+            if (i >= 3)
+            {
+                printf("å¯†ç é”™è¯¯3æ¬¡ï¼ä»»æ„é”®è¿”å›žä¸»èœå•ï¼\n");
+                getchar();
+                getchar();
+                break;
+            }
+            printf("ç”¨æˆ·åæˆ–å¯†ç è¾“å…¥é”™è¯¯ï¼è¯·é‡æ–°è¾“å…¥ï¼\n");
+        }
+        else
+        {
+            i = 0;
+            break;
+        }
+        q = p;
+    }
+    if (i == 0)
+    {
+        while (choice != 0)
+        {
+            printf("1ã€è´­ç¥¨\t\t2ã€æŸ¥çœ‹ä¸ªäººä¿¡æ¯\t\t3ã€ä¿®æ”¹ä¿¡æ¯\t\t0ã€è¿”å›žä¸»èœå•\n");
+            scanf("%d", &choice);
+            getchar();
+            switch (choice)
+            {
+            case 0:
+                choice = 0;
+                return buy_p;
+                break;
+            case 1:
+                buy_p = user_buy_ticket(buy_p, q->next, p);
+                break;
+            case 2:
+                printf("æ‚¨çš„ä¸ªäººä¿¡æ¯ä¸ºï¼šIDï¼š%d\t\tå§“åï¼š%s\t\tå¯†ç ï¼š%s\t\tä½™é¢ï¼š%d\n", p->next->id, p->next->name, p->next->password, p->next->balance);
+                user_view_ticket(q->next, buy_q);
+                printf("ä»»æ„é”®ç»§ç»­...");
+                getchar();
+                break;
+            case 3:
+                user_update(p, q->next);
+                break;
+            default:
+                printf("é€‰æ‹©æœ‰è¯¯ï¼ä»»æ„é”®è¿”å›ž...\n");
+                getchar();
+                choice = 0;
+                break;
+            }
+        }
+    }
 }
 
-struct buy_ticket * person_menu2(struct person *H,struct buy_ticket *buy_p,struct buy_ticket *buy_H)
+struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, struct Person *q)
 {
-	char name_test[20];				//ÓÃ»§µÇÂ¼ÔÝ´æ
-	char passwd_test[8];			//ÓÃ»§ÃÜÂëÔÝ´æ
-    char passwd_test2[8];
-	struct person *p = H;
-	int i = 0;
-	while(1)
-	{
-		printf("ÇëÊäÈëÓÃ»§Ãû£º");
-		scanf("%s",name_test);
-        printf("ÇëÊäÈëÃÜÂë£º");
-        scanf("%s",passwd_test2);
-		strcpy(passwd_test, passwd_test2);	
-		while(p->next !=NULL)
-		{
-			if(strcmp(p->next->name,name_test) == 0 && strcmp(p->next->passwd,passwd_test) == 0)
-			{
-				break;
-			}
-			p = p->next;
-		}
-		if(p->next ==NULL)			//ÓÃ»§Ãû»òÃÜÂë´íÎó
-		{
-			i++;
-			if(i>=3)				//´íÎó3´ÎÒÔÉÏ£¬ÍË³ö
-			{
-				key_error();
-				printf("\n´íÎó´ÎÊý³¬¹ý3´Î£¡ÈÎÒâ¼ü·µ»ØÖ÷²Ëµ¥£¡\n");
-				getchar();
-				getchar();
-				break;
-			}
-			printf("ÓÃ»§Ãû»òÃÜÂë´íÎó£¡ÇëÖØÐÂÊäÈë£º\n");
-		}
-		else
-		{
-			i =0;
-			break;
-		}
-		p = H;						//pÖ¸ÏòÍ·½Úµã
-	}
-	if(i == 0)
-	{
-		while(menu_select != 0)		//menu_select==0 ,ÔòÍË³öµ±Ç°²Ëµ¥
-		{
-			menu2();
-			scanf("%d",&menu_select);
-			getchar();				//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
-			switch(menu_select)
-			{
-				case 0:				//·µ»ØÖ÷²Ëµ¥
-						menu_select = 0;
-						return buy_p;
-					break;
-				case 1:				//¹ºÆ±
-									//buy_p,×îºóÒ»¸ö¹ºÂòÐÅÏ¢£¬p->nextµ±Ç°ÓÃ»§½Úµã,H,¹ÜÀíÔ±ÐÅÏ¢
-						buy_p = user_buy_tickey(buy_p,p->next,H);
-					break;
-				case 2:				//²é¿´ÐÅÏ¢
-						printf("ÄúµÄ¸öÈËÐÅÏ¢Îª£º");
-						printf("id£º%d\tÐÕÃû£º%d\tÃÜÂë£º%d\t½ð¶î(Ôª)£º%d\n",p->next->id, p->next->name, p->next->passwd, p->next->person_money);
-						user_view_ticket(p->next,buy_H);
-						printf("ÈÎÒâ¼ü¼ÌÐø");
-						getchar();
-					break;
-				case 3:				//ÐÞ¸ÄÐÅÏ¢
-									//p->next,ÓÃ»§½áµã,pÊÇÉÏÒ»½Úµã
-						userself_updata(H,p->next);	
-					break;
-				default:
-					printf("Ñ¡ÔñÓÐÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡\n");
-					getchar();
-					menu_select = 0;//Ö÷²Ëµ¥Èë¿Ú²ÎÊý
-					break;	
-			}
-		}
-	}
-}
-void user_view_ticket(struct person *p,struct buy_ticket *buy_H)
-{
-	struct buy_ticket *temp = buy_H;
-	printf("\nÉÏÆÚÖÐ½±ºÅÂë£º");
-	printf("ÌåÓý²ÊÆ±:%d\t´ÈÉÆ²ÊÆ±:%dt¾ÈÔÖ²ÊÆ±:%d\tÏÂÆÚ²ÊÆ±£º%d\n"temp->person_id,temp->ticket_number,temp->ticket_amount,temp->ticket_dayth);		
-	printf("\n\tÄúµÄ¹ºÆ±ÐÅÏ¢£º");
-	printf("\tID\tÐÕÃû\tÆÚºÅ\t  ÀàÐÍ\t\tºÅÂë\tÊýÁ¿\t¿ª½±×´Ì¬  ÖÐ½±Çé¿ö  ¹ºÆ±½ð¶î \n");
-	while(temp->next !=NULL)
-	{
-		if(temp->next->person_id == p->id)			//ÊÇ±¾ÈËµÄÐÅÏ¢²ÅÏÔÊ¾
-		{
-			printf("\t%d\t%s\t%d",
-						temp->next->person_id,
-						temp->next->person_name,
-						temp->next->ticket_dayth);
-			if(temp->next->ticket_type == sport_ticket)
-				printf("\tÌåÓý²ÊÆ±");
-			else if(temp->next->ticket_type == love_ticket)
-				printf("\t´ÈÉÆ²ÊÆ±");
-			else
-				printf("\t¾ÈÔÖ²ÊÆ±");
-			printf("\t%d\t%d",
-							temp->next->ticket_number,
-							temp->next->ticket_amount);
-			if(temp->next->ticket_status)
-					printf("\tÎ´¿ª½±");
-			else
-					printf("\tÒÑ¿ª½±");
-			if(temp->next->ticket_win)
-				printf("    ÖÐ  ½±");
-			else
-				printf("    Î´ÖÐ½±");
-			printf("\t%d\n",temp->next->ticket_sum);
-		}
-		temp = temp->next;
-	}
-}
-void userself_updata(struct person *H,struct person *p)
-{
-    char old_pass[8];
-	char passwd_test[8];
-	char passwd_test1[8];
-	char admin_passwd[8];
-	char name[20];
-	int i = 0,flag = 1;				//ÓÃ»§ÃûÊÇ·ñ´æÔÚ±êÖ¾ 1£¬´æÔÚ
+    struct buy_ticket *newticket = NULL;
+    while (choice != 0)
+    {
+        newticket = (struct buy_ticket *)malloc(sizeof(struct buy_ticket));
+        if (newticket == NULL)
+        {
+            printf("å¤´èŠ‚ç‚¹åˆ†é…ç©ºé—´å¤±è´¥ï¼\n");
+            exit(0);
+        }
+        newticket->next = NULL;
 
-	while(menu_select !=0)
-	{
-		menu23();
-		scanf("%d",&menu_select);
-		getchar();					//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
-		switch(menu_select)
-		{
-			case 0:					//·µ»ØÉÏÒ»¼¶
-				break;
-			case 1:					//ÐÞ¸ÄÐÕÃû
-					while(1)
-					{
-						printf("ÇëÊäÈëÐÂÓÃ»§Ãû£º");
-						scanf("%s",name);
-						flag = check_username(H,name);	//ÓÃ»§ÃûÊÇ·ñ´æÔÚ£¬1´æÔÚ
-						if(!flag)
-						{
-							getchar();
-							printf("È·ÈÏÐÞ¸ÄÓÃ»§Ãû (y/n)?");
-							if(getchar() == 'y')
-							{
-								save_flag = 1;			//ÐÅÏ¢¸üÐÂÌáÊ¾
-								strcpy(p->name,name);
-								printf("ÐÞ¸Ä³É¹¦£¡ÈÎÒâ¼ü·µ»Ø£¡");
-								getchar();
-							}
-							else
-							{
-								printf("ÒÑ·ÅÆúÐÞ¸Ä£¡ÈÎÒâ¼ü·µ»Ø£¡");
-								getchar();
-							}
-							break;
-						}
-						else
-						{
-							printf("\nÓÃ»§ÃûÒÑ´æÔÚ£¡£¨¿ÉÒÔÓÃ%sA£©\n",name);
-							i++;
-							if(i == 3)					//ÏÞ¶¨ÊäÈë´ÎÊý
-							{
-								printf("\nÊäÈë³¬¹ý3´Î£¡ÈÎÒâ¼ü·µ»ØÖ÷²Ëµ¥£¡ \n");
-								getchar();
-								getchar();
-								break;
-							}
-						}	
-					}
-					i = 0;								//case2»áÓÃµ½
-				break;
-			case 2:										//ÐÞ¸ÄÃÜÂë
-                    printf("ÇëÊäÈëÔ­ÃÜÂë£º");
-                    scanf("%s",old_pass);
-					strcpy(admin_passwd,old_pass);	
-					if(strcmp(admin_passwd,p->passwd) == 0)
-					{
-						while(1)
-						{
-							if(i>2)						//ÊäÈë3´Î£¬Ôò·ÅÆú¸üÐÂ
-							{
-								printf("´íÎó´ÎÊý³¬¹ý3´Î£¡ÈÎÒâ¼ü·µ»Ø");
-								getchar();
-								getchar();
-								break;
-							}	
-							strcpy(passwd_test,getpass("ÇëÊäÈëÐÂÃÜÂë£º"));	
-							strcpy(passwd_test1,getpass("ÇëÔÙ´ÎÊäÈëÃÜÂë£º"));				
-							if(strcmp(passwd_test1,passwd_test)== 0)
-							{
-								save_flag = 1;			//ÐÅÏ¢ÒÑ¾­¸üÐÂ
-								strcpy(p->passwd,passwd_test1);
-								printf("ÃÜÂëÒÑ¸üÐÂ£¡ÈÎÒâ¼ü·µ»Ø£¡");
-								getchar();
-								break;
-							}
-							else
-							{
-								i++;
-								printf("Á½´ÎÃÜÂë²»Æ¥Åä£¡ÇëÖØÐÂÊäÈë£¡\n");
-							}
-	
-						}	
-					}
-					else
-					{
-						printf("ÃÜÂë´íÎó£¡ÈÎÒâ¼ü·µ»Ø£¡");
-						getchar();
-					}
-				break;
-			default:	
-					menu_select = 0;
-					printf("\nÑ¡ÔñÓÐÎó£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡");
-					getchar();			
-				break;
-		}
-		if(menu_select == 0)
-		{
-			menu_select =2;					//ÉÏ¼¶²Ëµ¥menu13Èë¿Ú²ÎÊýÎª3
-			break;							//ÍË³öwhile(),²»ÍË³ö»áËÀÑ­»·
-		}
-	}
+        printf("æ‚¨çš„è´¦æˆ·ä½™é¢ä¸ºï¼š%då…ƒ\n", user->balance);
+        if (user->balance < ticket_value)
+        {
+            printf("ä½™é¢ä¸è¶³ï¼Œè¯·å……å€¼ï¼æŒ‰ä»»æ„é”®é€€å‡ºï¼");
+            getchar();
+            return p;
+        }
+        printf("è¯·é€‰æ‹©æ‚¨è¦ä¸‹æ³¨çš„ç±»åž‹ï¼š1ã€é¼ é¼ \t\t2ã€çŒ«çŒ«\t\t3ã€ç‹—ç‹—\t\t0ã€è¿”å›žä¸Šä¸€çº§\n");
+        scanf("%d", &newticket->ticket_type);
+        getchar();
+        if (newticket->ticket_type == 0)
+            return p;
+        printf("è¯·è¾“å…¥æ‚¨è¦è´­ä¹°çš„å·ç (1-20):");
+        scanf("%d", &newticket->ticket_number);
+        printf("æ‚¨è¦è´­ä¹°çš„æ•°é‡ï¼š");
+        scanf("%d", &newticket->ticket_amount);
+        newticket->person_id = user->id;
+        strcpy(newticket->person_name, user->name);
+        newticket->ticket_dayth = ticketdayth;
+        newticket->ticket_status = 1;
+        newticket->ticket_win = 0;
+        newticket->ticket_sum = newticket->ticket_amount * ticket_value;
+        if (newticket->ticket_sum > user->balance)
+        {
+            printf("è´¦æˆ·ä½™é¢ä¸è¶³ï¼Œè¯·å……å€¼ï¼ä»»æ„é”®è¿”å›ž...");
+            getchar();
+        }
+        else
+        {
+            len_buy++;
+            p->next = newticket;
+            p = newticket;
+            user->balance = user->balance - newticket->ticket_sum;
+            q->balance += newticket->ticket_sum;
+            printf("è´­ç¥¨æˆåŠŸï¼\n");
+            printf("æ‚¨è´­ä¹°çš„æ˜¯ï¼š%s\n", newticket->ticket_type);
+            printf("å½©ç¥¨æœŸå·:%d æœŸ\n", newticket->ticket_dayth);
+            printf("å½©ç¥¨å·ç :%d \n", newticket->ticket_number);
+            printf("å½©ç¥¨æ•°é‡:%d æ³¨\n", newticket->ticket_amount);
+            printf("æ€» é‡‘ é¢:%d å…ƒ\n", newticket->ticket_sum);
+            if (newticket->ticket_status)
+            {
+                printf("æœªå¼€å¥–\n");
+            }
+            else
+            {
+                if (!newticket->ticket_win)
+                {
+                    printf("æœªä¸­å¥–ï¼Œç¥æ‚¨ä¸‹æ¬¡å¥½è¿ï¼\n");
+                }
+                else
+                {
+                    printf("æ­å–œæ‚¨ä¸­å¥–äº†ï¼Œé‡‘é¢ä¸º:%då…ƒ\n", newticket->ticket_amount * ticket_win_money);
+                }
+            }
+            printf("ä»»æ„é”®è¿”å›ž...");
+            getchar();
+            getchar();
+        }
+    }
+    return p;
 }
 
-int check_username(struct person *H,char name[20])
+void user_view_ticket(struct Person *p, struct buy_ticket *buy_p)
 {
-	while(H->next != NULL)
-	{
-		if(strcmp(H->next->name,name)==0)
-			return 1;	//ÓÐ´ËÓÃ»§Ãû
-		H = H->next;
-	}
-	return 0;			//ÎÞ´ËÓÃ»§Ãû
+    struct buy_ticket *temp = buy_p;
+    printf("ä¸ŠæœŸä¸­å¥–å·ç æ˜¯ï¼šé¼ é¼ ï¼š%d\tçŒ«çŒ«ï¼š%d\tç‹—ç‹—ï¼š%d\tä¸‹æœŸå½©ç¥¨:%d\n", temp->mouse_ID, temp->cat_ID, temp->dog_ID, temp->ticket_dayth);
+    printf("æ‚¨çš„è´­ç¥¨ä¿¡æ¯ä¸ºï¼š\n");
+    printf("\tID\tå§“å\tæœŸå·\t\tç±»åž‹\t\tå·ç \tæ•°é‡\t\tå¼€å¥–çŠ¶æ€\t\tä¸­å¥–æƒ…å†µ\t\tè´­ç¥¨é‡‘é¢\t\n");
+    while (temp->next != NULL)
+    {
+        if (temp->next->person_id == p->id)
+        {
+            printf("\t%d\t%s\t%d\t\t", temp->next->person_id, temp->next->person_name, temp->next->ticket_dayth);
+            if (temp->next->ticket_type == mouse_ticket)
+                printf("é¼ é¼ å½©ç¥¨\t\t");
+            else if (temp->next->ticket_type == cat_ticket)
+                printf("çŒ«çŒ«å½©ç¥¨\t\t");
+            else
+                printf("ç‹—ç‹—å½©ç¥¨\t\t");
+            printf("%d\t%d\t\t", temp->next->ticket_number, temp->next->ticket_amount);
+            if (temp->next->ticket_status)
+                printf("æœªå¼€å¥–\t\t");
+            else
+                printf("å·²å¼€å¥–\t\t");
+            if (temp->next->ticket_win)
+                printf("ä¸­  å¥–\t\t");
+            else
+                printf("æœªä¸­å¥–\t\t");
+            printf("%d\n", temp->next->ticket_sum);
+        }
+        temp = temp->next;
+    }
 }
 
-struct buy_ticket * user_buy_tickey(struct buy_ticket *p,struct person *user,struct person *H)
+void user_update(struct Person *p, struct Person *q)
 {
-	struct buy_ticket *newnode=NULL;
-	while(menu_select !=0)		
-	{
-		newnode = (struct buy_ticket *)malloc(sizeof(struct buy_ticket));
-		if(newnode == NULL)
-		{
-			printf("²úÉúÍ·½ÚµãÊ±¿Õ¼ä·ÇÅä´íÎó£¡\n");
-			exit(0);
-		}
-		newnode->next = NULL;
+    char password1[8];
+    char password2[8];
+    char admin_password[8];
+    char oldpass[8];
+    char name[20];
+    int i = 0, flag = 1;
 
-		printf("ÄúµÄÕË»§Óà¶îÎª£º%dÔª\n",user->person_money);
-		if(user->person_money < ticket_value)		//Óà¶î²»¹»ÂòÒ»ÕÅµÄ»°ÍË³ö
-		{
-			printf("Óà¶î²»×ã£¡ÈÎÒâ¼üÍË³ö£¡");
-			getchar();
-			return p;
-		}
-		menu21();
-		scanf("%d",&newnode->ticket_type); 			//Ñ¡ÔñÆ±ÀàÐÍ
-		getchar();
-		if(newnode->ticket_type == 0)				//0·µ»ØÉÏÒ»¼¶
-				return p;
-		printf("ÇëÊäÈë²ÊÆ±ºÅÂë£¨1-20£©£º");
-		scanf("%d",&newnode->ticket_number);		//²ÊÆ±ºÅÂë
-		printf("ÇëÊäÈë¹»ÂòÊýÁ¿£º");					//²ÊÆ±ÊýÁ¿
-		scanf("%d",&newnode->ticket_amount);
-		newnode->person_id = user->id;				//id
-		strcpy(newnode->person_name,user->name);	//ÐÕÃû
-		newnode->ticket_dayth = ticketdayth;		//ÆÚºÅ
-		newnode->ticket_status = 1;					//¿ª½±×´Ì¬ÎªÒ»£¬Î´¿ª
-		newnode->ticket_win = 0;					//1ÎªÖÐ½±£¬0ÎªÎ´ÖÐ½±
-		newnode->ticket_sum = newnode->ticket_amount * ticket_value;//ticket_valueÎª²ÊÆ±µ¥¼Û
-		if(newnode->ticket_sum > user->person_money)//Óà¶î²»×ã
-		{
-			printf("ÕË»§Óà¶î²»×ã£¬ÈÎÒâ¼ü·µ»Ø£¡");
-			getchar();
-		}
-		else					//¹ºÆ±³É¹¦
-		{
-			len_buy++;			//¹ºÆ±ÐÅÏ¢¼Ó1
-			p->next = newnode;
-			p = newnode;
-			user->person_money =user->person_money - newnode->ticket_sum;		//Óà¶î¼õÈ¥»¨·Ñ
-			H->person_money += newnode->ticket_sum;								//½±³Ø½ð¶îÔö¼Ó
-			
-			/***********ÒÔÏÂ²ÊÆ±»­Ãæ*****************/				
-			printf("\n**********¹º Æ± ³É ¹¦**********\n");
-			printf("*********************************");
-			if(newnode->ticket_type == sport_ticket)
-				printf("\t\t*\t  %s\t\t*\n","sport_ticket");
-			else if(newnode->ticket_type == love_ticket)
-				printf("\t\t*\t  %s\t\t*\n","love_ticket");
-			else
-				printf("\t\t*\t  %s\t\t*\n","disastor_ticket");
-			printf("²ÊÆ±ÆÚºÅ£º%d ÆÚ\n",newnode->ticket_dayth);
-			printf("²ÊÆ±ºÅÂë£º%d \n",newnode->ticket_number);
-			printf("²ÊÆ±ÊýÁ¿£º%d Öù\\n",newnode->ticket_amount);
-			printf("×Ü ½ð ¶î£º%d Ôª\n",newnode->ticket_sum);
-			if(newnode->ticket_status)
-			printf("¿ª½±×´Ì¬£ºÎ´¿ª½±\n");
-			else
-			{
-				if(!newnode->ticket_win)	
-				{
-					printf("¿ª½±×´Ì¬£ºÒÑ¿ª½±\n");
-					printf("Î´ÖÐ½±£¬ÏÂ´ÎºÃÔË£¡\n");
-				}
-				else
-				{
-					printf(" ¿ª½±×´Ì¬£ºÒÑ¿ª½±\n");
-					printf("¹§Ï²ÄãÖÐ½±ÁË£¬½ð¶îÎª£º%d\t\t*\n",newnode->ticket_amount*ticket_win_money);
-				}			
-				
-			}
-			printf("  ÈÎÒâ¼ü·µ»Ø-->");
-			getchar();
-			getchar();
-		}	
-	}
-	return p;
+    while (choice != 0)
+    {
+        printf("1ã€ä¿®æ”¹ç”¨æˆ·å\t\t2ã€ä¿®æ”¹å¯†ç \n");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 0:
+            choice = 0;
+            break;
+        case 1:
+            while (1)
+            {
+                printf("è¯·è¾“å…¥æ–°ç”¨æˆ·åï¼š");
+                scanf("%s", name);
+                flag = check_user(name, p);
+                if (!flag)
+                {
+                    getchar();
+                    printf("è¯·ç¡®è®¤ä¿®æ”¹ç”¨æˆ·å(y/n)?");
+                    if (getchar() == 'y')
+                    {
+                        save_flag = 1;
+                        strcpy(p->name, name);
+                        printf("ä¿®æ”¹æˆåŠŸï¼ä»»æ„é”®è¿”å›ž..."); 
+                        getchar();
+                    }
+                    else
+                    {
+                        printf("æŒ‰ä»»æ„é”®è¿”å›žï¼");
+                        getchar();
+                    }
+                    break;
+                }
+                else
+                {
+                    printf("\nç”¨æˆ·åå·²å­˜åœ¨ï¼è¯·é‡æ–°è¾“å…¥ï¼");
+                    i++;
+                    if (i == 3)
+                    {
+                        printf("è¾“å…¥é‡å¤è¿‡å¤šï¼ä»»æ„é”®è¿”å›žä¸»èœå•ï¼\n");
+                        getchar();
+                        getchar();
+                        break;
+                    }
+                }
+            }
+            i = 0;
+            break;
+        case 2:
+            printf("è¯·è¾“å…¥æ—§å¯†ç ï¼š");
+            scanf("%s", oldpass);
+            strcpy(admin_password, oldpass);
+            if (strcmp(admin_password, p->password) == 0)
+            {
+                while (1)
+                {
+                    if (i > 2)
+                    {
+                        printf("é”™è¯¯æ¬¡æ•°è¿‡å¤šï¼ä»»æ„é”®è¿”å›ž...");
+                        getchar();
+                        getchar();
+                        break;
+                    }
+                    printf("è¯·è¾“å…¥æ–°å¯†ç ï¼š");
+                    scanf("%s", password1);
+                    printf("è¯·å†æ¬¡è¾“å…¥å¯†ç ï¼š");
+                    scanf("%s", password2);
+                    if (strcmp(password1, password2) == 0)
+                    {
+                        save_flag = 1;
+                        strcpy(q->password, password1);
+                        printf("å¯†ç å·²æ›´æ–°ï¼ä»»æ„é”®è¿”å›žï¼");
+                        getchar();
+                        break;
+                    }
+                    else
+                    {
+                        i++;
+                        printf("ä¸¤æ¬¡å¯†ç ä¸ç›¸åŒï¼è¯·é‡æ–°è¾“å…¥ï¼\n");
+                    }
+                }
+            }
+            else
+            {
+                printf("å¯†ç é”™è¯¯ï¼ä»»æ„é”®è¿”å›ž...");
+                getchar();
+            }
+            break;
+        default:
+            choice = 0;
+            printf("ä»»æ„é”®è¿”å›žä¸»èœå•ï¼");
+            getchar();
+            break;
+        }
+        if (choice == 0)
+        {
+            choice = 2;
+            break;
+        }
+    }
 }
 
-void w_user_file(struct person *H)
+int check_user(char name[20],struct Person *p)
 {
-	FILE *fp1;
-	if((fp1 = fopen("user.txt","wt")) == NULL)
-	{
-		printf("w_user_fileÎÞ·¨´´½¨ÎÄ¼þuser.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fprintf(fp1,"%d %s %s %d\n",
-				H->id, 
-				H->name, 
-				H->passwd, 
-				H->person_money);
-	while(H->next != NULL)
-	{
-		fprintf(fp1,"%d %s %s %d\n",
-				H->next->id, 
-				H->next->name, 
-				H->next->passwd, 
-				H->next->person_money);
-		H = H->next;
-	}
-	fclose(fp1);
-}
-struct person *r_user_file(struct person *H)
-{
-	struct person *newnode = NULL;
-	struct person *p = H,*temp = NULL;
-	
-	FILE *fp;
-	if((fp=fopen("user.txt","rt")) == NULL)
-	{
-		printf("r_user_fileÎÞ·¨´ò¿ªÎÄ¼þuser.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fscanf(fp,"%d %s %s %d",
-				&H->id, 
-				H->name, 
-				H->passwd, 
-				&H->person_money);
-	while(!feof(fp))
-	{					
-		newnode = (struct person *)malloc(sizeof(struct person));
-		if(newnode == NULL)
-		{
-			printf("²úÉúÐÂ½ÚµãÊ±¿Õ¼ä·ÇÅä´íÎó£¡\n");
-			exit(0);
-		}
-		newnode->next = NULL;
-		fscanf(fp,"%d %s %s %d",
-				&newnode->id, 
-				newnode->name, 
-				newnode->passwd, 
-				&newnode->person_money);
-		p->next = newnode;
-		temp = p;
-		p = newnode;
-		len_user++;		//ÓÃ»§Êý¼ÓÒ»
-	}
-	fclose(fp);
-	temp->next = NULL;	//×îÓÐÒ»¸ö¶Á³öÓÐÎÊÌâ£¬½«×îºóÒ»¸ö½ÚµãÊÍ·Å
-	free(p);
-	len = temp->id;
-	return temp;
-}
-
-void w_buy_file(struct buy_ticket *buy_H)
-{
-	FILE *fp1;
-	if((fp1 = fopen("buy.txt","wt")) == NULL)
-	{
-		printf("w_buy_fileÎÞ·¨´´½¨ÎÄ¼þbuy.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fprintf(fp1,"%d %d %d %d\n",
-					buy_H->person_id,		//ÉÏÒ»ÆÚÌå²ÊÖÐ½±ºÅÂë
-					buy_H->ticket_number,	//ÉÏÒ»ÆÚ´ÈÉÆÖÐ½±ºÅÂë
-					buy_H->ticket_amount,	//ÉÏÒ»ÆÚ¾ÈÔÖÖÐ½±ºÅÂë
-					buy_H->ticket_dayth		//¿ÉÂòµÄÆÚºÅ
-				);
-	while(buy_H->next != NULL)
-	{
-		fprintf(fp1,"%d %s %d %d %d %d %d %d %d\n",
-										buy_H->next->person_id,
-										buy_H->next->person_name,
-										buy_H->next->ticket_dayth,
-										buy_H->next->ticket_type,
-										buy_H->next->ticket_number,
-										buy_H->next->ticket_amount,
-										buy_H->next->ticket_status,
-										buy_H->next->ticket_win,
-										buy_H->next->ticket_sum);
-		buy_H = buy_H->next;
-	}
-	fclose(fp1);
-}
-
-struct buy_ticket *r_buy_file(struct buy_ticket *buy_H)
-{
-	struct buy_ticket *newnode = NULL;
-	struct buy_ticket *buy_p = buy_H,*temp = NULL;
-	
-	FILE *fp;
-	if((fp=fopen("buy.txt","rt")) == NULL)
-	{
-		printf("r_buy_fileÎÞ·¨´ò¿ªÎÄ¼þbuy.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fscanf(fp,"%d %d %d %d\n",
-				&buy_H->person_id,		//ÉÏÒ»ÆÚÌå²ÊÖÐ½±ºÅÂë
-				&buy_H->ticket_number,	//ÉÏÒ»ÆÚ´ÈÉÆÖÐ½±ºÅÂë
-				&buy_H->ticket_amount,	//ÉÏÒ»ÆÚ¾ÈÔÖÖÐ½±ºÅÂë
-				&buy_H->ticket_dayth	//¿ÉÂòµÄÆÚºÅ
-			);
-	while(!feof(fp))
-	{					
-		newnode = (struct buy_ticket *)malloc(sizeof(struct buy_ticket));
-		if(newnode == NULL)
-		{
-			printf("²úÉúÐÂ½ÚµãÊ±¿Õ¼ä·ÇÅä´íÎó£¡\n");
-			exit(0);
-		}
-		newnode->next = NULL;
-		fscanf(fp,"%d %s %d %d %d %d %d %d %d\n",
-										&newnode->person_id,
-										newnode->person_name,
-										&newnode->ticket_dayth,
-										&newnode->ticket_type,
-										&newnode->ticket_number,
-										&newnode->ticket_amount,
-										&newnode->ticket_status,
-										&newnode->ticket_win,
-										&newnode->ticket_sum);
-		buy_p->next = newnode;
-		temp = buy_p;
-		buy_p = newnode;
-		len_buy++;				//¹ºÆ±ÐÅÏ¢¸öÊý¼Ó1
-	}
-	fclose(fp);
-	return buy_p;
-}
-
-void w_wininformation_file(struct news temp)
-{
-	FILE *fp1;
-	if((fp1 = fopen("wininformation.txt","at")) == NULL)
-	{
-		printf("w_wininformation_fileÎÞ·¨´´½¨ÎÄ¼þwininformation.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fprintf(fp1,"%d %d %d %d %d %d %d %d %d %d %d\n",
-										temp.dayth,
-										temp.sport_ticket,
-										temp.love_ticket,
-										temp.disastor_ticket,
-										temp.sum,
-										temp.year,
-										temp.month,
-										temp.day,
-										temp.hour,
-										temp.min,
-										temp.sec
-										);
-	fclose(fp1);
-}
-
-
-void r_wininformation_file()
-{
-	struct news temp;
-	FILE *fp1;
-	if((fp1 = fopen("wininformation.txt","rt")) == NULL)
-	{
-		printf("r_wininformation_fileÎÞ·¨´´½¨ÎÄ¼þwininformation.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	printf("\t\tÆÚºÅ  ÌåÓý²ÊÆ±  ´ÈÉÆ²ÊÆ±  ¾ÈÔÖ²ÊÆ±  ÖÐ³ö½ð¶î\tÈÕÆÚ\n");
-	while(!feof(fp1))
-	{
-		fscanf(fp1,"%d %d %d %d %d %d %d %d %d %d %d\n",
-										&temp.dayth,
-										&temp.sport_ticket,
-										&temp.love_ticket,
-										&temp.disastor_ticket,
-										&temp.sum,
-										&temp.year,
-										&temp.month,
-										&temp.day,
-										&temp.hour,
-										&temp.min,
-										&temp.sec
-										);
-		printf("\t\t%d\t%d\t  %d\t  %d\t\t%d\t%dÄê%dÔÂ%dÈÕ  %d-%d-%d\n",
-										temp.dayth,
-										temp.sport_ticket,
-										temp.love_ticket,
-										temp.disastor_ticket,
-										temp.sum,
-										temp.year,
-										temp.month,
-										temp.day,
-										temp.hour,
-										temp.min,
-										temp.sec
-										);
-	}
-	fclose(fp1);
-}
-
-void w_winer_file(struct buy_ticket *temp)
-{
-	FILE *fp1;
-	if((fp1 = fopen("winer.txt","at")) == NULL)
-	{
-		printf("w_winer_fileÎÞ·¨´´½¨ÎÄ¼þwiner.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fprintf(fp1,"%d %s %d %d %d %d %d \n",
-										temp->person_id,
-										temp->person_name,
-										temp->ticket_dayth,
-										temp->ticket_type,
-										temp->ticket_number,
-										temp->ticket_amount,
-										temp->ticket_winmoney);
-	fclose(fp1);
-}
-
-void r_winer_file()
-{
-	struct buy_ticket *temp = NULL;
-	temp = (struct buy_ticket *)malloc(sizeof(struct buy_ticket));
-	FILE *fp1;
-	if((fp1 = fopen("winer.txt","rt")) == NULL)
-	{
-		printf("ÎÄ¼þÎÞ·¨´ò¿ª»òÎÞÀúÊ·ÖÐ½±ÈËÐÅÏ¢--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(0);
-	}
-	printf("\n\t\t¸÷ÆÚÖÐ½±ÈËÐÅÏ¢£º\n");
-	printf("\t\t¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\n");
-	printf("\t\tID\tÐÕÃû\tÆÚºÅ\tÀàÐÍ\t\tºÅÂë\tÊýÁ¿\tÖÐ½±½ð¶î\n");
-	while(!feof(fp1))
-	{
-		fscanf(fp1,"\t\t%d %s %d %d %d %d %d\n",
-										&temp->person_id,
-										temp->person_name,
-										&temp->ticket_dayth,
-										&temp->ticket_type,
-										&temp->ticket_number,
-										&temp->ticket_amount,					
-										&temp->ticket_winmoney);
-		printf("\t\t%d\t%s\t%d",
-				temp->person_id,
-				temp->person_name,
-				temp->ticket_dayth);
-		if(temp->ticket_type == sport_ticket)
-			printf("\tÌåÓý²ÊÆ±");
-		else if(temp->ticket_type == love_ticket)
-			printf("\t´ÈÉÆ²ÊÆ±");
-		else
-			printf("\t¾ÈÔÖ²ÊÆ±");
-		printf("\t%d\t%d\t%d\n",temp->ticket_number,temp->ticket_amount,temp->ticket_winmoney);
-	}
-	fclose(fp1);
-}
-
-void w_visit_file(int visit)
-{
-	FILE *fp1;
-	if((fp1 = fopen("visit.txt","wt")) == NULL)
-	{
-		printf("w_visit_fileÎÞ·¨´´½¨ÎÄ¼þvisit.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fprintf(fp1,"%d",visit);
-	fclose(fp1);
-}
-
-int r_visit_file()
-{
-	int visit;
-	FILE *fp1;
-	if((fp1 = fopen("visit.txt","rt")) == NULL)
-	{
-		printf("r_visit_fileÎÞ·¨´´½¨ÎÄ¼þvisit.txt--ÈÎÒâ¼üÍË³ö!\n");
-		getchar();
-		exit(1);
-	}
-	fscanf(fp1,"%d",&visit);
-	fclose(fp1);
-	return visit;
+    while(p->next!=NULL)
+    {
+        if(strcmp(p->next->name,name)==0)
+        {
+            return 1;
+            p=p->next;
+        }
+    }
+    return 0;    
 }
