@@ -75,6 +75,7 @@ void userjudgment(int *sc, int *group, char *id)
                 switch (*sc)
                 {
                 case 1:
+                    winlottery(sc);
                     break;
                 case 2:
                     adminQuery(sc);

@@ -94,10 +94,11 @@ void winlotteryin1() // ²ÊÆ±¿ª½±Ð´Èë1
         InwinDate(temp);
         didDate(temp);
         temp->draw = 1;
-        strcpy(temp->winnumber,&randomStr);
+        strcpy(temp->winnumber,randomStr);
         if (strcmp(temp->winnumber, temp->usernumber) == 0)
         {
             temp->win = 1;
+            Prize(temp);
         }
     }
     FILE *file_write = fopen("lottery1.txt", "w");
@@ -192,10 +193,11 @@ void winlotteryin2() // ²ÊÆ±¿ª½±Ð´Èë2
         InwinDate(temp);
         didDate(temp);
         temp->draw = 1;
-        strcpy(temp->winnumber,&randomStr);
+        strcpy(temp->winnumber,randomStr);
         if (strcmp(temp->winnumber, temp->usernumber) == 0)
         {
             temp->win = 1;
+            Prize(temp);
         }
     }
     FILE *file_write = fopen("lottery2.txt", "w");
@@ -290,10 +292,11 @@ void winlotteryin3() // ²ÊÆ±¿ª½±Ð´Èë3
         InwinDate(temp);
         didDate(temp);
         temp->draw = 1;
-        strcpy(temp->winnumber,&randomStr);
+        strcpy(temp->winnumber,randomStr);
         if (strcmp(temp->winnumber, temp->usernumber) == 0)
         {
             temp->win = 1;
+            Prize(temp);
         }
     }
     FILE *file_write = fopen("lottery3.txt", "w");

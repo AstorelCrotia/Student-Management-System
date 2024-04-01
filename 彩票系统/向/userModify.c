@@ -341,9 +341,8 @@ void buyModify(char *id, float money,int *sc) // ¹ºÂòÊ±Óà¶îÐÞ¸Ä
                 return;
             }
         }
-        break;
+        temp = temp->next;
     }
-    temp = temp->next;
     FILE *file_write = fopen("users.txt", "w");
     if (file_write == NULL)
     {
