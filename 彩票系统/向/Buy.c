@@ -83,7 +83,7 @@ void Buyin(Lottery *lottery, char *id, int sc) // π∫¬Ú–¥»Î
             return;
         }
         InbuyDate(lottery);
-        fwrite(&lottery, sizeof(Lottery), 1, file_write);
+        fwrite(lottery, sizeof(Lottery), 1, file_write);
         fclose(file_write);
     }
     else if (sc == 2)
@@ -97,7 +97,7 @@ void Buyin(Lottery *lottery, char *id, int sc) // π∫¬Ú–¥»Î
             return;
         }
         InbuyDate(lottery);
-        fwrite(&lottery, sizeof(Lottery), 1, file_write);
+        fwrite(lottery, sizeof(Lottery), 1, file_write);
         fclose(file_write);
     }
     else
@@ -111,7 +111,7 @@ void Buyin(Lottery *lottery, char *id, int sc) // π∫¬Ú–¥»Î
             return;
         }
         InbuyDate(lottery);
-        fwrite(&lottery, sizeof(Lottery), 1, file_write);
+        fwrite(lottery, sizeof(Lottery), 1, file_write);
         fclose(file_write);
     }
     return;

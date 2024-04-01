@@ -205,7 +205,7 @@ void allnQueryubuy() // 查询所有历史购票
         printf("============================\n");
         printf("|  彩号：%s             |\n", uid.tid);
         printf("|  户号：%s             |\n", uid.uid);
-        printf("|  期号：%s             |\n", uid.tid);
+        printf("|  期号：%s             |\n", uid.did);
         if (uid.category == 1)
         {
             printf("|  类型：bbg彩             |\n");
@@ -391,7 +391,7 @@ void userQuerywin(char *id) // 查询所有历史开奖
             printf("============================\n");
             printf("|  彩号：%s             |\n", uid.tid);
             printf("|  户号：%s             |\n", uid.uid);
-            printf("|  期号：%s             |\n", uid.tid);
+            printf("|  期号：%s             |\n", uid.did);
             if (uid.category == 1)
             {
                 printf("|  类型：bbg彩             |\n");

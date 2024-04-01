@@ -64,9 +64,9 @@ void winlotteryin1() // ²ÊÆ±¿ª½±Ð´Èë1
         printf("============================\n");
         return;
     }
-    while (fread(lottery , sizeof(User), 1, file_read) == 1)
+    while (fread(lottery, sizeof(Lottery), 1, file_read) == 1)
     {
-        lottery ->next = NULL;
+        lottery->next = NULL;
         if (head == NULL)
         {
             head = lottery;
@@ -94,12 +94,13 @@ void winlotteryin1() // ²ÊÆ±¿ª½±Ð´Èë1
         InwinDate(temp);
         didDate(temp);
         temp->draw = 1;
-        strcpy(temp->winnumber,randomStr);
+        strcpy(temp->winnumber, randomStr);
         if (strcmp(temp->winnumber, temp->usernumber) == 0)
         {
             temp->win = 1;
             Prize(temp);
         }
+        temp = temp->next;
     }
     FILE *file_write = fopen("lottery1.txt", "w");
     if (file_write == NULL)
@@ -163,9 +164,9 @@ void winlotteryin2() // ²ÊÆ±¿ª½±Ð´Èë2
         printf("============================\n");
         return;
     }
-    while (fread(lottery , sizeof(User), 1, file_read) == 1)
+    while (fread(lottery, sizeof(Lottery), 1, file_read) == 1)
     {
-        lottery ->next = NULL;
+        lottery->next = NULL;
         if (head == NULL)
         {
             head = lottery;
@@ -193,12 +194,13 @@ void winlotteryin2() // ²ÊÆ±¿ª½±Ð´Èë2
         InwinDate(temp);
         didDate(temp);
         temp->draw = 1;
-        strcpy(temp->winnumber,randomStr);
+        strcpy(temp->winnumber, randomStr);
         if (strcmp(temp->winnumber, temp->usernumber) == 0)
         {
             temp->win = 1;
             Prize(temp);
         }
+        temp = temp->next;
     }
     FILE *file_write = fopen("lottery2.txt", "w");
     if (file_write == NULL)
@@ -262,9 +264,9 @@ void winlotteryin3() // ²ÊÆ±¿ª½±Ð´Èë3
         printf("============================\n");
         return;
     }
-    while (fread(lottery , sizeof(User), 1, file_read) == 1)
+    while (fread(lottery, sizeof(Lottery), 1, file_read) == 1)
     {
-        lottery ->next = NULL;
+        lottery->next = NULL;
         if (head == NULL)
         {
             head = lottery;
@@ -292,12 +294,13 @@ void winlotteryin3() // ²ÊÆ±¿ª½±Ð´Èë3
         InwinDate(temp);
         didDate(temp);
         temp->draw = 1;
-        strcpy(temp->winnumber,randomStr);
+        strcpy(temp->winnumber, randomStr);
         if (strcmp(temp->winnumber, temp->usernumber) == 0)
         {
             temp->win = 1;
             Prize(temp);
         }
+        temp = temp->next;
     }
     FILE *file_write = fopen("lottery3.txt", "w");
     if (file_write == NULL)
