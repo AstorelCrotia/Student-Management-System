@@ -57,7 +57,7 @@ void adminQuery(int *sc) // 管理员查询
 void userQuery(int *sc, char *id) // 用户查询
 {
     *sc = 0;
-    while (*sc == 6)
+    while (*sc != 6)
     {
         *sc = 0;
         printf("====================================\n");
@@ -78,7 +78,7 @@ void userQuery(int *sc, char *id) // 用户查询
         printf("|  退出系统输入其他              |\n");
         printf("====================================\n");
         printf("你的输入：");
-        scanf(" %d", &sc);
+        scanf(" %d", sc);
         switch (*sc)
         {
         case 1:

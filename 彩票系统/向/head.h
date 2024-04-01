@@ -17,7 +17,8 @@ typedef struct Lottery
     char uid[20];
     char did[20];
     int category;
-    char number[20];
+    char usernumber[20];
+    char winnumber[20];
     int draw;
     int win;
     time_t buydate;
@@ -52,6 +53,11 @@ void usermoneyModify(char *id, int flag);         // 用户余额修改
 void adminmoneyModify();                          // 余额修改
 void Delete(int *sc);                             // 删除界面
 void Deleteuser();                                // 删除功能
-void Drawing();                                   // 彩票开奖
+void winlottery(int *sc);                         // 彩票开奖
 void Buy(int *sc, char *id);                      // 购买彩票
 void buyModify(char *id, float money, int *sc);   // 购买时余额修改
+void didDate(Lottery *date);                      // 期号生成
+void Buyin(Lottery *lottery, char *id, int sc);    // 购买写入
+void winlotteryin1();                             // 彩票开奖写入1
+void winlotteryin2();                             // 彩票开奖写入2
+void winlotteryin3();                             // 彩票开奖写入3
