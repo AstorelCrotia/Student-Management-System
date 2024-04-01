@@ -1,7 +1,21 @@
 #include "head.h"
 
-void Prize(Lottery *lottery) //¶Ò½±
+void Prize(Lottery *lottery, int *ran, float n) // ¶Ò½±
 {
+    int num[6] = {0};
+    float flag = 0;
+    sscanf(lottery->usernumber, "%d %d %d %d %d : %d", &num[0], &num[1], &num[2], &num[3], &num[4], &num[5]);
+    for (int i = 0; i < 6; i++)
+    {
+        if (num[i] == *(ran+i))
+        {
+            flag++;
+        }
+    }
+    if (flag == 0)
+    {
+        return;
+    }
     User *head = NULL;
     User *temp = NULL;
     User *user = (User *)malloc(sizeof(User));
@@ -49,7 +63,7 @@ void Prize(Lottery *lottery) //¶Ò½±
     {
         if (strcmp(lottery->uid, temp->uid) == 0)
         {
-            temp->balance += 30;
+            temp->balance += (flag*n);
             break;
         }
         temp = temp->next;
