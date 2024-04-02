@@ -45,8 +45,10 @@ int main()
     }
     visit++;
     w_visit_file(visit);
-    printf("*********»¶Ó­À´µ½Ò»Ò¹±©¸»¶¯Îï²ÊÆ±»ú*********\n");
-    printf("******»¶Ó­¹âÁÙ£¬ÄúÊÇ½ñÌìµÚ%dÎ»·Ã¿Í**********\n");
+    printf("********************************************\n");
+    printf("*********æ¬¢è¿Žæ¥åˆ°ä¸€å¤œæš´å¯ŒåŠ¨ç‰©å½©ç¥¨æœº*********\n");
+    printf("*************æ‚¨æ˜¯ä»Šå¤©ç¬?%dä½å®¢äº?**************\n",visit);
+    printf("********************************************\n");
     time_t start,end;
     double dif;
     time(&start);
@@ -57,16 +59,16 @@ int main()
     }
     while(1)
 	{
-		ticketdayth = buy_h->ticket_dayth;	//Í·½ÚµãµÄdayth±£´æÆÚºÅ£¬²ÊÃñ¿ÉÒÔ¹ºÂòµÄÆÚºÅ
-		printf("1¡¢¹ÜÀíÔ±µÇÂ¼\t2¡¢²ÊÃñµÇÂ½\t3¡¢ÓÃ»§×¢²á\t4¡¢ÍË³öÏµÍ³\n");
+		ticketdayth = buy_h->ticket_dayth;	
+		printf("1ã€ç®¡ç†å‘˜ç™»å½•\t2ã€å½©æ°‘ç™»å½•\t3ã€ç”¨æˆ·æ³¨å†Œ\t0ã€é€€å‡ºç³»ç»Ÿ\næ‚¨çš„é€‰æ‹©æ˜¯ï¼š");
 		scanf("%d",&choice);
-		getchar();							//·ÀÖ¹ÊäÈë×Ö·ûÊ±½øÈëËÀÑ­»·
+		getchar();							
 		switch(choice)
 		{
 			case 0:							
 					if(save_flag ==1)
 					{
-						printf("ÐÅÏ¢¸ü¸Ä£¬ÊÇ·ñ±£´æµ½ÎÄ¼þ£¡y/n\n");
+						printf("ä¿¡æ¯ä¿®æ”¹ï¼Œæ˜¯å¦ä¿å­˜åˆ°æ–‡ä»¶å¤?(y/n)?\n");
 						if(getchar() == 'y')
 						{
 							w_user_file(h);		
@@ -74,7 +76,7 @@ int main()
 
 					}
 						w_buy_file(buy_h);		
-						printf("»¶Ó­¹ºÂò£¡×£Äúºé¸£ÆëÌì£¡\n");				
+						printf("æœŸå¾…æ‚¨çš„å†æ¬¡å…‰ä¸´ï¼\n");				
 					exit(0);
 				break;
 			case 1:								
@@ -87,11 +89,11 @@ int main()
 					p = signup(h,p);
 				break;	
 			default:
-				printf("Ñ¡ÔñÎÞÐ§£¡ÈÎÒâ¼ü·µ»Ø²Ëµ¥£¡\n");
+				printf("é€‰æ‹©æ— æ•ˆï¼Œä»»æ„é”®è¿”å›ž...\n");
 				getchar();
 				break;
 		}
-		choice = 9;						//ÌøÈëÊäÈëÓÐÎó£¬Èç¹ûÓÃ»§Ã»ÊäÊý×Ö£¬»á½øÈëdefault
+		choice = 9;						
 	}
     return 0;
 }

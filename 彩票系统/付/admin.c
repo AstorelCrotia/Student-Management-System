@@ -12,10 +12,8 @@ void admin_signin(struct Person *p, struct buy_ticket *buy_p)
     {
         printf("请输入用户名：");
         scanf("%s", name_now);
-        printf("\n");
         printf("请输入密码：");
         scanf("%s", passwd_now2);
-        printf("\n");
         strcpy(passwd_now1, passwd_now2);
         if (strcmp(p->name, name_now) != 0 || strcmp(p->password, passwd_now1) != 0)
         {
@@ -40,11 +38,10 @@ void admin_signin(struct Person *p, struct buy_ticket *buy_p)
         while (choice)
         {
             printf("管理员你好！\n");
-            printf("1、摇号\t\t2、查看信息\t\t3、修改信息\t\t4、删除信息\t\t5、购票信息排序\t\t0、返回主菜单");
+            printf("1、摇号\t\t2、查看信息\t3、修改信息\t4、删除信息\t5、购票信息排序\t0、返回主菜单\n");
             printf("你希望进行的操作为：");
             scanf("%d", &choice);
             getchar();
-            printf("\n");
             switch (choice)
             {
             case 0: // 返回主菜单
@@ -111,7 +108,6 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
         printf("猫猫彩票：%d\n", y);
         printf("狗狗彩票：%d\n", z);
         printf("抽奖时间：%02d年%02d月%02d日 %02d-%02d-%02d\n", tm_ptr->tm_year - 100, tm_ptr->tm_mon + 1, tm_ptr->tm_mday, tm_ptr->tm_hour, tm_ptr->tm_min, tm_ptr->tm_sec);
-        printf("\n");
         printf("中奖人信息为：\n");
         printf("ID\t姓名\t期号\t  类型\t\t号码\t数量\t开奖状态  中奖情况  中奖金额 \n");
 
@@ -361,7 +357,7 @@ void admin_updata(struct Person *p)
     struct Person *q;
     while (choice != 0)
     {
-        printf("1、修改管理员信息\t\t2、修改彩民密码\t\t3、追加金额\t\t4、返回上一级\n");
+        printf("1、修改管理员信息\t2、修改彩民密码\t3、追加金额\t0、返回上一级\n");
         scanf("%d", &choice);
         getchar();
         switch (choice)
