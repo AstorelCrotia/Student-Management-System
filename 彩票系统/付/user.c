@@ -37,10 +37,8 @@ struct Person *signup(struct Person *p, struct Person *q)
         {
             printf("请输入密码：");
             scanf("%s", passwd1);
-            printf("\n");
             printf("再次输入确认密码：");
             scanf("%s", passwd2);
-            printf("\n");
             i++;
             if (i == 3)
             {
@@ -73,7 +71,7 @@ struct Person *signup(struct Person *p, struct Person *q)
             strcpy(newuser->password, passwd1); // 密码写入
             strcpy(newuser->name, name);        // 用户名写入
             newuser->balance = user_init_money;
-            printf("注册成功！任意键返回主菜单!\n");
+            printf("注册成功！任意键返回主菜单!");
             getchar();
             getchar();
             q->next = newuser;
@@ -109,7 +107,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
             i++;
             if (i >= 3)
             {
-                printf("密码错误3次！任意键返回主菜单！\n");
+                printf("密码错误多次！任意键返回...\n");
                 getchar();
                 getchar();
                 break;
@@ -127,7 +125,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
     {
         while (choice != 0)
         {
-            printf("1、购票\t\t2、查看个人信息\t\t3、修改信息\t\t0、返回主菜单\n");
+            printf("1、购票\t2、查看个人信息\t3、修改信息\t0、返回主菜单\n");
             scanf("%d", &choice);
             getchar();
             switch (choice)
