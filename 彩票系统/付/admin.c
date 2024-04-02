@@ -56,7 +56,7 @@ void admin_signin(struct Person *p, struct buy_ticket *buy_p)
                 admin_view(p, buy_p);
                 break;
             case 3:
-                admin_update(p);
+                admin_updata(p);
                 break;
             case 4:
                 admin_delete(p, buy_p);
@@ -176,7 +176,7 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
                     else
                         printf("    未中奖");
                     printf("\t%d\n", temp->next->ticket_winmoney);
-                    winer_file(temp->next);
+                    w_winer_file(temp->next);
                 }
             }
             temp = temp->next;
@@ -262,9 +262,9 @@ void admin_view(struct Person *p, struct buy_ticket *buy_p)
             getchar();
             break;
         }
-        if(choice==0)
+        if (choice == 0)
         {
-            choice=1;
+            choice = 1;
             break;
         }
     }
@@ -354,4 +354,495 @@ void dayth_check_buynews(struct buy_ticket *buy_p)
     printf("任意键返回...");
     getchar();
     getchar();
+}
+
+void admin_updata(struct Person *p)
+{
+    struct Person *q;
+    while (choice != 0)
+    {
+        printf("1、修改管理员信息\t\t2、修改彩民密码\t\t3、追加金额\t\t4、返回上一级\n");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 0:
+            break;
+        case 1:
+            adminself_updata(p);
+            break;
+        case 2:
+            q = admin_user(p);
+            if (q != NULL)
+            {
+                q = q->next;
+                admin_change(q);
+            }
+            else
+            {
+                printf("未找到该信息！任意键返回...");
+                getchar();
+            }
+            break;
+        case 3:
+            q = admin_user(p);
+            q = q->next;
+            admin_add_money(q);
+            break;
+        default:
+            choice = 0;
+            printf("选择无效！任意键返回...");
+            getchar();
+            break;
+        }
+        if (choice == 0)
+        {
+            choice = 1;
+            break;
+        }
+    }
+}
+
+void adminself_updata(struct Person *p)
+{
+    char password1[8];
+    char password2[8];
+    char admin_password[8];
+    char name[20];
+    int i = 0;
+
+    while (choice != 0)
+    {
+        printf("1、修改姓名\t\t2、修改密码\t\t3、修改奖池金额\t\t0、返回上一级\n");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 0:
+            break;
+        case 1:
+            printf("请输入新用户名：");
+            scanf("%s", name);
+            getchar();
+            printf("请确认修改用户名：(y/n)");
+            if (getchar() == 'y')
+            {
+                save_flag = 1;
+                strcpy(p->name, name);
+                printf("修改成功！任意键返回...");
+                getchar();
+                getchar();
+            }
+            else
+            {
+                printf("无效输入！任意键返回...");
+                getchar();
+            }
+            break;
+        case 2:
+            printf("请输入旧密码：");
+            scanf("%s", admin_password);
+            if (strcmp(admin_password, p->password) == 0)
+            {
+                while (1)
+                {
+                    if (i > 2)
+                    {
+                        printf("错误次数过多！任意键返回...");
+                        getchar();
+                        getchar();
+                        break;
+                    }
+                    printf("请输入新密码：");
+                    scanf("%s", password1);
+                    printf("请再次输入密码：");
+                    scanf("%s", password2);
+                    if (strcmp(password1, password2) == 0)
+                    {
+                        save_flag = 1;
+                        strcpy(p->password, password2);
+                        printf("密码已更新！任意键返回...");
+                        getchar();
+                        break;
+                    }
+                    else
+                    {
+                        i++;
+                        printf("两次密码不一致！请重新输入！\n");
+                    }
+                }
+            }
+            else
+            {
+                printf("密码错误！任意键返回...");
+                getchar();
+            }
+            break;
+        case 3:
+            admin_add_money(p);
+            break;
+        default:
+            choice = 0;
+            printf("选择无效！任意键返回...");
+            getchar();
+            break;
+        }
+        if (choice == 0)
+        {
+            choice = 3;
+            break;
+        }
+    }
+}
+
+void admin_add_money(struct Person *p)
+{
+    int money;
+    printf("余额为：");
+    printf("%d 元\n", p->balance);
+    printf("请输入追加奖池金额：");
+    scanf("%d", &money);
+    getchar();
+    printf("确认追加奖池:(y/n)");
+    if (getchar() == 'y')
+    {
+        save_flag = 1;
+        p->balance += money;
+        printf("追加后的金额为：");
+        printf("%d 元\t任意键返回...\n", p->balance);
+        getchar();
+    }
+    else
+    {
+        printf("追加失败！");
+    }
+}
+
+struct Person *admin_user(struct Person *p)
+{
+    int id = 0;
+    char name[20];
+    printf("请输入要查找的姓名或ID：");
+    fflush(stdin);
+    scanf("%d", &id);
+    gets(name);
+    while (p->next != NULL)
+    {
+        if ((p->next->id == id) || (strcmp(p->next->name, name) == 0))
+        {
+            return p;
+        }
+        p->next;
+    }
+    if (p->next == NULL)
+        return NULL;
+}
+
+void admin_change(struct Person *p)
+{
+    char password1[8];
+    char password2[8];
+    int i = 0;
+    printf("彩民信息为：ID：%d\t姓名：%s\t密码：%s\t金额：%d元\n", p->id, p->name, p->password, p->balance);
+    while (1)
+    {
+        if (i > 2)
+        {
+            printf("错误次数过多！任意键返回...");
+            getchar();
+            getchar();
+            break;
+        }
+        printf("请输入新密码：");
+        scanf("%s", password1);
+        printf("请再次输入密码：");
+        scanf("%s", password2);
+        if (strcmp(password1, password2) == 0)
+        {
+            save_flag = 1;
+            strcpy(p->password, password2);
+            printf("密码已更新！任意键返回...");
+            getchar();
+            getchar();
+            break;
+        }
+        else
+        {
+            i++;
+            printf("两次密码不一致！请重新输入！\n");
+        }
+    }
+}
+
+void admin_delete(struct Person *p, struct buy_ticket *buy_p)
+{
+    struct Person *q = NULL;
+    struct Person *temp = NULL;
+    while (choice != 0)
+    {
+        printf("1、删除注册用户\t\t2、根据ID删除购票信息\t\t3、根据类型删除购票信息\t\t4、根据期号删除购票信息\t\t5、返回上一级\n");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 0:
+            break;
+        case 1:
+            q = admin_user(p);
+            if (q != NULL)
+            {
+                printf("彩民的基本信息为：ID：%d\t姓名：%s\t密码：%s\t金额：%d元\n", q->next->id, q->next->name, q->next->password, q->next->balance);
+                printf("确认删除(y/n)!");
+                if (getchar() == 'y')
+                {
+                    len_buy--;
+                    save_flag = 1;
+                    temp = q->next;
+                    q->next = temp->next;
+                    printf("删除成功！\n");
+                    printf("结点已销毁！任意键返回...");
+                    free(temp);
+                    getchar();
+                    getchar();
+                }
+                else
+                {
+                    printf("取消操作！任意键返回...");
+                    getchar();
+                    getchar();
+                }
+            }
+            else
+            {
+                printf("所查询的用户不存在！\n");
+                getchar();
+            }
+            break;
+        case 2:
+            id_del_buynews(buy_p);
+        case 3:
+            type_del_buynews(buy_p);
+        case 4:
+            dayth_del_buynews(buy_p);
+            break;
+        default:
+            choice = 0;
+            printf("选择无效！任意键返回...");
+            getchar();
+            break;
+        }
+        if (choice == 0)
+        {
+            choice = 1;
+            break;
+        }
+    }
+}
+
+void id_del_buynews(struct buy_ticket *buy_p)
+{
+    int id;
+    struct buy_ticket *temp = NULL;
+    printf("请输入需要删除信息的ID：");
+    scanf("%d", &id);
+    getchar();
+    printf("确定删除信息(y/n)");
+    if (getchar() == 'y')
+    {
+        while (buy_p->next != NULL)
+        {
+            if (buy_p->next->person_id == id && buy_p->next->ticket_status == 0)
+            {
+                temp = buy_p->next;
+                buy_p->next = buy_p->next->next;
+                printf("删除成功，结点已销毁！\n");
+                free(temp);
+                len_buy--;
+            }
+            else
+                buy_p = buy_p->next;
+        }
+        printf("未开奖的彩票无法删除！任意键返回...");
+        getchar();
+        getchar();
+    }
+    else
+    {
+        printf("操作取消！任意键返回...");
+        getchar();
+        getchar();
+    }
+}
+
+void type_del_buynews(struct buy_ticket *buy_p)
+{
+    int type;
+    struct buy_ticket *temp = NULL;
+    printf("选择需要删除信息的彩票类型(1、鼠鼠彩票 2、猫猫彩票  3、狗狗彩票):");
+    scanf("%d", &type);
+    getchar();
+    printf("请确认信息(y/n):");
+    if (getchar() == 'y')
+    {
+        while (buy_p->next != NULL)
+        {
+            if (buy_p->next->ticket_type == type && buy_p->next->ticket_status == 0)
+            {
+                temp = buy_p->next;
+                buy_p->next = buy_p->next->next;
+                printf("删除成功！结点已销毁！\n");
+                free(temp);
+                len_buy--;
+            }
+            else
+                buy_p = buy_p->next;
+        }
+        printf("未开奖的彩票无法删除！任意键返回...");
+        getchar();
+        getchar();
+    }
+    else
+    {
+        printf("已取消操作！任意键返回...");
+        getchar();
+        getchar();
+    }
+}
+
+void dayth_del_buynews(struct buy_ticket *buy_p)
+{
+    int dayth;
+    struct buy_ticket *temp = NULL;
+    printf("请输入需要删除信息的期号：");
+    scanf("%d", &dayth);
+    getchar();
+    printf("请确认删除信息：(y/n)");
+    if (getchar() == 'y')
+    {
+        while (buy_p->next != NULL)
+        {
+            if (buy_p->next->ticket_dayth == dayth && buy_p->next->ticket_status == 0)
+            {
+                temp = buy_p->next;
+                buy_p->next = buy_p->next->next;
+                printf("删除成功！节点已销毁！");
+                free(temp);
+                len_buy--;
+            }
+            else
+                buy_p = buy_p->next;
+        }
+        printf("未开奖的彩票无法删除！任意键返回...");
+        getchar();
+        getchar();
+    }
+    else
+    {
+        printf("放弃操作！任意键返回...");
+        getchar();
+        getchar();
+    }
+}
+
+void admin_sort(struct Person *p, struct buy_ticket *buy_p)
+{
+    while (choice != 0)
+    {
+        printf("1、按账号余额排序\t\t2、按期号排序\t\t3、按购票总数排序\t\t0、返回上一级\n");
+        scanf("%d", &choice);
+        getchar();
+        switch (choice)
+        {
+        case 0:
+            break;
+        case 1:
+            sortfun(p, buy_p);
+            break;
+        case 2:
+            sortfun(p, buy_p);
+            break;
+        case 3:
+            sortfun(p, buy_p);
+            break;
+        default:
+            choice = 0;
+            printf("选择无效！任意键返回...");
+            getchar();
+            break;
+        }
+        if (choice == 0)
+        {
+            choice = 1;
+            break;
+        }
+    }
+}
+
+void sortfun(struct Person *H, struct buy_ticket *buy_H)
+{
+    int i, j;
+    struct Person *p = H;
+    struct Person *temp = NULL;
+    struct buy_ticket *buy_p = buy_H;
+    struct buy_ticket *buy_temp = NULL;
+    if (choice == 1)
+    {
+        for (i = len_user - 2; i > 0; i--)
+        {
+            for (j = 0; j < i; j++)
+            {
+                if (p->next->balance < p->next->next->balance)
+                {
+                    temp = p->next;
+                    p->next = temp->next;
+                    temp->next = p->next->next;
+                    p->next->next = temp;
+                }
+                p = p->next;
+            }
+            p = H;
+        }
+        printf("排序后的信息为：\n");
+        user_information(H);
+    }
+    else if (choice == 2)
+    {
+        for (i = len_buy - 1; i > 0; i--)
+        {
+            for (j = 0; j < i; j++)
+            {
+                if (buy_p->next->ticket_dayth > buy_p->next->next->ticket_dayth)
+                {
+                    buy_temp = buy_p->next;
+                    buy_p->next = buy_temp->next;
+                    buy_temp->next = buy_p->next->next;
+                    buy_p->next->next = buy_temp;
+                }
+                buy_p = buy_p->next;
+            }
+            buy_p = buy_H;
+        }
+        printf("排序后的购票信息为：\n");
+        view_allbuy_news(buy_H);
+    }
+    else
+    {
+        for (i = len_buy - 1; i > 0; i--)
+        {
+            for (j = 0; j < i; j++)
+            {
+                if (buy_p->next->ticket_amount < buy_p->next->next->ticket_amount)
+                {
+                    buy_temp = buy_p->next;
+                    buy_p->next = buy_temp->next;
+                    buy_temp->next = buy_p->next->next;
+                    buy_p->next->next = buy_temp;
+                }
+                buy_p = buy_p->next;
+            }
+            buy_p = buy_H;
+        }
+        printf("\t排序后购票信息为：\n");
+        view_allbuy_news(buy_H);
+    }
 }
