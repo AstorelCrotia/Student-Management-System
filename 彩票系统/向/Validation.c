@@ -5,10 +5,11 @@ void Validation(char *id, int *group) // 验证用户名功能
     printf("============================\n");
     printf("请输入用户名:");
     scanf("%19s", id);
-    while (getchar() != '\n');
+    while (getchar() != '\n')
+        ;
     User tureuid = {0};
     User tureadmin = {0};
-    int i = 1;
+    int i = 0;
     int flag = 0;
     char code[20] = "\0";
     FILE *file_uid = fopen("users.txt", "r");
@@ -64,16 +65,19 @@ void Validation(char *id, int *group) // 验证用户名功能
         {
             printf("=============================================\n");
             printf("|  用户名不存在！                         |\n");
-            printf("|  这是第%d次输入错误，你还有%d次机会       |\n", i, 3 - i);
+            printf("|  这是第%d次输入错误，你还有%d次机会       |\n", i + 1, 2 - i);
             printf("=============================================\n");
             printf("你可以输入“1”重新输入，或输入其他退出：");
             scanf("%d", &flag);
+            while (getchar() != '\n')
+                ;
             if (flag == 1)
             {
                 printf("=============================================\n");
                 printf("请输入用户名:");
                 scanf("%19s", id);
-                while (getchar() != '\n');
+                while (getchar() != '\n')
+                    ;
                 i++;
             }
             else
@@ -81,32 +85,24 @@ void Validation(char *id, int *group) // 验证用户名功能
                 break;
             }
         }
-        if (i == 3)
-        {
-            printf("=============================================\n");
-            printf("错误三次，程序退出!\n");
-        }
     }
     if (*group == 1)
     {
-        i = 1;
+        i = 0;
         flag = 0;
         printf("=============================================\n");
         printf("请输入密码：");
         scanf("%19s", code);
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
         while (i != 3)
         {
-            while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
+            if (strcmp(code, tureuid.code) == 0)
             {
-                if (strcmp(code, tureuid.code) == 0)
-                {
-                    printf("=============================================\n");
-                    printf("欢迎登录！\n");
-                    flag = 2;
-                    break;
-                }
-                rewind(file_uid);
+                printf("=============================================\n");
+                printf("欢迎登录！\n");
+                flag = 2;
+                break;
             }
             if (flag == 2)
             {
@@ -114,18 +110,29 @@ void Validation(char *id, int *group) // 验证用户名功能
             }
             else
             {
+                if (i == 3)
+                {
+                    *group = 0;
+                    printf("============================\n");
+                    printf("|  退出程序！              |\n");
+                    printf("============================\n");
+                    break;
+                }
                 printf("=============================================\n");
-                printf("|  用户名不存在！                         |\n");
-                printf("|  这是第%d次输入错误，你还有%d次机会       |\n", i, 3 - i);
+                printf("|  密码不正确！                            |\n");
+                printf("|  这是第%d次输入错误，你还有%d次机会       |\n", i + 1, 2 - i);
                 printf("=============================================\n");
                 printf("你可以输入“1”重新输入，或输入其他退出：");
                 scanf("%d", &flag);
+                while (getchar() != '\n')
+                    ;
                 if (flag == 1)
                 {
                     printf("=============================================\n");
                     printf("请输入密码:");
                     scanf("%19s", code);
-                    while (getchar() != '\n');
+                    while (getchar() != '\n')
+                        ;
                     i++;
                 }
                 else
@@ -134,33 +141,29 @@ void Validation(char *id, int *group) // 验证用户名功能
                     break;
                 }
             }
-            if (i == 3)
-            {
-                *group = 0;
-                printf("=============================================\n");
-                printf("错误三次，程序退出!\n");
-            }
+        }
+        if (i == 3)
+        {
+            *group = 0;
         }
     }
     else if (*group == 2)
     {
-        i = 1;
+        i = 0;
         flag = 0;
         printf("=============================================\n");
         printf("请输入密码：");
         scanf("%19s", code);
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
         while (i != 3)
         {
-            while (fread(&tureadmin, sizeof(User), 1, file_admin) == 1)
+            if (strcmp(code, tureadmin.code) == 0)
             {
-                if (strcmp(code, tureadmin.code) == 0)
-                {
-                    printf("=============================================\n");
-                    printf("欢迎登录！\n");
-                    flag = 2;
-                    break;
-                }
+                printf("=============================================\n");
+                printf("欢迎登录！\n");
+                flag = 2;
+                break;
             }
             rewind(file_admin);
             if (flag == 2)
@@ -169,18 +172,29 @@ void Validation(char *id, int *group) // 验证用户名功能
             }
             else
             {
+                if (i == 3)
+                {
+                    *group = 0;
+                    printf("============================\n");
+                    printf("|  退出程序！              |\n");
+                    printf("============================\n");
+                    break;
+                }
                 printf("=============================================\n");
-                printf("|  用户名不存在！                         |\n");
-                printf("|  这是第%d次输入错误，你还有%d次机会       |\n", i, 3 - i);
+                printf("|  密码不正确！                            |\n");
+                printf("|  这是第%d次输入错误，你还有%d次机会       |\n", i + 1, 2 - i);
                 printf("=============================================\n");
                 printf("你可以输入“1”重新输入，或输入其他退出：");
                 scanf("%d", &flag);
+                while (getchar() != '\n')
+                    ;
                 if (flag == 1)
                 {
                     printf("=============================================\n");
                     printf("请输入密码:");
                     scanf("%19s", code);
-                    while (getchar() != '\n');
+                    while (getchar() != '\n')
+                        ;
                     i++;
                 }
                 else
@@ -189,12 +203,10 @@ void Validation(char *id, int *group) // 验证用户名功能
                     break;
                 }
             }
-            if (i == 3)
-            {
-                *group = 0;
-                printf("=============================================\n");
-                printf("错误三次，程序退出!\n");
-            }
+        }
+        if (i == 3)
+        {
+            *group = 0;
         }
     }
     fclose(file_uid);

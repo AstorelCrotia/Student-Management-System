@@ -21,6 +21,7 @@ void Mjudgment(int *sc, int *group, char *id)
 
 void userjudgment(int *sc, int *group, char *id)
 {
+    *sc = 0;
     if (*group == 1)
     {
         while (*sc != 7)
@@ -29,24 +30,19 @@ void userjudgment(int *sc, int *group, char *id)
             switch (*sc)
             {
             case 1:
-                Buy(sc,id);
-                *sc = 0;
+                Buy(sc, id);
                 break;
             case 2:
                 userQuery(sc, id);
-                *sc = 0;
                 break;
             case 3:
                 usermoneyModify(id, 1);
-                *sc = 0;
                 break;
             case 4:
                 usermoneyModify(id, 2);
-                *sc = 0;
                 break;
             case 5:
                 usercodeModify(id);
-                *sc = 0;
                 break;
             default:
                 *sc = 7;
@@ -79,19 +75,16 @@ void userjudgment(int *sc, int *group, char *id)
                 switch (*sc)
                 {
                 case 1:
-                    *sc = 0;
+                    winlottery(sc);
                     break;
                 case 2:
                     adminQuery(sc);
-                    *sc = 0;
                     break;
                 case 3:
                     adminModify(sc);
-                    *sc = 0;
                     break;
                 case 4:
                     Delete(sc);
-                    *sc = 0;
                     break;
                 default:
                     *sc = 5;
