@@ -6,6 +6,7 @@
 #include<conio.h>
 #define ID_EDIT_USERNAME 1001
 #define ID_EDIT_PASSWORD 1002
+#define ID_EDIT_PASSWORD1 1000
 #define ID_RETURN 1003
 #define ID_LISTBOX 1004
 #define ID_LISTBOX1 1005
@@ -17,6 +18,8 @@
 #define ID_LISTBOX7 1011
 #define ID_LISTBOX8 1012
 #define ID_LISTBOX9 1013
+#define ID_LISTBOX10 1014
+#define ID_LISTBOX11 1015
 #define WM_USER_RETURN_PREV_WINDOW (WM_USER + 1)
 typedef struct user{//用户链表
     char name[20];
@@ -63,19 +66,19 @@ void quire_prve(HWND hWnd,char *id);//当期购票情况
 //用户
 USER *getUser_txt();//文件获取到用户链表
 void putUser_txt(USER *users);//存入文件
-void registerUser(USER *users);//注册用户
 int check(USER *users,char *name);//检查用户名是否重复
-void recharge(USER *users,char *name);//余额充值
+int registerUser(HWND hWnd,char *name,char *password);
+void banlance(HWND hWnd,char *name);
+void recharge(HWND hWnd,char *name,int banlance);
 int user_login(char *name,char *password);//用户登录
 void userquire_curr(HWND hWnd);
-char *Verification_code();//验证码
 void quiry_user(USER *users,Id_t *issue,Td_t *ticket,Td_t *pwinner,char *name);//用户查询
 void quiry_userinf(HWND hWnd,char *name);//个人信息
-void quiry_buyticket(Td_t *ticket,char *name);//购票情况
-void quiry_userwin(Td_t *pwinner,char *name);//中奖记录
+void quiry_buyticket(HWND hWnd,char *name);//购票情况
+void quiry_userwin(HWND hWnd,char *name);//中奖记录
 void modify_user(USER *users,char *name);//修改个人信息
-void modify_userName(USER *users,char *name);//修改用户名
-void modify_userPassword(USER *users,char *name);//修改密码
+int modify_userName(HWND hWnd,char *name1,char *name2);//修改用户名
+void modify_userPassword(HWND hWnd,char *password,char *name);//修改密码
 //彩票
 Id_t *getIssue_txt();//文件获取到彩票链表
 void putIssue_txt(Id_t *head);//存入文件
@@ -99,6 +102,7 @@ void menu_adminquiry(HWND hWnd);
 void menu_adminquiryticket(HWND hWnd);
 void menu_user(HWND hWnd);
 void menu_userquiry(HWND hWnd);
+void menu_usermodify(HWND hWnd);
 //时间函数
 void delay(int seconds);//延时函数
 void Countdown(int seconds);//等待定时
@@ -141,9 +145,23 @@ void user_function(HWND hWnd);
 void user_ticketissue(HWND hWnd);
 void user_quiry(HWND hWnd);
 void user_quiryinf(HWND hWnd);
+void user_quiryticket(HWND hWnd);
+void user_quirywin(HWND hWnd);
+void user_modify(HWND hWnd);
+void user_modifyname(HWND hWnd);
+void user_modifypassword(HWND hWnd);
+void user_add(HWND hWnd);//
+void user_recharge(HWND hWnd);
 
 LRESULT CALLBACK WndProcUser(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProcUserfun(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProcUserticketissue(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProcUserQuiry(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProcUserQuiryinf(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcUserQuiryticket(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcUserQuirywin(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcUserModify(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcUserModifyName(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcUserModifyPassword(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcAdd(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProcUserrecharge(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

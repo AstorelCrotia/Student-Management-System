@@ -21,7 +21,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
                     user_loginw(hWnd);
                     break;
                 case 3:
-                    // 处理用户注册逻辑
+                    ShowWindow(hWnd,SW_HIDE);
+                    user_add(hWnd);
                     break;
                 case 0:
                     MessageBox(hWnd, "欢迎下次光临！", "提示", MB_OK);
