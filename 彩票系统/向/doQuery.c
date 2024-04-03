@@ -287,6 +287,40 @@ void allQuerywin() // 查询所有历史开奖
 
 void Querymoney() // 查询彩票中心营收
 {
+    Revenue uid = {0};
+    float balance = 0;
+    FILE *file_read = fopen("revenue.txt", "r");
+    if (file_read == NULL)
+    {
+        printf("============================\n");
+        printf("|  连接服务器失败！        |\n");
+        printf("============================\n");
+        return;
+    }
+    while (fread(&uid, sizeof(Revenue), 1, file_read) == 1)
+    {
+        printf("============================\n");
+        printf("|  用户：%s             |\n", uid.uid);
+        if (uid.category == 1)
+        {
+            printf("|  类型：bbg彩             |\n");
+        }
+        else if (uid.category == 2)
+        {
+            printf("|  类型：A彩             |\n");
+        }
+        else
+        {
+            printf("|  类型：B彩             |\n");
+            
+        }
+        happenDate(&uid);
+        printf("|  发生金额：%.2f             |\n", uid.money);
+        balance += uid.money;
+        printf("|  资金余额：%.2f             |\n", balance);
+        printf("============================\n");
+    }
+    fclose(file_read);
 }
 
 void Showuser(char *id) // 用户查询自己信息

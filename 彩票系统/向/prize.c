@@ -9,6 +9,7 @@ void Prize(Lottery *lottery, int *ran, float n) // ¶Ò½±
     {
         if (num[i] == *(ran+i))
         {
+            lottery->win = 1;
             flag++;
         }
     }
@@ -64,6 +65,7 @@ void Prize(Lottery *lottery, int *ran, float n) // ¶Ò½±
         if (strcmp(lottery->uid, temp->uid) == 0)
         {
             temp->balance += (flag*n);
+            revenue(-flag*n,lottery);
             break;
         }
         temp = temp->next;

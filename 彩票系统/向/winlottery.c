@@ -38,14 +38,16 @@ void winlottery(int *sc) // ²ÊÆ±¿ª½±
 
 void winlotteryin1() // ²ÊÆ±¿ª½±Ð´Èë1
 {
-    int randomNum[6] = {0};
-    char randomStr[20] = "\0";
+    // int randomNum[6] = {0};
+    // char randomStr[20] = "\0";
+    int randomNum[6] = {10,10,10,10,10,10};
+    char randomStr[20] = "10 10 10 10 10 : 10";
     srand(time(NULL));
-    for (int i = 0; i < 6; i++)
-    {
-        randomNum[i] = rand() % 100;
-    }
-    snprintf(randomStr, sizeof(randomStr), "%02d %02d %02d %02d %02d : %02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
+    // for (int i = 0; i < 6; i++)
+    // {
+    //     randomNum[i] = rand() % 100;
+    // }
+    // snprintf(randomStr, sizeof(randomStr), "%02d %02d %02d %02d %02d : %02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
     Lottery *head = NULL;
     Lottery *temp = NULL;
     Lottery *lottery = (Lottery *)malloc(sizeof(Lottery));
