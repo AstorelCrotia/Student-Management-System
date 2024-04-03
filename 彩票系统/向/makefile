@@ -1,22 +1,16 @@
-# 定义编译器和编译选项
 CC = gcc
 CFLAGS = -Wall
-
-# 定义目标文件和依赖文件
-TARGET = myprogram
-OBJS = *.c
-
-# 默认编译规则
+SRCDIR = src
+INCDIR = include
+OBJDIR = obj
+BINDIR = bin
+SRC = $(wildcard $(SRCDIR)/*.c)
+OBJ = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
+TARGET = $(BINDIR)/彩票管理系统.exe
 all: $(TARGET)
-
-# 生成可执行文件
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
-
-# 编译每个源文件
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
-
-# 清理中间文件和可执行文件
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET)
 clean:
-	rm -f $(TARGET) $(OBJS)
+	rm -f $(OBJDIR)/*.o $(TARGET)
