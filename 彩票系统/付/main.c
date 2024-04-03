@@ -31,7 +31,6 @@ int main()
         fclose(fp);
         buy_p = r_buy_file(buy_h);
     }
-    printf("1");
     int visit;
     if ((fp = fopen("buy.txt", "rt")) == NULL)
     {
@@ -47,7 +46,7 @@ int main()
     w_visit_file(visit);
     printf("********************************************\n");
     printf("*********欢迎来到一夜暴富动物彩票机*********\n");
-    printf("*************您是今天第%d位客人**************\n", visit);
+    printf("************您是今天的NO.%d位客户*************\n", visit);
     printf("********************************************\n");
     time_t start, end;
     double dif;
@@ -60,7 +59,7 @@ int main()
     while (1)
     {
         ticketdayth = buy_h->ticket_dayth;
-        printf("1、管理员登录\t2、彩民登录\t3、用户注册\t0、退出系统\n您的选择是:");
+        printf("1、管理员登录\t2、彩民登录\t3、用户注册\t0、退出系统\n您的选择:");
         scanf("%d", &choice);
         getchar();
         switch (choice)

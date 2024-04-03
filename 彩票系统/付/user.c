@@ -8,11 +8,13 @@ struct Person *signup(struct Person *p, struct Person *q)
     int i = 0;
     int flag = 1;
     struct Person *newuser = NULL;
+
     while (1)
     {
         printf("请输入用户名:");
         scanf("%s", name);
         flag = check_user(name, p);
+
         if (flag == 0)
         {
             i = 0;
@@ -31,6 +33,7 @@ struct Person *signup(struct Person *p, struct Person *q)
             }
         }
     }
+
     if (!flag)
     {
         while (1)
@@ -40,6 +43,7 @@ struct Person *signup(struct Person *p, struct Person *q)
             printf("再次输入确认密码:");
             scanf("%s", passwd2);
             i++;
+
             if (i == 3)
             {
                 printf("输入超过三次！任意键返回...\n");
@@ -55,17 +59,20 @@ struct Person *signup(struct Person *p, struct Person *q)
             else
                 printf("密码输入不一致，请重新输入！\n");
         }
+
         if (i != 3)
         {
             len++;
             len_user++;
             save_flag = 1;
             newuser = (struct Person *)malloc(sizeof(struct Person));
+
             if (newuser == NULL)
             {
                 printf("分配空间错误！\n");
                 exit(0); // 程序错误退出；
             }
+
             newuser->next = NULL;
             newuser->id = len;
             strcpy(newuser->password, passwd1); // 密码写入
@@ -79,7 +86,7 @@ struct Person *signup(struct Person *p, struct Person *q)
         }
     }
     return q;
-};
+}
 
 struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy_ticket *buy_q)
 {
@@ -177,13 +184,34 @@ struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, st
             getchar();
             return p;
         }
-        printf("请选择您要下注的类型:1、鼠鼠\t\t2、猫猫\t\t3、狗狗\t\t0、返回上一级\n");
-        scanf("%d", &newticket->ticket_type);
-        getchar();
+        while (1)
+        {
+            printf("请选择您要下注的类型:1、鼠鼠\t2、猫猫\t3、狗狗\t0、返回上一级\n");
+            scanf("%d", &newticket->ticket_type);
+            if (newticket->ticket_type < 0 || newticket->ticket_type > 3)
+            {
+                printf("没有您输入的类型！请重新输入！\n");
+            }
+            else
+            {
+                break;
+            }
+        }
         if (newticket->ticket_type == 0)
             return p;
-        printf("请输入您要购买的号码(1-20):");
-        scanf("%d", &newticket->ticket_number);
+        while (1)
+        {
+            printf("请输入您要购买的号码(1-20):");
+            scanf("%d", &newticket->ticket_number);
+            if (newticket->ticket_number < 1 || newticket->ticket_number > 20)
+            {
+                printf("您输入的号码不在范围内！请重新输入！\n");
+            }
+            else
+            {
+                break;
+            }
+        }
         printf("您要购买的数量：");
         scanf("%d", &newticket->ticket_amount);
         newticket->person_id = user->id;
@@ -196,6 +224,7 @@ struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, st
         {
             printf("账户余额不足，请充值！任意键返回...");
             getchar();
+            return p;
         }
         else
         {
@@ -210,7 +239,7 @@ struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, st
             printf("彩票号码:%d \n", newticket->ticket_number);
             printf("彩票数量:%d 注\n", newticket->ticket_amount);
             printf("总金额:%d 元\n", newticket->ticket_sum);
-            if (newticket->ticket_status)
+            if (newticket->ticket_status == 1)
             {
                 printf("未开奖\n");
             }
@@ -225,6 +254,7 @@ struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, st
                     printf("恭喜您中奖了，金额为:%d元\n", newticket->ticket_amount * ticket_win_money);
                 }
             }
+            save_flag = 1;
             printf("任意键返回...");
             getchar();
             getchar();
@@ -298,7 +328,7 @@ void user_update(struct Person *p, struct Person *q)
                     {
                         save_flag = 1;
                         strcpy(p->name, name);
-                        printf("修改成功！任意键返回..."); 
+                        printf("修改成功！任意键返回...");
                         getchar();
                     }
                     else
@@ -377,15 +407,15 @@ void user_update(struct Person *p, struct Person *q)
     }
 }
 
-int check_user(char name[20],struct Person *p)
+int check_user(char name[20], struct Person *p)
 {
-    while(p->next!=NULL)
+    while (p->next != NULL)
     {
-        if(strcmp(p->next->name,name)==0)
+        if (strcmp(p->name, name) == 0)
         {
             return 1;
-            p=p->next;
         }
+        p = p->next;
     }
-    return 0;    
+    return 0;
 }
