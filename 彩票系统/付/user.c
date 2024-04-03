@@ -1,5 +1,5 @@
 #include "head.h"
-// 新用户注册
+// 新用户注�?
 struct Person *signup(struct Person *p, struct Person *q)
 {
     char passwd1[20];
@@ -10,7 +10,7 @@ struct Person *signup(struct Person *p, struct Person *q)
     struct Person *newuser = NULL;
     while (1)
     {
-        printf("请输入用户名：");
+        printf("请输入用户名�?");
         scanf("%s", name);
         flag = check_user(name, p);
         if (flag == 0)
@@ -37,12 +37,12 @@ struct Person *signup(struct Person *p, struct Person *q)
         {
             printf("请输入密码：");
             scanf("%s", passwd1);
-            printf("再次输入确认密码：");
+            printf("再次输入确认密码�?");
             scanf("%s", passwd2);
             i++;
             if (i == 3)
             {
-                printf("输入超过三次！任意键返回主菜单!\n");
+                printf("输入超过三次！任意键返回主菜�?!\n");
                 getchar();
                 getchar();
                 break;
@@ -69,9 +69,9 @@ struct Person *signup(struct Person *p, struct Person *q)
             newuser->next = NULL;
             newuser->id = len;
             strcpy(newuser->password, passwd1); // 密码写入
-            strcpy(newuser->name, name);        // 用户名写入
+            strcpy(newuser->name, name);        // 用户名写�?
             newuser->balance = user_init_money;
-            printf("注册成功！任意键返回主菜单!");
+            printf("注册成功！任意键返回...");
             getchar();
             getchar();
             q->next = newuser;
@@ -90,9 +90,9 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
 
     while (1)
     {
-        printf("请输入用户名：");
+        printf("请输入用户名:");
         scanf("%s", name);
-        printf("请输入密码：");
+        printf("请输入密码:");
         scanf("%s", password);
         while (q->next != NULL)
         {
@@ -138,7 +138,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
                 buy_p = user_buy_ticket(buy_p, q->next, p);
                 break;
             case 2:
-                printf("您的个人信息为：ID：%d\t\t姓名：%s\t\t密码：%s\t\t余额：%d\n", p->next->id, p->next->name, p->next->password, p->next->balance);
+                printf("您的个人信息为:ID:%d\t\t姓名:%s\t\t密码:%s\t\t余额:%d\n", p->next->id, p->next->name, p->next->password, p->next->balance);
                 user_view_ticket(q->next, buy_q);
                 printf("任意键继续...");
                 getchar();
@@ -154,6 +154,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
             }
         }
     }
+    return buy_q;
 }
 
 struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, struct Person *q)
@@ -204,11 +205,11 @@ struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, st
             user->balance = user->balance - newticket->ticket_sum;
             q->balance += newticket->ticket_sum;
             printf("购票成功！\n");
-            printf("您购买的是：%s\n", newticket->ticket_type);
+            printf("您购买的是：%d\n", newticket->ticket_type);
             printf("彩票期号:%d 期\n", newticket->ticket_dayth);
             printf("彩票号码:%d \n", newticket->ticket_number);
             printf("彩票数量:%d 注\n", newticket->ticket_amount);
-            printf("总 金 额:%d 元\n", newticket->ticket_sum);
+            printf("总金额:%d 元\n", newticket->ticket_sum);
             if (newticket->ticket_status)
             {
                 printf("未开奖\n");
@@ -235,7 +236,7 @@ struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, st
 void user_view_ticket(struct Person *p, struct buy_ticket *buy_p)
 {
     struct buy_ticket *temp = buy_p;
-    printf("上期中奖号码是：鼠鼠：%d\t猫猫：%d\t狗狗：%d\t下期彩票:%d\n", temp->mouse_ID, temp->cat_ID, temp->dog_ID, temp->ticket_dayth);
+    printf("上期中奖号码是：鼠鼠:%d\t猫猫:%d\t狗狗:%d\t下期彩票:%d\n", temp->person_id, temp->ticket_amount, temp->ticket_sum, temp->ticket_dayth);
     printf("您的购票信息为：\n");
     printf("\tID\t姓名\t期号\t\t类型\t\t号码\t数量\t\t开奖状态\t\t中奖情况\t\t购票金额\t\n");
     while (temp->next != NULL)
@@ -255,7 +256,7 @@ void user_view_ticket(struct Person *p, struct buy_ticket *buy_p)
             else
                 printf("已开奖\t\t");
             if (temp->next->ticket_win)
-                printf("中  奖\t\t");
+                printf("已中奖\t\t");
             else
                 printf("未中奖\t\t");
             printf("%d\n", temp->next->ticket_sum);
@@ -302,14 +303,14 @@ void user_update(struct Person *p, struct Person *q)
                     }
                     else
                     {
-                        printf("按任意键返回！");
+                        printf("按任意键返回...");
                         getchar();
                     }
                     break;
                 }
                 else
                 {
-                    printf("\n用户名已存在！请重新输入！");
+                    printf("\n用户名已存在!请重新输入�?");
                     i++;
                     if (i == 3)
                     {
@@ -323,7 +324,7 @@ void user_update(struct Person *p, struct Person *q)
             i = 0;
             break;
         case 2:
-            printf("请输入旧密码：");
+            printf("请输入旧密码:");
             scanf("%s", oldpass);
             strcpy(admin_password, oldpass);
             if (strcmp(admin_password, p->password) == 0)
@@ -337,7 +338,7 @@ void user_update(struct Person *p, struct Person *q)
                         getchar();
                         break;
                     }
-                    printf("请输入新密码：");
+                    printf("请输入新密码:");
                     scanf("%s", password1);
                     printf("请再次输入密码：");
                     scanf("%s", password2);
@@ -364,7 +365,7 @@ void user_update(struct Person *p, struct Person *q)
             break;
         default:
             choice = 0;
-            printf("任意键返回主菜单！");
+            printf("任意键返回...");
             getchar();
             break;
         }

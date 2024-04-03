@@ -77,16 +77,16 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
     int flag = 0; // 中奖信号
     struct buy_ticket *temp = buy_p;
     int x = 0, y = 0, z = 0; // 三种类型的彩票
-    printf("确认开始摇号(y/n)?", buy_p->ticket_dayth);
+    printf("确认开始摇号(y/n)?");
     if (getchar() == 'y')
     {
         srand((unsigned)time(NULL));
         x = rand() % 20 + 1; // 鼠彩
         y = rand() % 20 + 1; // 猫彩
         z = rand() % 20 + 1; // 狗彩
-        buy_p->mouse_ID = x;
-        buy_p->cat_ID = y;
-        buy_p->dog_ID = z;
+        buy_p->person_id = x;
+        buy_p->ticket_number = y;
+        buy_p->ticket_amount = z;
         buy_p->ticket_sum = 0;
         printf("号码抽取中...\n");
         time_t start, end;
@@ -109,11 +109,11 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
         printf("狗狗彩票：%d\n", z);
         printf("抽奖时间：%02d年%02d月%02d日 %02d-%02d-%02d\n", tm_ptr->tm_year - 100, tm_ptr->tm_mon + 1, tm_ptr->tm_mday, tm_ptr->tm_hour, tm_ptr->tm_min, tm_ptr->tm_sec);
         printf("中奖人信息为：\n");
-        printf("ID\t姓名\t期号\t  类型\t\t号码\t数量\t开奖状态  中奖情况  中奖金额 \n");
+        printf("\t\tID\t姓名\t期号\t  类型\t\t号码\t数量\t开奖状态  中奖情况  中奖金额 \n");
 
         while (temp->next != NULL)
         {
-            if (temp->next->ticket_dayth == buy_p->ticket_dayth) // 购买当期判断奖池减少，记录彩民
+            if (temp->next->ticket_dayth == buy_p->ticket_dayth)
             {
                 temp->next->ticket_status = 0;
                 switch (temp->next->ticket_type)
@@ -121,31 +121,28 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
                 case mouse_ticket:
                     if (temp->next->ticket_number == x)
                     {
-                        temp->next->ticket_win = 1;
-                        temp->next->ticket_number = x;
-                        temp->next->ticket_winmoney = temp->next->ticket_amount * mouse_win;
-                        buy_p->ticket_sum += temp->next->ticket_winmoney;
-                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * mouse_win);
+                        temp->next->ticket_win = 1;                                                    // 中奖
+                        temp->next->ticket_winmoney = temp->next->ticket_amount * mouse_win;           // 个人本期中奖金额
+                        buy_p->ticket_sum += temp->next->ticket_winmoney;                              // 算出中出奖总金额
+                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * mouse_win); // 中奖增加金额
                     }
                     break;
                 case cat_ticket:
                     if (temp->next->ticket_number == y)
                     {
-                        temp->next->ticket_win = 1;
-                        temp->next->ticket_number = y;
-                        temp->next->ticket_winmoney = temp->next->ticket_amount * cat_win;
+                        temp->next->ticket_win = 1;                                        // 中奖
+                        temp->next->ticket_winmoney = temp->next->ticket_amount * cat_win; // 本次中奖金额
                         buy_p->ticket_sum += temp->next->ticket_winmoney;
-                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * cat_win);
+                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * cat_win); // 增加金额
                     }
                     break;
                 case dog_ticket:
                     if (temp->next->ticket_number == z)
                     {
-                        temp->next->ticket_win = 1;
-                        temp->next->ticket_number = z;
+                        temp->next->ticket_win = 1; // 中奖
                         temp->next->ticket_winmoney = temp->next->ticket_amount * dog_win;
                         buy_p->ticket_sum += temp->next->ticket_winmoney;
-                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * dog_win);
+                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * dog_win); // 增加金额
                     }
                     break;
                 default:
@@ -155,14 +152,19 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
                 if (temp->next->ticket_win)
                 {
                     flag = 1;
-                    printf("%d\t%s\t%d", temp->next->person_id, temp->next->person_name, temp->next->ticket_dayth);
+                    printf("\t\t%d\t%s\t%d",
+                           temp->next->person_id,
+                           temp->next->person_name,
+                           temp->next->ticket_dayth);
                     if (temp->next->ticket_type == mouse_ticket)
                         printf("\t鼠鼠彩票");
                     else if (temp->next->ticket_type == cat_ticket)
                         printf("\t猫猫彩票");
                     else
                         printf("\t狗狗彩票");
-                    printf("\t%d\t%d", temp->next->ticket_number, temp->next->ticket_amount);
+                    printf("\t%d\t%d",
+                           temp->next->ticket_number,
+                           temp->next->ticket_amount);
                     if (temp->next->ticket_status)
                         printf("\t未开奖");
                     else
@@ -282,7 +284,13 @@ void view_allbuy_news(struct buy_ticket *buy_p)
     printf("所有购票信息\n");
     while (buy_p->next != NULL)
     {
-        printf("ID：%d\t姓名：%s\t期号：%d\t\t类型：%s\t号码：%d数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_type, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+        printf("ID：%d\t姓名：%s\t期号：%d\t号码：%d数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+        if (buy_p->next->ticket_type == mouse_ticket)
+            printf("\t类型：鼠鼠彩票");
+        else if (buy_p->next->ticket_type == cat_ticket)
+            printf("\t类型：猫猫彩票");
+        else
+            printf("\t类型：狗狗彩票");
         if (buy_p->next->ticket_status)
             printf("开奖状态：未开奖\t");
         else
@@ -307,15 +315,35 @@ void ID_check_buynews(struct buy_ticket *buy_p)
     {
         if (buy_p->next->person_id == id)
         {
-            printf("查找的购票信息为:\t\tID：%d\t姓名：%s\t期号：%d\t类型：%s\t号码：%d\t数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_type, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+            printf("ID：%d\t姓名：%s\t期号：%d\t号码：%d数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+            if (buy_p->next->ticket_type == mouse_ticket)
+            {
+                printf("\t类型：鼠鼠彩票");
+            }
+            else if (buy_p->next->ticket_type == cat_ticket)
+            {
+                printf("\t类型：猫猫彩票");
+            }
+            else
+            {
+                printf("\t类型：狗狗彩票");
+            }
             if (buy_p->next->ticket_status)
+            {
                 printf("开奖状态：未开奖\t");
+            }
             else
+            {
                 printf("开奖状态：已开奖\t");
+            }
             if (buy_p->next->ticket_win)
+            {
                 printf("中奖状态：已中奖\t");
+            }
             else
+            {
                 printf("中奖状态：未中奖\t");
+            }
             printf("%d\n", buy_p->next->ticket_sum);
         }
         buy_p = buy_p->next;
@@ -334,7 +362,13 @@ void dayth_check_buynews(struct buy_ticket *buy_p)
     {
         if (buy_p->next->ticket_dayth == dayth)
         {
-            printf("查找的购票信息为:\t\tID：%d\t姓名：%s\t期号：%d\t类型：%s\t号码：%d\t数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_type, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+            printf("ID：%d\t姓名：%s\t期号：%d\t号码：%d数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+            if (buy_p->next->ticket_type == mouse_ticket)
+                printf("\t类型：鼠鼠彩票");
+            else if (buy_p->next->ticket_type == cat_ticket)
+                printf("\t类型：猫猫彩票");
+            else
+                printf("\t类型：狗狗彩票");
             if (buy_p->next->ticket_status)
                 printf("开奖状态：未开奖\t");
             else
@@ -516,22 +550,49 @@ void admin_add_money(struct Person *p)
 
 struct Person *admin_user(struct Person *p)
 {
+    choice = 0;
     int id = 0;
     char name[20];
-    printf("请输入要查找的姓名或ID：");
-    fflush(stdin);
-    scanf("%d", &id);
-    gets(name);
-    while (p->next != NULL)
+    while (choice != 0)
     {
-        if ((p->next->id == id) || (strcmp(p->next->name, name) == 0))
+        printf("请输入要查找的是:\n1、姓名\t2、ID");
+        scanf("%d", &choice);
+        switch (choice)
         {
-            return p;
+        case 0:
+            choice =0;
+            break;
+        case 1:
+            printf("您要查找的姓名为:");
+            scanf("%s", name);
+            while (p->next != NULL)
+            {
+                if (strcmp(p->next->name, name) == 0)
+                {
+                    return p;
+                }
+                p = p->next;
+            }
+            break;
+        case 2:
+            printf("您要查找的ID为:");
+            scanf("%d", &id);
+            while (p->next != NULL)
+            {
+                if (p->next->id == id)
+                {
+                    return p;
+                }
+                p = p->next;
+            }
+        default:
+            printf("无效输入，任意键返回...");
+            getchar();
+            choice = 3;
+            break;
         }
-        p->next;
     }
-    if (p->next == NULL)
-        return NULL;
+    return NULL;
 }
 
 void admin_change(struct Person *p)
