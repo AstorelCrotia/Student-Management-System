@@ -166,10 +166,10 @@ struct Person *r_user_file(struct Person *h)
 		p->next = newperson;
 		temp = p;
 		p = newperson;
-		len_user++;		//用户数加一
+		len_user++;		
 	}
 	fclose(fp);
-	temp->next = NULL;	//最有一个读出有问题，将最后一个节点释放
+	temp->next = NULL;	
 	free(p);
 	len = temp->id;
 	return temp;
@@ -246,7 +246,7 @@ struct buy_ticket *r_buy_file(struct buy_ticket *buy_h)
 										&newuser->ticket_sum);
 		buy_p->next = newuser;
 		buy_p = newuser;
-		len_buy++;				//购票信息个数加1
+		len_buy++;				
 	}
 	fclose(fp);
     return buy_p;

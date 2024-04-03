@@ -13,7 +13,7 @@ void admin_signin(struct Person *p, struct buy_ticket *buy_p)
         printf("请输入用户名：");
         scanf("%s", name_now);
         printf("请输入密码：");
-        scanf("%s", passwd_now2);
+        mask_password(passwd_now2);
         strcpy(passwd_now1, passwd_now2);
         if (strcmp(p->name, name_now) != 0 || strcmp(p->password, passwd_now1) != 0)
         {
@@ -228,7 +228,7 @@ void admin_view(struct Person *p, struct buy_ticket *buy_p)
         case 0:
             break;
         case 1:
-            printf("ID：%d\t姓名：%s\t密码：%s\t余额：%d元\n", p->id, p->name, p->password, p->balance);
+            printf("ID:%d\t姓名:%s\t密码:%s\t余额:%d元\n", p->id, p->name, p->password, p->balance);
             printf("任意键退出...");
             getchar();
             break;
@@ -272,7 +272,7 @@ void user_information(struct Person *p)
 {
     while (p->next != NULL)
     {
-        printf("ID；%d\t姓名：%s\t密码：%s\t金额：%d元\n", p->next->id, p->next->name, p->next->password, p->next->balance);
+        printf("ID:%d\t姓名:%s\t密码:%s\t金额:%d元\n", p->next->id, p->next->name, p->next->password, p->next->balance);
         p = p->next;
     }
     printf("任意键返回...");
@@ -284,13 +284,13 @@ void view_allbuy_news(struct buy_ticket *buy_p)
     printf("所有购票信息\n");
     while (buy_p->next != NULL)
     {
-        printf("ID：%d\t姓名：%s\t期号：%d\t号码：%d数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+        printf("ID:%d\t姓名:%s\t期号:%d\t号码:%d数量:%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
         if (buy_p->next->ticket_type == mouse_ticket)
-            printf("\t类型：鼠鼠彩票");
+            printf("\t类型:鼠鼠彩票");
         else if (buy_p->next->ticket_type == cat_ticket)
-            printf("\t类型：猫猫彩票");
+            printf("\t类型:猫猫彩票");
         else
-            printf("\t类型：狗狗彩票");
+            printf("\t类型:狗狗彩票");
         if (buy_p->next->ticket_status)
             printf("开奖状态：未开奖\t");
         else
@@ -309,24 +309,24 @@ void view_allbuy_news(struct buy_ticket *buy_p)
 void ID_check_buynews(struct buy_ticket *buy_p)
 {
     int id;
-    printf("请输入查找用户的ID：");
+    printf("请输入查找用户的ID:");
     scanf("%d", &id);
     while (buy_p->next != NULL)
     {
         if (buy_p->next->person_id == id)
         {
-            printf("ID：%d\t姓名：%s\t期号：%d\t号码：%d数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+            printf("ID:%d\t姓名:%s\t期号:%d\t号码:%d数量:%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
             if (buy_p->next->ticket_type == mouse_ticket)
             {
-                printf("\t类型：鼠鼠彩票");
+                printf("\t类型:鼠鼠彩票");
             }
             else if (buy_p->next->ticket_type == cat_ticket)
             {
-                printf("\t类型：猫猫彩票");
+                printf("\t类型:猫猫彩票");
             }
             else
             {
-                printf("\t类型：狗狗彩票");
+                printf("\t类型:狗狗彩票");
             }
             if (buy_p->next->ticket_status)
             {
@@ -362,13 +362,13 @@ void dayth_check_buynews(struct buy_ticket *buy_p)
     {
         if (buy_p->next->ticket_dayth == dayth)
         {
-            printf("ID：%d\t姓名：%s\t期号：%d\t号码：%d数量：%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
+            printf("ID:%d\t姓名:%s\t期号:%d\t号码:%d数量:%d\t", buy_p->next->person_id, buy_p->next->person_name, buy_p->next->ticket_dayth, buy_p->next->ticket_number, buy_p->next->ticket_amount);
             if (buy_p->next->ticket_type == mouse_ticket)
-                printf("\t类型：鼠鼠彩票");
+                printf("\t类型:鼠鼠彩票");
             else if (buy_p->next->ticket_type == cat_ticket)
-                printf("\t类型：猫猫彩票");
+                printf("\t类型:猫猫彩票");
             else
-                printf("\t类型：狗狗彩票");
+                printf("\t类型:狗狗彩票");
             if (buy_p->next->ticket_status)
                 printf("开奖状态：未开奖\t");
             else
@@ -471,7 +471,7 @@ void adminself_updata(struct Person *p)
             break;
         case 2:
             printf("请输入旧密码：");
-            scanf("%s", admin_password);
+            mask_password(admin_password);
             if (strcmp(admin_password, p->password) == 0)
             {
                 while (1)
@@ -484,9 +484,9 @@ void adminself_updata(struct Person *p)
                         break;
                     }
                     printf("请输入新密码：");
-                    scanf("%s", password1);
+                    mask_password(password1);
                     printf("请再次输入密码：");
-                    scanf("%s", password2);
+                    mask_password(password2);
                     if (strcmp(password1, password2) == 0)
                     {
                         save_flag = 1;
@@ -600,7 +600,7 @@ void admin_change(struct Person *p)
     char password1[8];
     char password2[8];
     int i = 0;
-    printf("彩民信息为：ID：%d\t姓名：%s\t密码：%s\t金额：%d元\n", p->id, p->name, p->password, p->balance);
+    printf("彩民信息为:ID:%d\t姓名:%s\t密码:%s\t金额:%d元\n", p->id, p->name, p->password, p->balance);
     while (1)
     {
         if (i > 2)
@@ -611,9 +611,9 @@ void admin_change(struct Person *p)
             break;
         }
         printf("请输入新密码：");
-        scanf("%s", password1);
+        mask_password(password1);
         printf("请再次输入密码：");
-        scanf("%s", password2);
+        mask_password(password2);
         if (strcmp(password1, password2) == 0)
         {
             save_flag = 1;
@@ -648,7 +648,7 @@ void admin_delete(struct Person *p, struct buy_ticket *buy_p)
             q = admin_user(p);
             if (q != NULL)
             {
-                printf("彩民的基本信息为：ID：%d\t姓名：%s\t密码：%s\t金额：%d元\n", q->next->id, q->next->name, q->next->password, q->next->balance);
+                printf("彩民的基本信息为:ID:%d\t姓名:%s\t密码:%s\t金额:%d元\n", q->next->id, q->next->name, q->next->password, q->next->balance);
                 printf("确认删除(y/n)!");
                 if (getchar() == 'y')
                 {
@@ -700,7 +700,7 @@ void id_del_buynews(struct buy_ticket *buy_p)
 {
     int id;
     struct buy_ticket *temp = NULL;
-    printf("请输入需要删除信息的ID：");
+    printf("请输入需要删除信息的ID:");
     scanf("%d", &id);
     getchar();
     printf("确定删除信息(y/n)");
@@ -899,7 +899,68 @@ void sortfun(struct Person *H, struct buy_ticket *buy_H)
             }
             buy_p = buy_H;
         }
-        printf("\t排序后购票信息为：\n");
+        printf("\t排序后购票信息为:\n");
         view_allbuy_news(buy_H);
     }
+}
+
+void mask_password(char *password)
+{  
+    do
+    {
+        int i = 0;
+        int length = 0;
+        int hasDigit = 0;
+        int hasLetter = 0;
+        while (1)
+        {
+            ch = _getch();
+            if (ch == 13)
+            {
+                break;
+            }
+            else if (ch == 8)
+            {
+                if (i > 0)
+                {
+                    printf("\b \b");
+                    i--;
+                }
+            }
+            else if (isprint(ch))
+            {
+                password[i++] = ch;
+                printf("*");
+            }
+        }
+        password[i] = '\0';
+        printf("\n");
+        length = strlen(password);
+        if (length < 8)
+        {
+            printf("密码至少含有8位!\n");
+        }
+        else
+        {
+            for (i = 0; i < length; i++)
+            {
+                if (isdigit(password[i]))
+                {
+                    hasDigit = 1;
+                }
+                else if (isalpha(password[i]))
+                {
+                    hasLetter = 1;
+                }
+            }
+            if (!hasDigit || !hasLetter)
+            {
+                printf("必须同时包含数字和字母！\n");
+            }
+            else
+            {
+                break;
+            }
+        }
+    } while (1);
 }

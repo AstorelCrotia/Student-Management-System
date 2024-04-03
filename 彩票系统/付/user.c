@@ -39,9 +39,9 @@ struct Person *signup(struct Person *p, struct Person *q)
         while (1)
         {
             printf("请输入密码：");
-            scanf("%s", passwd1);
+            mask_password(passwd1);
             printf("再次输入确认密码:");
-            scanf("%s", passwd2);
+            mask_password(passwd2);
             i++;
 
             if (i == 3)
@@ -54,7 +54,7 @@ struct Person *signup(struct Person *p, struct Person *q)
 
             if (strcmp(passwd1, passwd2) == 0)
             {
-                break; // 密码正确
+                break; 
             }
             else
                 printf("密码输入不一致，请重新输入！\n");
@@ -70,13 +70,13 @@ struct Person *signup(struct Person *p, struct Person *q)
             if (newuser == NULL)
             {
                 printf("分配空间错误！\n");
-                exit(0); // 程序错误退出；
+                exit(0); 
             }
 
             newuser->next = NULL;
             newuser->id = len;
-            strcpy(newuser->password, passwd1); // 密码写入
-            strcpy(newuser->name, name);        // 用户名写�?
+            strcpy(newuser->password, passwd1); 
+            strcpy(newuser->name, name);        
             newuser->balance = user_init_money;
             printf("注册成功！任意键返回...");
             getchar();
@@ -100,7 +100,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
         printf("请输入用户名:");
         scanf("%s", name);
         printf("请输入密码:");
-        scanf("%s", password);
+        mask_password(password);
         while (q->next != NULL)
         {
             if (strcmp(q->next->name, name) == 0 && strcmp(q->next->password, password) == 0)
@@ -340,7 +340,7 @@ void user_update(struct Person *p, struct Person *q)
                 }
                 else
                 {
-                    printf("\n用户名已存在!请重新输入�?");
+                    printf("\n用户名已存在!请重新输入!");
                     i++;
                     if (i == 3)
                     {
@@ -355,7 +355,7 @@ void user_update(struct Person *p, struct Person *q)
             break;
         case 2:
             printf("请输入旧密码:");
-            scanf("%s", oldpass);
+            mask_password(oldpass);
             strcpy(admin_password, oldpass);
             if (strcmp(admin_password, p->password) == 0)
             {
@@ -369,9 +369,9 @@ void user_update(struct Person *p, struct Person *q)
                         break;
                     }
                     printf("请输入新密码:");
-                    scanf("%s", password1);
+                    mask_password(password1);
                     printf("请再次输入密码：");
-                    scanf("%s", password2);
+                    mask_password(password2);
                     if (strcmp(password1, password2) == 0)
                     {
                         save_flag = 1;
