@@ -6,12 +6,12 @@ int main()
     len = 0;
     len_buy = 0;
     len_user = 0;
-
     struct Person *p = NULL, *h = NULL;
     FILE *fp;
     h = person_creat_head(h);
     if ((fp = fopen("user.txt", "rt")) == NULL)
     {
+        fclose(fp);
         p = h;
     }
     else
@@ -19,7 +19,6 @@ int main()
         fclose(fp);
         p = r_user_file(h);
     }
-
     struct buy_ticket *buy_h = NULL, *buy_p = NULL;
     buy_h = buy_creat_head(buy_h);
     buy_p = buy_h;
@@ -32,11 +31,12 @@ int main()
         fclose(fp);
         buy_p = r_buy_file(buy_h);
     }
-
+    printf("1");
     int visit;
     if ((fp = fopen("buy.txt", "rt")) == NULL)
     {
         visit = 0;
+        fclose(fp);
     }
     else
     {
@@ -60,7 +60,7 @@ int main()
     while (1)
     {
         ticketdayth = buy_h->ticket_dayth;
-        printf("1、管理员登录\t2、彩民登录\t3、用户注册\t0、退出系统\n您的选择是：");
+        printf("1、管理员登录\t2、彩民登录\t3、用户注册\t0、退出系统\n您的选择是:");
         scanf("%d", &choice);
         getchar();
         switch (choice)
@@ -68,7 +68,7 @@ int main()
         case 0:
             if (save_flag == 1)
             {
-                printf("信息修改，是否保存到文件�?(y/n)?\n");
+                printf("信息修改，是否保存到文件:(y/n)?\n");
                 if (getchar() == 'y')
                 {
                     w_user_file(h);

@@ -10,7 +10,7 @@ struct Person *signup(struct Person *p, struct Person *q)
     struct Person *newuser = NULL;
     while (1)
     {
-        printf("请输入用户名�?");
+        printf("请输入用户名:");
         scanf("%s", name);
         flag = check_user(name, p);
         if (flag == 0)
@@ -37,12 +37,12 @@ struct Person *signup(struct Person *p, struct Person *q)
         {
             printf("请输入密码：");
             scanf("%s", passwd1);
-            printf("再次输入确认密码�?");
+            printf("再次输入确认密码:");
             scanf("%s", passwd2);
             i++;
             if (i == 3)
             {
-                printf("输入超过三次！任意键返回主菜�?!\n");
+                printf("输入超过三次！任意键返回...\n");
                 getchar();
                 getchar();
                 break;
@@ -177,7 +177,7 @@ struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, st
             getchar();
             return p;
         }
-        printf("请选择您要下注的类型：1、鼠鼠\t\t2、猫猫\t\t3、狗狗\t\t0、返回上一级\n");
+        printf("请选择您要下注的类型:1、鼠鼠\t\t2、猫猫\t\t3、狗狗\t\t0、返回上一级\n");
         scanf("%d", &newticket->ticket_type);
         getchar();
         if (newticket->ticket_type == 0)

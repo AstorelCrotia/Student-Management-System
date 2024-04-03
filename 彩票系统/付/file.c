@@ -112,17 +112,24 @@ void w_user_file(struct Person *h)
     FILE *fp1;
     if ((fp1 = fopen("user.txt", "wt")) == NULL)
     {
-        printf("打开文件错误！任意键退�?...\n");
+        printf("打开文件错误！任意键退出...\n");
         getchar();
         exit(1);
     }
-    fprintf(fp1, "ID:%d\t姓名:%s\t密码:%s\t余额:%d\n", h->id, h->name, h->password, h->balance);
-    while (h->next != NULL)
-    {
-        fprintf(fp1, "ID:%d\t姓名:%s\t密码:%s\t余额:%d\n", h->next->id, h->next->name, h->next->password, h->next->balance);
-        h = h->next;
-    }
-    fclose(fp1);
+    fprintf(fp1,"%d %s %s %d\n",
+				h->id, 
+				h->name, 
+				h->password, 
+				h->balance);
+	while(h->next != NULL)
+	{
+		fprintf(fp1,"%d %s %s %d\n",
+				h->next->id, 
+				h->next->name, 
+				h->next->password, 
+				h->next->balance);
+		h = h->next;
+	}
 }
 
 struct Person *r_user_file(struct Person *h)
@@ -137,27 +144,35 @@ struct Person *r_user_file(struct Person *h)
         getchar();
         exit(1);
     }
-    fscanf(fp, "ID:%d\t姓名:%s\t密码:%s\t余额:%d\n", &h->id, h->name, h->password, &h->balance);
-    while (!feof(fp))
-    {
-        newperson = (struct Person *)malloc(sizeof(struct Person));
-        if (newperson == NULL)
-        {
-            printf("分配空间错误！\n");
-            exit(0);
-        }
-        newperson->next = NULL;
-        fscanf(fp, "ID:%d\t姓名:%s\t密码:%s\t余额:%d\n", &newperson->id, newperson->name, newperson->password, &newperson->balance);
-        p->next = newperson;
-        temp = p;
-        p = newperson;
-        len_user++;
-    }
-    fclose(fp);
-    temp->next = NULL;
-    free(p);
-    len = temp->id;
-    return temp;
+    fscanf(fp,"%d %s %s %d",
+				&h->id, 
+				h->name, 
+				h->password, 
+				&h->balance);
+	while(!feof(fp))
+	{					
+		newperson = (struct Person *)malloc(sizeof(struct Person));
+		if(newperson == NULL)
+		{
+			printf("产生新节点时空间非配错误！\n");
+			exit(0);
+		}
+		newperson->next = NULL;
+		fscanf(fp,"%d %s %s %d",
+				&newperson->id, 
+				newperson->name, 
+				newperson->password, 
+				&newperson->balance);
+		p->next = newperson;
+		temp = p;
+		p = newperson;
+		len_user++;		//用户数加一
+	}
+	fclose(fp);
+	temp->next = NULL;	//最有一个读出有问题，将最后一个节点释放
+	free(p);
+	len = temp->id;
+	return temp;
 }
 
 void w_buy_file(struct buy_ticket *buy_h)
