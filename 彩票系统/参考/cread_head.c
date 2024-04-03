@@ -40,7 +40,7 @@ struct buy_ticket * buy_creat_head(struct buy_ticket *buy_H)
 	newnode = (struct buy_ticket *)malloc(sizeof(struct buy_ticket));
 	if(newnode == NULL)
 	{
-		printf("产生头节点时空间非配错误！\n");
+		printf("产生头节点时空间分配错误！\n");
 		exit(0);
 	}
 	newnode->person_id = 0;			//上一期体彩中奖号码

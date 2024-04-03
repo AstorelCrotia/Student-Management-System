@@ -14,7 +14,7 @@
       
       
       "MIMode": "gdb",
-      "miDebuggerPath": "E:/A/bd/vscode/mingw64/bin/gdb.exe", 
+      "miDebuggerPath": "Y:/mingw64/bin/gdb.exe", 
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
