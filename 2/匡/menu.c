@@ -34,5 +34,10 @@ void menu_userquiry(HWND hWnd) {
     CreateWindow("BUTTON", "个 人 信 息", WS_CHILD | WS_VISIBLE, 10, 10, 120, 30, hWnd, (HMENU)1, NULL, NULL);
     CreateWindow("BUTTON", "购 买 记 录", WS_CHILD | WS_VISIBLE, 10, 50, 120, 30, hWnd, (HMENU)2, NULL, NULL);
     CreateWindow("BUTTON", "中 奖 记 录", WS_CHILD | WS_VISIBLE, 10, 90, 120, 30, hWnd, (HMENU)3, NULL, NULL);
-    CreateWindow("BUTTON", "返 回 主 菜 单", WS_CHILD | WS_VISIBLE, 10, 130, 120, 30, hWnd, (HMENU)0, NULL, NULL);
+    CreateWindow("BUTTON", "返回上一级", WS_CHILD | WS_VISIBLE, 10, 130, 120, 30, hWnd, (HMENU)0, NULL, NULL);
+}
+void menu_usermodify(HWND hWnd) {
+    CreateWindow("BUTTON", "修改用户名", WS_CHILD | WS_VISIBLE, 10, 10, 120, 30, hWnd, (HMENU)1, NULL, NULL);
+    CreateWindow("BUTTON", "修 改 密 码", WS_CHILD | WS_VISIBLE, 10, 50, 120, 30, hWnd, (HMENU)2, NULL, NULL);
+    CreateWindow("BUTTON", "返回上一级", WS_CHILD | WS_VISIBLE, 10, 90, 120, 30, hWnd, (HMENU)0, NULL, NULL);
 }
