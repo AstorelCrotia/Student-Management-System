@@ -1,4 +1,5 @@
 #include "head.h"
+#include<time.h>
 // 新用户注�?
 struct Person *signup(struct Person *p, struct Person *q)
 {
@@ -54,7 +55,7 @@ struct Person *signup(struct Person *p, struct Person *q)
 
             if (strcmp(passwd1, passwd2) == 0)
             {
-                break; 
+                break;
             }
             else
                 printf("密码输入不一致，请重新输入！\n");
@@ -70,13 +71,13 @@ struct Person *signup(struct Person *p, struct Person *q)
             if (newuser == NULL)
             {
                 printf("分配空间错误！\n");
-                exit(0); 
+                exit(0);
             }
 
             newuser->next = NULL;
             newuser->id = len;
-            strcpy(newuser->password, passwd1); 
-            strcpy(newuser->name, name);        
+            strcpy(newuser->password, passwd1);
+            strcpy(newuser->name, name);
             newuser->balance = user_init_money;
             printf("注册成功！任意键返回...");
             getchar();
@@ -91,7 +92,7 @@ struct Person *signup(struct Person *p, struct Person *q)
 struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy_ticket *buy_q)
 {
     char name[20];
-    char password[8];
+    char password[20];
     struct Person *q = p;
     int i = 0;
 
@@ -100,7 +101,8 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
         printf("请输入用户名:");
         scanf("%s", name);
         printf("请输入密码:");
-        mask_password(password);
+        mask_signin_password(password);
+        Signin_vertification(vertification, CODE_LENGTH);
         while (q->next != NULL)
         {
             if (strcmp(q->next->name, name) == 0 && strcmp(q->next->password, password) == 0)
@@ -132,7 +134,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
     {
         while (choice != 0)
         {
-            printf("1、购票\t2、查看个人信息\t3、修改信息\t0、返回主菜单\n");
+            printf("1、购票\t2、查看个人信息\t3、修改信息\t4、用户充值\t0、返回主菜单\n");
             scanf("%d", &choice);
             getchar();
             switch (choice)
@@ -152,6 +154,9 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
                 break;
             case 3:
                 user_update(p, q->next);
+                break;
+            case 4:
+                user_recharge(p);
                 break;
             default:
                 printf("选择有误！任意键返回...\n");
@@ -297,16 +302,16 @@ void user_view_ticket(struct Person *p, struct buy_ticket *buy_p)
 
 void user_update(struct Person *p, struct Person *q)
 {
-    char password1[8];
-    char password2[8];
-    char admin_password[8];
-    char oldpass[8];
+    char password1[20];
+    char password2[20];
+    char admin_password[20];
+    char oldpass[20];
     char name[20];
     int i = 0, flag = 1;
 
     while (choice != 0)
     {
-        printf("1、修改用户名\t\t2、修改密码\n");
+        printf("1、修改用户名\t\t2、修改密码\t\t0、返回上一级\n");
         scanf("%d", &choice);
         getchar();
         switch (choice)
@@ -328,12 +333,12 @@ void user_update(struct Person *p, struct Person *q)
                     {
                         save_flag = 1;
                         strcpy(p->name, name);
-                        printf("修改成功！任意键返回...");
+                        printf("修改成功！\n");
                         getchar();
                     }
                     else
                     {
-                        printf("按任意键返回...");
+                        printf("按任意键返回...\n");
                         getchar();
                     }
                     break;
@@ -355,7 +360,7 @@ void user_update(struct Person *p, struct Person *q)
             break;
         case 2:
             printf("请输入旧密码:");
-            mask_password(oldpass);
+            mask_signin_password(oldpass);
             strcpy(admin_password, oldpass);
             if (strcmp(admin_password, p->password) == 0)
             {
@@ -371,7 +376,7 @@ void user_update(struct Person *p, struct Person *q)
                     printf("请输入新密码:");
                     mask_password(password1);
                     printf("请再次输入密码：");
-                    mask_password(password2);
+                    mask_signin_password(password2);
                     if (strcmp(password1, password2) == 0)
                     {
                         save_flag = 1;
@@ -418,4 +423,48 @@ int check_user(char name[20], struct Person *p)
         p = p->next;
     }
     return 0;
+}
+
+struct Person *user_recharge(struct Person *p)
+{
+    int num;
+    printf("您目前的余额为:%d", p->balance);
+    printf("您想充值的金额为:");
+    while (scanf("%d", &num) != 1)
+    {
+        while (getchar() != '\n')
+        {
+            printf("请输入正确的整数金额!");
+        }
+    }
+    p->balance += num;
+    printf("您现在的余额为:%d\n", p->balance);
+    return p;
+}
+
+void Signin_vertification(char *code, int size)
+{
+    const char charset[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; // 验证码字符集
+    char userinput[CODE_LENGTH + 1];
+    int charset_size = sizeof(charset) - 1;
+    
+    while (1)
+    {
+        srand(time(NULL));
+        for (int i = 0; i < size; i++)
+        {
+            code[i] = charset[rand() % charset_size]; // 从字符集中随机选择一个字符
+        }
+        code[size] = '\0'; // 添加字符串结束符
+        printf("验证码(%s):",code);
+        scanf("%s",userinput);
+        if(strcmp(userinput,code)==0)
+        {
+            break;
+        }
+        else
+        {
+            printf("验证码错误！请重新输入！\n");
+        }
+    }
 }

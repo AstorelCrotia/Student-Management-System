@@ -13,7 +13,8 @@ void admin_signin(struct Person *p, struct buy_ticket *buy_p)
         printf("请输入用户名：");
         scanf("%s", name_now);
         printf("请输入密码：");
-        mask_password(passwd_now2);
+        mask_signin_password(passwd_now2);
+        Signin_vertification(vertification, CODE_LENGTH);
         strcpy(passwd_now1, passwd_now2);
         if (strcmp(p->name, name_now) != 0 || strcmp(p->password, passwd_now1) != 0)
         {
@@ -37,6 +38,7 @@ void admin_signin(struct Person *p, struct buy_ticket *buy_p)
     {
         while (choice)
         {
+            printf("**********************************\n");
             printf("管理员你好！\n");
             printf("1、摇号\t\t2、查看信息\t3、修改信息\t4、删除信息\t5、购票信息排序\t0、返回主菜单\n");
             printf("你希望进行的操作为：");
@@ -435,15 +437,15 @@ void admin_updata(struct Person *p)
 
 void adminself_updata(struct Person *p)
 {
-    char password1[8];
-    char password2[8];
-    char admin_password[8];
+    char password1[20];
+    char password2[20];
+    char admin_password[20];
     char name[20];
     int i = 0;
 
     while (choice != 0)
     {
-        printf("1、修改姓名\t\t2、修改密码\t\t3、修改奖池金额\t\t0、返回上一级\n");
+        printf("1、修改姓名\t2、修改密码\t3、修改奖池金额\t0、返回上一级\n");
         scanf("%d", &choice);
         getchar();
         switch (choice)
@@ -471,7 +473,7 @@ void adminself_updata(struct Person *p)
             break;
         case 2:
             printf("请输入旧密码：");
-            mask_password(admin_password);
+            mask_signin_password(admin_password);
             if (strcmp(admin_password, p->password) == 0)
             {
                 while (1)
@@ -486,7 +488,7 @@ void adminself_updata(struct Person *p)
                     printf("请输入新密码：");
                     mask_password(password1);
                     printf("请再次输入密码：");
-                    mask_password(password2);
+                    mask_signin_password(password2);
                     if (strcmp(password1, password2) == 0)
                     {
                         save_flag = 1;
@@ -597,8 +599,8 @@ struct Person *admin_user(struct Person *p)
 
 void admin_change(struct Person *p)
 {
-    char password1[8];
-    char password2[8];
+    char password1[20];
+    char password2[20];
     int i = 0;
     printf("彩民信息为:ID:%d\t姓名:%s\t密码:%s\t金额:%d元\n", p->id, p->name, p->password, p->balance);
     while (1)
@@ -613,7 +615,7 @@ void admin_change(struct Person *p)
         printf("请输入新密码：");
         mask_password(password1);
         printf("请再次输入密码：");
-        mask_password(password2);
+        mask_signin_password(password2);
         if (strcmp(password1, password2) == 0)
         {
             save_flag = 1;
@@ -637,7 +639,7 @@ void admin_delete(struct Person *p, struct buy_ticket *buy_p)
     struct Person *temp = NULL;
     while (choice != 0)
     {
-        printf("1、删除注册用户\t\t2、根据ID删除购票信息\t\t3、根据类型删除购票信息\t\t4、根据期号删除购票信息\t\t5、返回上一级\n");
+        printf("1、删除注册用户\t2、根据ID删除购票信息\t3、根据类型删除购票信息\t4、根据期号删除购票信息\t5、返回上一级\n");
         scanf("%d", &choice);
         getchar();
         switch (choice)
@@ -908,7 +910,7 @@ void mask_password(char *password)
 {  
     do
     {
-        int i = 0;
+        int m = 0;
         int length = 0;
         int hasDigit = 0;
         int hasLetter = 0;
@@ -921,34 +923,34 @@ void mask_password(char *password)
             }
             else if (ch == 8)
             {
-                if (i > 0)
+                if (m > 0)
                 {
                     printf("\b \b");
-                    i--;
+                    m--;
                 }
             }
             else if (isprint(ch))
             {
-                password[i++] = ch;
+                password[m++] = ch;
                 printf("*");
             }
         }
-        password[i] = '\0';
+        password[m] = '\0';
         printf("\n");
         length = strlen(password);
-        if (length < 8)
+        if (length < 8 || length >12)
         {
-            printf("密码至少含有8位!\n");
+            printf("密码必须在8-12位!\n");
         }
         else
         {
-            for (i = 0; i < length; i++)
+            for (m = 0; m < length; m++)
             {
-                if (isdigit(password[i]))
+                if (isdigit(password[m]))
                 {
                     hasDigit = 1;
                 }
-                else if (isalpha(password[i]))
+                else if (isalpha(password[m]))
                 {
                     hasLetter = 1;
                 }
@@ -963,4 +965,32 @@ void mask_password(char *password)
             }
         }
     } while (1);
+}
+
+void mask_signin_password(char *password)
+{  
+        int m = 0;
+        while (1)
+        {
+            ch = _getch();
+            if (ch == 13)
+            {
+                break;
+            }
+            else if (ch == 8)
+            {
+                if (m > 0)
+                {
+                    printf("\b \b");
+                    m--;
+                }
+            }
+            else if (isprint(ch))
+            {
+                password[m++] = ch;
+                printf("*");
+            }
+        }
+        password[m] = '\0';
+        printf("\n");
 }

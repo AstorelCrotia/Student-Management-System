@@ -6,6 +6,7 @@
 #include <ctype.h>
 #ifndef YOUR_HEADER_FILE_NAME_H
 #define YOUR_HEADER_FILE_NAME_H
+#define CODE_LENGTH 6 // 随机验证码位数
 // 用户结构体;
 typedef struct Person
 {
@@ -61,6 +62,7 @@ int save_flag;   // 信息是否有改动标志位
 int choice;      // 菜单选择
 int ticketdayth; // 彩票期号
 char ch;
+char vertification[CODE_LENGTH+1];
 
 // 价格宏定义;
 #define user_init_money 10   // 新注册用户初始值
@@ -72,6 +74,7 @@ char ch;
 #define cat_win 20
 #define dog_win 10
 
+
 struct buy_ticket *buy_creat_head(struct buy_ticket *buy_h);                                     // 购票头节点;
 struct Person *r_user_file(struct Person *h);                                                    // 创建和读取用户链表;
 struct buy_ticket *r_buy_file(struct buy_ticket *buy_h);                                         // 读取用户购票链表;
@@ -80,6 +83,7 @@ struct Person *signup(struct Person *p, struct Person *q);                      
 struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy_ticket *buy_q); // 彩民登陆;
 struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, struct Person *q); // 彩民购票;
 struct Person *admin_user(struct Person *p);                                                     // 管理员查找需要修改用户信息;
+struct Person *user_recharge(struct Person *p);                                                  // 用户充值
 void admin_change(struct Person *p);                                                             // 管理员修改所查找的用户信息;
 void user_view_ticket(struct Person *p, struct buy_ticket *buy_p);                               // 用户查询购票信息;
 void user_update(struct Person *p, struct Person *q);                                            // 用户更新信息;
@@ -102,7 +106,9 @@ void dayth_del_buynews(struct buy_ticket *buy_p);              // 以期号删�
 void type_del_buynews(struct buy_ticket *buy_p);               // 以类型删除彩票信息;
 void Game(struct Person *p, struct buy_ticket *buy_p);         // 摇奖;
 void add_winmoney(struct Person *p, int id, int money);        // 添加奖池奖金;
-void mask_password(char *password);                           // 密码加密不可见;
+void mask_password(char *password);                            // 密码加密不可见;
+void mask_signin_password(char *password);                     // 登陆之后密码不可见;
+void Signin_vertification(char *code, int size);               // 验证码
 
 void w_visit_file(int visit);                 // 记录访客数量
 int r_visit_file();                           // 读取访客数量
