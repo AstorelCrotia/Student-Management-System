@@ -40,6 +40,7 @@ void admin_signin(struct Person *p, struct buy_ticket *buy_p)
         {
             printf("**********************************\n");
             printf("管理员你好！\n");
+            printf("你可供选择的操作有:\n");
             printf("1、摇号\t\t2、查看信息\t3、修改信息\t4、删除信息\t5、购票信息排序\t0、返回主菜单\n");
             printf("你希望进行的操作为：");
             scanf("%d", &choice);

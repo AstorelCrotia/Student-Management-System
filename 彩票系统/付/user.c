@@ -134,7 +134,11 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
     {
         while (choice != 0)
         {
+            printf("**********************************\n");
+            printf("%s,您好!",p->name);
+            printf("你可供选择的操作有:\n");
             printf("1、购票\t2、查看个人信息\t3、修改信息\t4、用户充值\t0、返回主菜单\n");
+            printf("您的选择是:");
             scanf("%d", &choice);
             getchar();
             switch (choice)
