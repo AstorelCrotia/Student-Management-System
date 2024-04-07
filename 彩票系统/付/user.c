@@ -1,6 +1,6 @@
 #include "head.h"
 #include<time.h>
-// 新用户注�?
+// 新用户注册;
 struct Person *signup(struct Person *p, struct Person *q)
 {
     char passwd1[20];
@@ -135,7 +135,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
         while (choice != 0)
         {
             printf("**********************************\n");
-            printf("%s,您好!",p->name);
+            printf("%s,您好!",name);
             printf("你可供选择的操作有:\n");
             printf("1、购票\t2、查看个人信息\t3、修改信息\t4、用户充值\t0、返回主菜单\n");
             printf("您的选择是:");
@@ -160,7 +160,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
                 user_update(p, q->next);
                 break;
             case 4:
-                user_recharge(p);
+                user_recharge(q,name);
                 break;
             default:
                 printf("选择有误！任意键返回...\n");
@@ -429,9 +429,13 @@ int check_user(char name[20], struct Person *p)
     return 0;
 }
 
-struct Person *user_recharge(struct Person *p)
+struct Person *user_recharge(struct Person *p,char name[])
 {
     int num;
+    while(p != NULL && strcmp(p->name, name) != 0)
+    {
+        p = p->next;
+    }
     printf("您目前的余额为:%d", p->balance);
     printf("您想充值的金额为:");
     while (scanf("%d", &num) != 1)

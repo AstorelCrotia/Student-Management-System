@@ -83,7 +83,7 @@ struct Person *signup(struct Person *p, struct Person *q);                      
 struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy_ticket *buy_q); // 彩民登陆;
 struct buy_ticket *user_buy_ticket(struct buy_ticket *p, struct Person *user, struct Person *q); // 彩民购票;
 struct Person *admin_user(struct Person *p);                                                     // 管理员查找需要修改用户信息;
-struct Person *user_recharge(struct Person *p);                                                  // 用户充值
+struct Person *user_recharge(struct Person *p,char name[]);                                      // 用户充值
 void admin_change(struct Person *p);                                                             // 管理员修改所查找的用户信息;
 void user_view_ticket(struct Person *p, struct buy_ticket *buy_p);                               // 用户查询购票信息;
 void user_update(struct Person *p, struct Person *q);                                            // 用户更新信息;
