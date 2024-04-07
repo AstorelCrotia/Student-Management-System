@@ -106,13 +106,13 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
         tm_ptr = localtime(&the_time);
 
         // 公布中奖信息
-        printf("\n第%d期的中奖号码是：\n", buy_p->ticket_dayth);
+        printf("\n第%d期的中奖号码是:\n", buy_p->ticket_dayth);
         printf("鼠鼠彩票：%d\n", x);
         printf("猫猫彩票：%d\n", y);
         printf("狗狗彩票：%d\n", z);
         printf("抽奖时间：%02d年%02d月%02d日 %02d-%02d-%02d\n", tm_ptr->tm_year - 100, tm_ptr->tm_mon + 1, tm_ptr->tm_mday, tm_ptr->tm_hour, tm_ptr->tm_min, tm_ptr->tm_sec);
         printf("中奖人信息为：\n");
-        printf("\tID\t姓名\t期号\t  类型\t\t号码\t数量\t开奖状态  中奖情况  中奖金额 \n");
+        printf("ID\t姓名\t期号\t  类型\t号码\t数量\t开奖状态  中奖情况  中奖金额 \n");
 
         while (temp->next != NULL)
         {
@@ -124,28 +124,28 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
                 case mouse_ticket:
                     if (temp->next->ticket_number == x)
                     {
-                        temp->next->ticket_win = 1;                                                    // 中奖
-                        temp->next->ticket_winmoney = temp->next->ticket_amount * mouse_win;           // 个人本期中奖金额
-                        buy_p->ticket_sum += temp->next->ticket_winmoney;                              // 算出中出奖总金额
-                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * mouse_win); // 中奖增加金额
+                        temp->next->ticket_win = 1;                                                  
+                        temp->next->ticket_winmoney = temp->next->ticket_amount * mouse_win;           
+                        buy_p->ticket_sum += temp->next->ticket_winmoney;                             
+                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * mouse_win); 
                     }
                     break;
                 case cat_ticket:
                     if (temp->next->ticket_number == y)
                     {
-                        temp->next->ticket_win = 1;                                        // 中奖
-                        temp->next->ticket_winmoney = temp->next->ticket_amount * cat_win; // 本次中奖金额
+                        temp->next->ticket_win = 1;                                        
+                        temp->next->ticket_winmoney = temp->next->ticket_amount * cat_win; 
                         buy_p->ticket_sum += temp->next->ticket_winmoney;
-                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * cat_win); // 增加金额
+                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * cat_win); 
                     }
                     break;
                 case dog_ticket:
                     if (temp->next->ticket_number == z)
                     {
-                        temp->next->ticket_win = 1; // 中奖
+                        temp->next->ticket_win = 1;
                         temp->next->ticket_winmoney = temp->next->ticket_amount * dog_win;
                         buy_p->ticket_sum += temp->next->ticket_winmoney;
-                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * dog_win); // 增加金额
+                        add_winmoney(p, temp->next->person_id, temp->next->ticket_amount * dog_win); 
                     }
                     break;
                 default:
@@ -155,7 +155,7 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
                 if (temp->next->ticket_win)
                 {
                     flag = 1;
-                    printf("\t%d\t%s\t%d",
+                    printf("%d\t%s\t%d",
                            temp->next->person_id,
                            temp->next->person_name,
                            temp->next->ticket_dayth);
@@ -197,7 +197,7 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
         prize.hour = tm_ptr->tm_hour;
         prize.min = tm_ptr->tm_min;
         prize.sec = tm_ptr->tm_sec;
-        w_wininformation_file(prize); // 保存中奖信息
+        w_wininformation_file(prize); 
         buy_p->ticket_dayth++;
         save_flag = 1;
         printf("任意键返回...");
@@ -553,12 +553,11 @@ void admin_add_money(struct Person *p)
 
 struct Person *admin_user(struct Person *p)
 {
-    choice = 0;
     int id = 0;
     char name[20];
     while (choice != 0)
     {
-        printf("请输入要查找的是:\n1、姓名\t2、ID");
+        printf("请输入要查找的是:\n1、姓名\t2、ID\n");
         scanf("%d", &choice);
         switch (choice)
         {
@@ -588,10 +587,10 @@ struct Person *admin_user(struct Person *p)
                 }
                 p = p->next;
             }
+            break;
         default:
             printf("无效输入，任意键返回...");
             getchar();
-            choice = 3;
             break;
         }
     }
@@ -640,7 +639,8 @@ void admin_delete(struct Person *p, struct buy_ticket *buy_p)
     struct Person *temp = NULL;
     while (choice != 0)
     {
-        printf("1、删除注册用户\t2、根据ID删除购票信息\t3、根据类型删除购票信息\t4、根据期号删除购票信息\t5、返回上一级\n");
+        printf("**********************************\n");
+        printf("1、删除用户\t2、根据ID删除购票信息\t3、根据类型删除购票信息\t4、根据期号删除购票信息\t0、返回上一级\n");
         scanf("%d", &choice);
         getchar();
         switch (choice)
@@ -652,15 +652,15 @@ void admin_delete(struct Person *p, struct buy_ticket *buy_p)
             if (q != NULL)
             {
                 printf("彩民的基本信息为:ID:%d\t姓名:%s\t密码:%s\t金额:%d元\n", q->next->id, q->next->name, q->next->password, q->next->balance);
-                printf("确认删除(y/n)!");
+                printf("确认删除(y/n)?\n");
+                getchar();
                 if (getchar() == 'y')
                 {
                     len_buy--;
                     save_flag = 1;
                     temp = q->next;
                     q->next = temp->next;
-                    printf("删除成功！\n");
-                    printf("结点已销毁！任意键返回...");
+                    printf("删除成功！任意键返回...\n");
                     free(temp);
                     getchar();
                     getchar();
