@@ -84,9 +84,9 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
     if (getchar() == 'y')
     {
         srand((unsigned)time(NULL));
-        x = rand() % 20 + 1; // 鼠彩
-        y = rand() % 20 + 1; // 猫彩
-        z = rand() % 20 + 1; // 狗彩
+        x = rand() % ticket_max + 1; // 鼠彩
+        y = rand() % ticket_max + 1; // 猫彩
+        z = rand() % ticket_max + 1; // 狗彩
         buy_p->person_id = x;
         buy_p->ticket_number = y;
         buy_p->ticket_amount = z;
