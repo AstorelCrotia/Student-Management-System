@@ -64,7 +64,8 @@ void Buyin(Lottery *lottery, char *id, int sc) // 购买写入
     for (int i = 0; i < 6; i++)
     {
         printf("====================================\n");
-        printf("请输入你选择的第%d位号码(接收范围0~99)：", i + 1);
+        printf("接收范围0~99，个位数自动补0。");
+        printf("请输入你选择的第%d位号码：", i + 1);
         scanf("%2d", &Num[i]);
         while (getchar() != '\n')
             ;

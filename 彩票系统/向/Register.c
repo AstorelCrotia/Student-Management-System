@@ -31,6 +31,7 @@ void Registeruser() // 注册用户
         return;
     }
     printf("=============================================\n");
+    printf("最多可输入19位，超过部分不被录入。");
     printf("请输入用户名:");
     scanf("%19s", user.uid);
     while (getchar() != '\n');
@@ -92,6 +93,7 @@ void Registeruser() // 注册用户
     while (1)
     {
         printf("============================\n");
+        printf("最多可输入19位，超过部分不被录入。");
         printf("请输入用户的密码：");
         scanf("%19s", user.code);
         while (getchar() != '\n');
@@ -150,6 +152,7 @@ void Registeradmin() // 注册管理员
         return;
     }
     printf("=============================================\n");
+    printf("最多可输入19位，超过部分不被录入。");
     printf("请输入用户名:");
     scanf("%19s", user.uid);
     while (getchar() != '\n');
@@ -211,6 +214,7 @@ void Registeradmin() // 注册管理员
     while (1)
     {
         printf("============================\n");
+        printf("最多可输入19位，超过部分不被录入。");
         printf("请输入用户的密码：");
         scanf("%19s", user.code);
         while (getchar() != '\n');

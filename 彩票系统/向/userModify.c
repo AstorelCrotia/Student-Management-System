@@ -272,7 +272,6 @@ void usermoneyModify(char *id, int flag) // Óà¶îĞŞ¸Ä
 
 void buyModify(char *id, float money,int *sc) // ¹ºÂòÊ±Óà¶îĞŞ¸Ä
 {
-    int i = 1;
     User *head = NULL;
     User *temp = NULL;
     User *user = (User *)malloc(sizeof(User));
