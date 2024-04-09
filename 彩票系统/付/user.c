@@ -157,7 +157,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
                 getchar();
                 break;
             case 3:
-                user_update(p, q->next);
+                user_update(q, q->next);
                 break;
             case 4:
                 user_recharge(q, name);
@@ -277,7 +277,7 @@ void user_view_ticket(struct Person *p, struct buy_ticket *buy_p)
     struct buy_ticket *temp = buy_p;
     printf("上期中奖号码是：鼠鼠:%d\t猫猫:%d\t狗狗:%d\t下期彩票:%d\n", temp->person_id, temp->ticket_amount, temp->ticket_sum, temp->ticket_dayth);
     printf("您的购票信息为：\n");
-    printf("ID\t姓名\t期号\t\t类型\t\t号码\t数量\t\t开奖状态\t\t中奖情况\t\t购票金额\t\n");
+    printf("ID\t姓名\t期号\t\t类型\t\t号码\t数量\t\t开奖状态\t中奖情况\t购票金额\t\n");
     while (temp->next != NULL)
     {
         if (temp->next->person_id == p->id)
@@ -452,7 +452,7 @@ struct Person *user_recharge(struct Person *p, char name[])
 
 void Signin_vertification(char *code, int size)
 {
-    const char charset[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; // 验证码字符集
+    const char charset[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; 
     char userinput[CODE_LENGTH + 1];
     int charset_size = sizeof(charset) - 1;
 
@@ -461,9 +461,9 @@ void Signin_vertification(char *code, int size)
         srand(time(NULL));
         for (int i = 0; i < size; i++)
         {
-            code[i] = charset[rand() % charset_size]; // 从字符集中随机选择一个字符
+            code[i] = charset[rand() % charset_size]; 
         }
-        code[size] = '\0'; // 添加字符串结束符
+        code[size] = '\0'; 
         printf("验证码(%s):", code);
         scanf("%s", userinput);
         if (strcmp(userinput, code) == 0)

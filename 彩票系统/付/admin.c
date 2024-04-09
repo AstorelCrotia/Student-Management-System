@@ -112,7 +112,7 @@ void Game(struct Person *p, struct buy_ticket *buy_p)
         printf("狗狗彩票：%d\n", z);
         printf("抽奖时间：%02d年%02d月%02d日 %02d-%02d-%02d\n", tm_ptr->tm_year - 100, tm_ptr->tm_mon + 1, tm_ptr->tm_mday, tm_ptr->tm_hour, tm_ptr->tm_min, tm_ptr->tm_sec);
         printf("中奖人信息为：\n");
-        printf("ID\t姓名\t期号\t  类型\t号码\t数量\t开奖状态  中奖情况  中奖金额 \n");
+        printf("ID\t姓名\t期号\t  类型\t\t号码\t数量\t开奖状态\t中奖情况\t中奖金额 \n");
 
         while (temp->next != NULL)
         {

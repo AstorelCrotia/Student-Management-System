@@ -69,11 +69,7 @@ int main()
         case 0:
             if (save_flag == 1)
             {
-                printf("信息修改，是否保存到文件:(y/n)?\n");
-                if (getchar() == 'y')
-                {
-                    w_user_file(h);
-                }
+                w_user_file(h);
             }
             w_buy_file(buy_h);
             printf("期待您的再次光临！\n");
