@@ -113,8 +113,6 @@ void Deleteuser() // 删除功能
             temp = temp->next;
             free(toFree);
         }
-        free(head);
-        free(delete);
         return;
     }
     FILE *file_write = fopen("users.txt", "w");
@@ -149,8 +147,6 @@ void Deleteuser() // 删除功能
         temp = temp->next;
         free(toFree);
     }
-    free(head);
-    free(delete);
     printf("============================\n");
     printf("|  %s用户已经删除！      |\n", input);
     printf("============================\n");
