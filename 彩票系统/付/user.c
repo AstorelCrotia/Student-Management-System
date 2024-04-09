@@ -1,5 +1,5 @@
 #include "head.h"
-#include<time.h>
+#include <time.h>
 // 新用户注册;
 struct Person *signup(struct Person *p, struct Person *q)
 {
@@ -135,7 +135,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
         while (choice != 0)
         {
             printf("**********************************\n");
-            printf("%s,您好!",name);
+            printf("%s,您好!", name);
             printf("你可供选择的操作有:\n");
             printf("1、购票\t2、查看个人信息\t3、修改信息\t4、用户充值\t0、返回主菜单\n");
             printf("您的选择是:");
@@ -151,7 +151,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
                 buy_p = user_buy_ticket(buy_p, q->next, p);
                 break;
             case 2:
-                printf("您的个人信息为:ID:%d\t\t姓名:%s\t\t密码:%s\t\t余额:%d\n", p->next->id, p->next->name, p->next->password, p->next->balance);
+                printf("您的个人信息为:ID:%d\t\t姓名:%s\t\t密码:%s\t\t余额:%d\n", q->next->id, q->next->name, q->next->password, q->next->balance);
                 user_view_ticket(q->next, buy_q);
                 printf("任意键继续...");
                 getchar();
@@ -160,7 +160,7 @@ struct buy_ticket *signin(struct Person *p, struct buy_ticket *buy_p, struct buy
                 user_update(p, q->next);
                 break;
             case 4:
-                user_recharge(q,name);
+                user_recharge(q, name);
                 break;
             default:
                 printf("选择有误！任意键返回...\n");
@@ -277,18 +277,18 @@ void user_view_ticket(struct Person *p, struct buy_ticket *buy_p)
     struct buy_ticket *temp = buy_p;
     printf("上期中奖号码是：鼠鼠:%d\t猫猫:%d\t狗狗:%d\t下期彩票:%d\n", temp->person_id, temp->ticket_amount, temp->ticket_sum, temp->ticket_dayth);
     printf("您的购票信息为：\n");
-    printf("\tID\t姓名\t期号\t\t类型\t\t号码\t数量\t\t开奖状态\t\t中奖情况\t\t购票金额\t\n");
+    printf("ID\t姓名\t期号\t\t类型\t\t号码\t数量\t\t开奖状态\t\t中奖情况\t\t购票金额\t\n");
     while (temp->next != NULL)
     {
         if (temp->next->person_id == p->id)
         {
-            printf("\t%d\t%s\t%d\t\t", temp->next->person_id, temp->next->person_name, temp->next->ticket_dayth);
+            printf("%d\t%s\t%d\t\t", temp->next->person_id, temp->next->person_name, temp->next->ticket_dayth);
             if (temp->next->ticket_type == mouse_ticket)
-                printf("鼠鼠彩票\t\t");
+                printf("鼠鼠彩票\t");
             else if (temp->next->ticket_type == cat_ticket)
-                printf("猫猫彩票\t\t");
+                printf("猫猫彩票\t");
             else
-                printf("狗狗彩票\t\t");
+                printf("狗狗彩票\t");
             printf("%d\t%d\t\t", temp->next->ticket_number, temp->next->ticket_amount);
             if (temp->next->ticket_status)
                 printf("未开奖\t\t");
@@ -429,10 +429,10 @@ int check_user(char name[20], struct Person *p)
     return 0;
 }
 
-struct Person *user_recharge(struct Person *p,char name[])
+struct Person *user_recharge(struct Person *p, char name[])
 {
     int num;
-    while(p != NULL && strcmp(p->name, name) != 0)
+    while (p != NULL && strcmp(p->name, name) != 0)
     {
         p = p->next;
     }
@@ -455,7 +455,7 @@ void Signin_vertification(char *code, int size)
     const char charset[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; // 验证码字符集
     char userinput[CODE_LENGTH + 1];
     int charset_size = sizeof(charset) - 1;
-    
+
     while (1)
     {
         srand(time(NULL));
@@ -464,9 +464,9 @@ void Signin_vertification(char *code, int size)
             code[i] = charset[rand() % charset_size]; // 从字符集中随机选择一个字符
         }
         code[size] = '\0'; // 添加字符串结束符
-        printf("验证码(%s):",code);
-        scanf("%s",userinput);
-        if(strcmp(userinput,code)==0)
+        printf("验证码(%s):", code);
+        scanf("%s", userinput);
+        if (strcmp(userinput, code) == 0)
         {
             break;
         }
