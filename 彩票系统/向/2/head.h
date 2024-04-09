@@ -64,7 +64,7 @@ void winlottery(int *sc);                         // 彩票开奖
 void Buy(int *sc, char *id);                      // 购买彩票
 void buyModify(char *id, float money, int *sc);   // 购买时余额修改
 void didDate(Lottery *date1, Lottery *date2);     // 期号生成
-void Buyin(Lottery *lottery, char *id, int sc,Lottery *oldlottery);   // 购买写入
+void Buyin(Lottery *lottery, char *id, int sc);   // 购买写入
 void winlotteryin1();                             // 彩票开奖写入1
 void winlotteryin2();                             // 彩票开奖写入2
 void winlotteryin3();                             // 彩票开奖写入3
@@ -77,3 +77,4 @@ void conditionQueryuserbuy(char *id);             // 用户查询所有购票历史
 void userQuerywin(char *id);                      // 用户查询所有历史中奖
 void Prize(Lottery *lottery, int *ran, float n);  // 兑奖
 void revenue(float money, Lottery *lottery);      // 营收操作
+void uDeleteuser(char *id);                       // 删除功能

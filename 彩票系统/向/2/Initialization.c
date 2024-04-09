@@ -22,7 +22,7 @@ void Initialization() // 系统初始化，写入超管
         return;
     }
     strcpy(admin.uid, "admin");
-    while (fread(&tureadmin, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", tureadmin.uid, tureadmin.code, &tureadmin.balance) != EOF)
     {
         if (strcmp(admin.uid, tureadmin.uid) == 0)
         {
@@ -36,7 +36,7 @@ void Initialization() // 系统初始化，写入超管
         return;
     }
     strcpy(admin.code, "123");
-    fwrite(&admin, sizeof(User), 1, file_write);
+    fprintf(file_write, "用户名：%s  密码：%s  余额：%.2f\n", admin.uid, admin.code, admin.balance);
     fclose(file_write);
     return;
 }

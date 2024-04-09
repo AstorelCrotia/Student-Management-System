@@ -38,15 +38,15 @@ void admincodeModify() // 密码修改
 {
     int i = 0;
     User *head = NULL;
-    User *temp = NULL;
-    User *user = (User *)malloc(sizeof(User));
-    if (user == NULL)
+    User *temp = (User *)malloc(sizeof(User));
+    if (temp == NULL)
     {
         printf("============================\n");
         printf("|  内存分配失败！          |\n");
         printf("============================\n");
         return;
     }
+    User user = {0};
     char input[20] = "\0";
     char code1[20] = "\0";
     char code2[20] = "\0";
@@ -58,34 +58,35 @@ void admincodeModify() // 密码修改
         printf("============================\n");
         return;
     }
-    while (fread(user, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", user.uid, user.code, &user.balance) != EOF)
     {
-        user->next = NULL;
         if (head == NULL)
         {
-            head = user;
-            temp = user;
+            head = temp;
         }
         else
         {
-            temp->next = user;
-            temp = user;
+            temp->next = (User *)malloc(sizeof(User));
+            temp = temp->next;
+            if (temp == NULL)
+            {
+                printf("============================\n");
+                printf("|  内存分配失败！          |\n");
+                printf("============================\n");
+                break;
+            }
         }
-        user = (User *)malloc(sizeof(User));
-        if (user == NULL)
-        {
-            printf("============================\n");
-            printf("|  内存分配失败！          |\n");
-            printf("============================\n");
-            return;
-        }
+        strcpy(temp->uid, user.uid);
+        strcpy(temp->code, user.code);
+        temp->balance = user.balance;
+        temp->next = NULL;
     }
     fclose(file_read);
-    free(user);
     printf("============================\n");
     printf("请输入你要修改的用户名：");
     scanf("%19s", input);
-    while (getchar() != '\n');
+    while (getchar() != '\n')
+        ;
     temp = head;
     while (temp != NULL)
     {
@@ -96,11 +97,13 @@ void admincodeModify() // 密码修改
                 printf("============================\n");
                 printf("请输入用户的新密码：");
                 scanf("%19s", code1);
-                while (getchar() != '\n');
+                while (getchar() != '\n')
+                    ;
                 printf("============================\n");
                 printf("请再次输入用户的新密码：");
                 scanf("%19s", code2);
-                while (getchar() != '\n');
+                while (getchar() != '\n')
+                    ;
                 if (strcmp(code1, code2) == 0)
                 {
                     strcpy(temp->code, code1);
@@ -148,7 +151,7 @@ void admincodeModify() // 密码修改
     temp = head;
     while (temp != NULL)
     {
-        fwrite(temp, sizeof(User), 1, file_write);
+        fprintf(file_write, "用户名：%s  密码：%s  余额：%.2f\n", temp->uid, temp->code, temp->balance);
         temp = temp->next;
     }
     fclose(file_write);
@@ -166,15 +169,15 @@ void adminmoneyModify() // 余额修改
 {
     int i = 0;
     User *head = NULL;
-    User *temp = NULL;
-    User *user = (User *)malloc(sizeof(User));
-    if (user == NULL)
+    User *temp = (User *)malloc(sizeof(User));
+    if (temp == NULL)
     {
         printf("============================\n");
         printf("|  内存分配失败！          |\n");
         printf("============================\n");
         return;
     }
+    User user = {0};
     char input[20] = "\0";
     float m1 = 0;
     float m2 = 0;
@@ -186,34 +189,35 @@ void adminmoneyModify() // 余额修改
         printf("============================\n");
         return;
     }
-    while (fread(user, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", user.uid, user.code, &user.balance) != EOF)
     {
-        user->next = NULL;
         if (head == NULL)
         {
-            head = user;
-            temp = user;
+            head = temp;
         }
         else
         {
-            temp->next = user;
-            temp = user;
+            temp->next = (User *)malloc(sizeof(User));
+            temp = temp->next;
+            if (temp == NULL)
+            {
+                printf("============================\n");
+                printf("|  内存分配失败！          |\n");
+                printf("============================\n");
+                break;
+            }
         }
-        user = (User *)malloc(sizeof(User));
-        if (user == NULL)
-        {
-            printf("============================\n");
-            printf("|  内存分配失败！          |\n");
-            printf("============================\n");
-            return;
-        }
+        strcpy(temp->uid, user.uid);
+        strcpy(temp->code, user.code);
+        temp->balance = user.balance;
+        temp->next = NULL;
     }
     fclose(file_read);
-    free(user);
     printf("============================\n");
     printf("请输入你要修改的用户名：");
     scanf("%19s", input);
-    while (getchar() != '\n');
+    while (getchar() != '\n')
+        ;
     temp = head;
     while (temp != NULL)
     {
@@ -227,7 +231,7 @@ void adminmoneyModify() // 余额修改
                 printf("============================\n");
                 printf("请再次输入用户的新余额：");
                 scanf("%f", &m2);
-                if (m1==m2)
+                if (m1 == m2)
                 {
                     temp->balance = m1;
                     printf("============================\n");
@@ -274,7 +278,7 @@ void adminmoneyModify() // 余额修改
     temp = head;
     while (temp != NULL)
     {
-        fwrite(temp, sizeof(User), 1, file_write);
+        fprintf(file_write, "用户名：%s  密码：%s  余额：%.2f\n", temp->uid, temp->code, temp->balance);
         temp = temp->next;
     }
     fclose(file_write);

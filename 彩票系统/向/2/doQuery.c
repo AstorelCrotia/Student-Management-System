@@ -18,7 +18,7 @@ void conditionQueryuser() // 条件查询用户
         printf("============================\n");
         return;
     }
-    while (fread(&uid, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", uid.uid, uid.code, &uid.balance) != EOF)
     {
         if (strcmp(input, uid.uid) == 0)
         {
@@ -181,7 +181,7 @@ void allQueryuser() // 查询所有用户信息
         return;
     }
     printf("============================\n");
-    while (fread(&uid, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", uid.uid, uid.code, &uid.balance) != EOF)
     {
         printf("|  第%d位用户：  ", i);
         printf("用户名：%s  ", uid.uid);
@@ -305,10 +305,11 @@ void Querymoney() // 查询彩票中心营收
         printf("============================\n");
         return;
     }
-    while (fread(&uid, sizeof(Revenue), 1, file_read) == 1)
+    while (fscanf(file_read, "发生用户：%s  发生时间：%s  彩票类型：%d  发生金额：%f\n",
+            uid.uid,uid.buydate,&uid.category,&uid.money) != EOF)
     {
         printf("============================\n");
-        printf("|  用户：%s             |\n", uid.uid);
+        printf("|  发生用户：%s             |\n", uid.uid);
         if (uid.category == 1)
         {
             printf("|  类型：bbg彩             |\n");
@@ -341,7 +342,7 @@ void Showuser(char *id) // 用户查询自己信息
         printf("============================\n");
         return;
     }
-    while (fread(&uid, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", uid.uid, uid.code, &uid.balance) != EOF)
     {
         if (strcmp(id, uid.uid) == 0)
         {

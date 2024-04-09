@@ -6,7 +6,7 @@ void InbuyDate(Lottery *date)
     struct tm *localTime;
     localTime = localtime(&buytime);
     snprintf(date->tid, sizeof(date->tid), "%s%d%d%d%d", date->tid, localTime->tm_mday, localTime->tm_hour, localTime->tm_min, localTime->tm_sec);
-    snprintf(date->buydate, sizeof(date->buydate), "%d-%d-%d %d:%d:%d", localTime->tm_year + 1900, localTime->tm_mon + 1, localTime->tm_mday,
+    snprintf(date->buydate, sizeof(date->buydate), "%d-%d-%d-%d:%d:%d", localTime->tm_year + 1900, localTime->tm_mon + 1, localTime->tm_mday,
              localTime->tm_hour, localTime->tm_min, localTime->tm_sec);
     return;
 }
@@ -16,7 +16,7 @@ void InwinDate(Lottery *date)
     time_t buytime = time(NULL);
     struct tm *localTime;
     localTime = localtime(&buytime);
-    snprintf(date->windate, sizeof(date->windate), "%d-%d-%d %d:%d:%d", localTime->tm_year + 1900, localTime->tm_mon + 1, localTime->tm_mday,
+    snprintf(date->windate, sizeof(date->windate), "%d-%d-%d-%d:%d:%d", localTime->tm_year + 1900, localTime->tm_mon + 1, localTime->tm_mday,
              localTime->tm_hour, localTime->tm_min, localTime->tm_sec);
     return;
 }

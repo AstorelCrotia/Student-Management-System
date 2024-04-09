@@ -33,24 +33,27 @@ void winlottery(int *sc) // 彩票开奖
 
 void winlotteryin1() // 彩票开奖写入1
 {
-    int randomNum[6] = {0};
-    char randomStr[20] = "\0";
-    srand(time(NULL));
-    for (int i = 0; i < 6; i++)
-    {
-        randomNum[i] = rand() % 100;
-    }
-    snprintf(randomStr, sizeof(randomStr), "%02d %02d %02d %02d %02d : %02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
+    // int randomNum[6] = {0};
+    // char randomStr[20] = "\0";
+    // srand(time(NULL));
+    // for (int i = 0; i < 6; i++)
+    // {
+    //     randomNum[i] = rand() % 100;
+    // }
+    // snprintf(randomStr, sizeof(randomStr), "%02d-%02d-%02d-%02d-%02d:%02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
+    int randomNum[6] = {10,10,10,10,10,10};
+    char randomStr[20] = "10-10-10-10-10:10";
     Lottery *head = NULL;
-    Lottery *temp = NULL;
-    Lottery *lottery = (Lottery *)malloc(sizeof(Lottery));
-    if (lottery == NULL)
+    Lottery lottery = {0};
+    Lottery *current = (Lottery *)malloc(sizeof(Lottery));
+    if (current == NULL)
     {
         printf("============================\n");
         printf("|  内存分配失败！          |\n");
         printf("============================\n");
         return;
     }
+    current->next = NULL;
     FILE *file_read = fopen("lottery1.txt", "r");
     if (file_read == NULL)
     {
@@ -60,39 +63,46 @@ void winlotteryin1() // 彩票开奖写入1
         return;
     }
     while (fscanf(file_read, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
-                  lottery->tid, lottery->uid, lottery->did, &lottery->category, lottery->usernumber, lottery->winnumber,
-                  &lottery->draw, &lottery->win, lottery->buydate, lottery->windate) != EOF)
+                  lottery.tid, lottery.uid, lottery.did, &lottery.category, lottery.usernumber, lottery.winnumber,
+                  &lottery.draw, &lottery.win, lottery.buydate, lottery.windate) != EOF)
     {
-        lottery->next = NULL;
         if (head == NULL)
         {
-            head = lottery;
-            temp = lottery;
+            head = current;
         }
         else
         {
-            temp->next = lottery;
-            temp = lottery;
+            current->next = (Lottery *)malloc(sizeof(Lottery));
+            if (current == NULL)
+            {
+                printf("============================\n");
+                printf("|  内存分配失败！          |\n");
+                printf("============================\n");
+                return;
+            }
+            current = current->next;
         }
-        lottery = (Lottery *)malloc(sizeof(Lottery));
-        if (lottery == NULL)
-        {
-            printf("============================\n");
-            printf("|  内存分配失败！          |\n");
-            printf("============================\n");
-            return;
-        }
+        strcpy(current->tid, lottery.tid);
+        strcpy(current->uid, lottery.uid);
+        strcpy(current->did, lottery.did);
+        current->category = lottery.category;
+        strcpy(current->usernumber, lottery.usernumber);
+        strcpy(current->winnumber, lottery.winnumber);
+        current->draw = lottery.draw;
+        current->win = lottery.win;
+        strcpy(current->buydate, lottery.buydate);
+        strcpy(current->windate, lottery.windate);
+        current->next = NULL;
     }
     fclose(file_read);
-    free(lottery);
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        InwinDate(temp);
-        temp->draw = 1;
-        strcpy(temp->winnumber, randomStr);
-        Prize(temp, randomNum, 12);
-        temp = temp->next;
+        InwinDate(current);
+        current->draw = 1;
+        strcpy(current->winnumber, randomStr);
+        Prize(current, randomNum, 12);
+        current = current->next;
     }
     FILE *file_write = fopen("lottery1.txt", "w");
     if (file_write == NULL)
@@ -111,23 +121,26 @@ void winlotteryin1() // 彩票开奖写入1
         printf("============================\n");
         return;
     }
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        fscanf(file_read, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
-           temp->tid, temp->uid, temp->did, &temp->category, temp->usernumber, temp->winnumber,
-           &temp->draw, &temp->win, temp->buydate, temp->windate);
-        temp = temp->next;
+        fprintf(file_write, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
+                current->tid, current->uid, current->did, current->category, current->usernumber, current->winnumber,
+                current->draw, current->win, current->buydate, current->windate);
+        current = current->next;
     }
     fclose(file_write);
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        Lottery *toFree = temp;
-        temp = temp->next;
+        Lottery *toFree = current;
+        current = current->next;
         free(toFree);
     }
     head = NULL;
+    printf("============================\n");
+    printf("|  开奖结束！            |\n");
+    printf("============================\n");
 }
 
 void winlotteryin2() // 彩票开奖写入2
@@ -139,18 +152,19 @@ void winlotteryin2() // 彩票开奖写入2
     {
         randomNum[i] = rand() % 100;
     }
-    snprintf(randomStr, sizeof(randomStr), "%02d %02d %02d %02d %02d : %02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
+    snprintf(randomStr, sizeof(randomStr), "%02d-%02d-%02d-%02d-%02d:%02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
     Lottery *head = NULL;
-    Lottery *temp = NULL;
-    Lottery *lottery = (Lottery *)malloc(sizeof(Lottery));
-    if (lottery == NULL)
+    Lottery lottery = {0};
+    Lottery *current = (Lottery *)malloc(sizeof(Lottery));
+    if (current == NULL)
     {
         printf("============================\n");
         printf("|  内存分配失败！          |\n");
         printf("============================\n");
         return;
     }
-    FILE *file_read = fopen("lottery2.txt", "r");
+    current->next = NULL;
+    FILE *file_read = fopen("lotter2.txt", "r");
     if (file_read == NULL)
     {
         printf("============================\n");
@@ -159,39 +173,46 @@ void winlotteryin2() // 彩票开奖写入2
         return;
     }
     while (fscanf(file_read, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
-                  lottery->tid, lottery->uid, lottery->did, &lottery->category, lottery->usernumber, lottery->winnumber,
-                  &lottery->draw, &lottery->win, lottery->buydate, lottery->windate) != EOF)
+                  lottery.tid, lottery.uid, lottery.did, &lottery.category, lottery.usernumber, lottery.winnumber,
+                  &lottery.draw, &lottery.win, lottery.buydate, lottery.windate) != EOF)
     {
-        lottery->next = NULL;
         if (head == NULL)
         {
-            head = lottery;
-            temp = lottery;
+            head = current;
         }
         else
         {
-            temp->next = lottery;
-            temp = lottery;
+            current->next = (Lottery *)malloc(sizeof(Lottery));
+            if (current == NULL)
+            {
+                printf("============================\n");
+                printf("|  内存分配失败！          |\n");
+                printf("============================\n");
+                return;
+            }
+            current = current->next;
         }
-        lottery = (Lottery *)malloc(sizeof(Lottery));
-        if (lottery == NULL)
-        {
-            printf("============================\n");
-            printf("|  内存分配失败！          |\n");
-            printf("============================\n");
-            return;
-        }
+        strcpy(current->tid, lottery.tid);
+        strcpy(current->uid, lottery.uid);
+        strcpy(current->did, lottery.did);
+        current->category = lottery.category;
+        strcpy(current->usernumber, lottery.usernumber);
+        strcpy(current->winnumber, lottery.winnumber);
+        current->draw = lottery.draw;
+        current->win = lottery.win;
+        strcpy(current->buydate, lottery.buydate);
+        strcpy(current->windate, lottery.windate);
+        current->next = NULL;
     }
     fclose(file_read);
-    free(lottery);
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        InwinDate(temp);
-        temp->draw = 1;
-        strcpy(temp->winnumber, randomStr);
-        Prize(temp, randomNum, 12);
-        temp = temp->next;
+        InwinDate(current);
+        current->draw = 1;
+        strcpy(current->winnumber, randomStr);
+        Prize(current, randomNum, 12);
+        current = current->next;
     }
     FILE *file_write = fopen("lottery2.txt", "w");
     if (file_write == NULL)
@@ -210,23 +231,26 @@ void winlotteryin2() // 彩票开奖写入2
         printf("============================\n");
         return;
     }
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        fscanf(file_read, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
-           temp->tid, temp->uid, temp->did, &temp->category, temp->usernumber, temp->winnumber,
-           &temp->draw, &temp->win, temp->buydate, temp->windate);
-        temp = temp->next;
+        fprintf(file_write, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
+                current->tid, current->uid, current->did, current->category, current->usernumber, current->winnumber,
+                current->draw, current->win, current->buydate, current->windate);
+        current = current->next;
     }
     fclose(file_write);
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        Lottery *toFree = temp;
-        temp = temp->next;
+        Lottery *toFree = current;
+        current = current->next;
         free(toFree);
     }
     head = NULL;
+    printf("============================\n");
+    printf("|  开奖结束！            |\n");
+    printf("============================\n");
 }
 
 void winlotteryin3() // 彩票开奖写入3
@@ -238,17 +262,18 @@ void winlotteryin3() // 彩票开奖写入3
     {
         randomNum[i] = rand() % 100;
     }
-    snprintf(randomStr, sizeof(randomStr), "%02d %02d %02d %02d %02d : %02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
+    snprintf(randomStr, sizeof(randomStr), "%02d-%02d-%02d-%02d-%02d:%02d", randomNum[0], randomNum[1], randomNum[2], randomNum[3], randomNum[4], randomNum[5]);
     Lottery *head = NULL;
-    Lottery *temp = NULL;
-    Lottery *lottery = (Lottery *)malloc(sizeof(Lottery));
-    if (lottery == NULL)
+    Lottery lottery = {0};
+    Lottery *current = (Lottery *)malloc(sizeof(Lottery));
+    if (current == NULL)
     {
         printf("============================\n");
         printf("|  内存分配失败！          |\n");
         printf("============================\n");
         return;
     }
+    current->next = NULL;
     FILE *file_read = fopen("lottery3.txt", "r");
     if (file_read == NULL)
     {
@@ -258,39 +283,46 @@ void winlotteryin3() // 彩票开奖写入3
         return;
     }
     while (fscanf(file_read, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
-                  lottery->tid, lottery->uid, lottery->did, &lottery->category, lottery->usernumber, lottery->winnumber,
-                  &lottery->draw, &lottery->win, lottery->buydate, lottery->windate) != EOF)
+                  lottery.tid, lottery.uid, lottery.did, &lottery.category, lottery.usernumber, lottery.winnumber,
+                  &lottery.draw, &lottery.win, lottery.buydate, lottery.windate) != EOF)
     {
-        lottery->next = NULL;
         if (head == NULL)
         {
-            head = lottery;
-            temp = lottery;
+            head = current;
         }
         else
         {
-            temp->next = lottery;
-            temp = lottery;
+            current->next = (Lottery *)malloc(sizeof(Lottery));
+            if (current == NULL)
+            {
+                printf("============================\n");
+                printf("|  内存分配失败！          |\n");
+                printf("============================\n");
+                return;
+            }
+            current = current->next;
         }
-        lottery = (Lottery *)malloc(sizeof(Lottery));
-        if (lottery == NULL)
-        {
-            printf("============================\n");
-            printf("|  内存分配失败！          |\n");
-            printf("============================\n");
-            return;
-        }
+        strcpy(current->tid, lottery.tid);
+        strcpy(current->uid, lottery.uid);
+        strcpy(current->did, lottery.did);
+        current->category = lottery.category;
+        strcpy(current->usernumber, lottery.usernumber);
+        strcpy(current->winnumber, lottery.winnumber);
+        current->draw = lottery.draw;
+        current->win = lottery.win;
+        strcpy(current->buydate, lottery.buydate);
+        strcpy(current->windate, lottery.windate);
+        current->next = NULL;
     }
     fclose(file_read);
-    free(lottery);
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        InwinDate(temp);
-        temp->draw = 1;
-        strcpy(temp->winnumber, randomStr);
-        Prize(temp, randomNum, 12);
-        temp = temp->next;
+        InwinDate(current);
+        current->draw = 1;
+        strcpy(current->winnumber, randomStr);
+        Prize(current, randomNum, 12);
+        current = current->next;
     }
     FILE *file_write = fopen("lottery3.txt", "w");
     if (file_write == NULL)
@@ -309,21 +341,24 @@ void winlotteryin3() // 彩票开奖写入3
         printf("============================\n");
         return;
     }
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        fscanf(file_read, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
-           temp->tid, temp->uid, temp->did, &temp->category, temp->usernumber, temp->winnumber,
-           &temp->draw, &temp->win, temp->buydate, temp->windate);
-        temp = temp->next;
+        fprintf(file_write, "彩票id：%s  购买用户：%s  期号：%s  彩票类型：%d  用户号码：%s  中奖号码：%s  是否开奖：%d  是否中奖：%d  购买日期：%s  开奖日期：%s\n",
+                current->tid, current->uid, current->did, current->category, current->usernumber, current->winnumber,
+                current->draw, current->win, current->buydate, current->windate);
+        current = current->next;
     }
     fclose(file_write);
-    temp = head;
-    while (temp != NULL)
+    current = head;
+    while (current != NULL)
     {
-        Lottery *toFree = temp;
-        temp = temp->next;
+        Lottery *toFree = current;
+        current = current->next;
         free(toFree);
     }
     head = NULL;
+    printf("============================\n");
+    printf("|  开奖结束！            |\n");
+    printf("============================\n");
 }

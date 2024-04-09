@@ -34,11 +34,12 @@ void Registeruser() // 注册用户
     printf("最多可输入19位，超过部分不被录入。");
     printf("请输入用户名:");
     scanf("%19s", user.uid);
-    while (getchar() != '\n');
+    while (getchar() != '\n')
+        ;
     while (1)
     {
         flag = 0;
-        while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
+        while (fscanf(file_uid, "用户名：%s  密码：%s  余额：%f\n", tureuid.uid, tureuid.code, &tureuid.balance) != EOF)
         {
             if (strcmp(user.uid, tureuid.uid) == 0)
             {
@@ -49,7 +50,8 @@ void Registeruser() // 注册用户
                 break;
             }
         }
-        while (fread(&tureuid, sizeof(User), 1, file_admin) == 1)
+        rewind(file_uid);
+        while (fscanf(file_admin, "用户名：%s  密码：%s  余额：%f\n", tureuid.uid, tureuid.code, &tureuid.balance) != EOF)
         {
             if (strcmp(user.uid, tureuid.uid) == 0)
             {
@@ -60,6 +62,7 @@ void Registeruser() // 注册用户
                 break;
             }
         }
+        rewind(file_admin);
         if (flag == 1)
         {
             printf("=============================================\n");
@@ -70,7 +73,8 @@ void Registeruser() // 注册用户
                 printf("=============================================\n");
                 printf("请输入用户名:");
                 scanf("%19s", user.uid);
-                while (getchar() != '\n');
+                while (getchar() != '\n')
+                    ;
             }
             else
             {
@@ -96,16 +100,18 @@ void Registeruser() // 注册用户
         printf("最多可输入19位，超过部分不被录入。");
         printf("请输入用户的密码：");
         scanf("%19s", user.code);
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
         printf("============================\n");
         printf("请再次输入用户的密码：");
         scanf("%19s", code1);
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
         if (strcmp(user.code, code1) == 0)
         {
             strcpy(user.code, code1);
             printf("============================\n");
-            printf("|  %s用户注册成功！     |\n",user.uid);
+            printf("|  %s用户注册成功！     |\n", user.uid);
             printf("============================\n");
             break;
         }
@@ -116,7 +122,7 @@ void Registeruser() // 注册用户
             printf("============================\n");
         }
     }
-    fwrite(&user, sizeof(User), 1, file_write);
+    fprintf(file_write, "用户名：%s  密码：%s  余额：%.2f\n", user.uid, user.code, user.balance);
     fclose(file_write);
     return;
 }
@@ -155,11 +161,12 @@ void Registeradmin() // 注册管理员
     printf("最多可输入19位，超过部分不被录入。");
     printf("请输入用户名:");
     scanf("%19s", user.uid);
-    while (getchar() != '\n');
+    while (getchar() != '\n')
+        ;
     while (1)
     {
         flag = 0;
-        while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
+        while (fscanf(file_uid, "用户名：%s  密码：%s  余额：%f\n", tureuid.uid, tureuid.code, &tureuid.balance) != EOF)
         {
             if (strcmp(user.uid, tureuid.uid) == 0)
             {
@@ -170,7 +177,7 @@ void Registeradmin() // 注册管理员
                 break;
             }
         }
-        while (fread(&tureuid, sizeof(User), 1, file_admin) == 1)
+        while (fscanf(file_admin, "用户名：%s  密码：%s  余额：%f\n", tureuid.uid, tureuid.code, &tureuid.balance) != EOF)
         {
             if (strcmp(user.uid, tureuid.uid) == 0)
             {
@@ -191,7 +198,8 @@ void Registeradmin() // 注册管理员
                 printf("=============================================\n");
                 printf("请输入用户名:");
                 scanf("%19s", user.uid);
-                while (getchar() != '\n');
+                while (getchar() != '\n')
+                    ;
             }
             else
             {
@@ -217,11 +225,13 @@ void Registeradmin() // 注册管理员
         printf("最多可输入19位，超过部分不被录入。");
         printf("请输入用户的密码：");
         scanf("%19s", user.code);
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
         printf("============================\n");
         printf("请再次输入用户的密码：");
         scanf("%19s", code1);
-        while (getchar() != '\n');
+        while (getchar() != '\n')
+            ;
         if (strcmp(user.code, code1) == 0)
         {
             strcpy(user.code, code1);
@@ -237,7 +247,7 @@ void Registeradmin() // 注册管理员
             printf("============================\n");
         }
     }
-    fwrite(&user, sizeof(User), 1, file_write);
+    fprintf(file_write, "用户名：%s  密码：%s  余额：%.2f\n", user.uid, user.code, user.balance);
     fclose(file_write);
     return;
 }

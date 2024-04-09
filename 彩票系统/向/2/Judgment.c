@@ -44,6 +44,10 @@ void userjudgment(int *sc, int *group, char *id)
             case 5:
                 usercodeModify(id);
                 break;
+            case 6:
+                uDeleteuser(id);
+                *sc = 7;
+                break;
             default:
                 *sc = 7;
                 break;

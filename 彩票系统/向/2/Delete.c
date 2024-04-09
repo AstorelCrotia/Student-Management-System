@@ -33,17 +33,17 @@ void Deleteuser() // 删除功能
 {
     int i = 0;
     User *head = NULL;
-    User *temp = NULL;
-    User *delete = NULL;
-    char input[20] = "\0";
-    User *user = (User *)malloc(sizeof(User));
-    if (user == NULL)
+    User *temp = (User *)malloc(sizeof(User));
+    if (temp == NULL)
     {
         printf("============================\n");
         printf("|  内存分配失败！          |\n");
         printf("============================\n");
         return;
     }
+    User *delete = NULL;
+    char input[20] = "\0";
+    User user = {0};
     FILE *file_read = fopen("users.txt", "r");
     if (file_read == NULL)
     {
@@ -52,34 +52,35 @@ void Deleteuser() // 删除功能
         printf("============================\n");
         return;
     }
-    while (fread(user, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", user.uid, user.code, &user.balance) != EOF)
     {
-        user->next = NULL;
         if (head == NULL)
         {
-            head = user;
-            temp = user;
+            head = temp;
         }
         else
         {
-            temp->next = user;
-            temp = user;
+            temp->next = (User *)malloc(sizeof(User));
+            temp = temp->next;
+            if (temp == NULL)
+            {
+                printf("============================\n");
+                printf("|  内存分配失败！          |\n");
+                printf("============================\n");
+                break;
+            }
         }
-        user = (User *)malloc(sizeof(User));
-        if (user == NULL)
-        {
-            printf("============================\n");
-            printf("|  内存分配失败！          |\n");
-            printf("============================\n");
-            break;
-        }
+        strcpy(temp->uid, user.uid);
+        strcpy(temp->code, user.code);
+        temp->balance = user.balance;
+        temp->next = NULL;
     }
     fclose(file_read);
-    free(user);
     printf("============================\n");
     printf("请输入你要删除的用户名：");
     scanf("%19s", input);
-    while (getchar() != '\n');
+    while (getchar() != '\n')
+        ;
     temp = head;
     if (strcmp(input, temp->uid) == 0)
     {
@@ -126,7 +127,7 @@ void Deleteuser() // 删除功能
     temp = head;
     while (temp != NULL)
     {
-        fwrite(temp, sizeof(User), 1, file_write);
+        fprintf(file_write, "用户名：%s  密码：%s  余额：%.2f\n", temp->uid, temp->code, temp->balance);
         temp = temp->next;
     }
     fclose(file_write);
@@ -138,7 +139,7 @@ void Deleteuser() // 删除功能
         printf("============================\n");
         return;
     }
-    fwrite(delete, sizeof(User), 1, file_wdelete);
+    fprintf(file_wdelete, "用户名：%s  密码：%s  余额：%.2f\n", delete->uid, delete->code, delete->balance);
     fclose(file_wdelete);
     temp = head;
     while (temp != NULL)
@@ -149,5 +150,106 @@ void Deleteuser() // 删除功能
     }
     printf("============================\n");
     printf("|  %s用户已经删除！      |\n", input);
+    printf("============================\n");
+}
+
+void uDeleteuser(char *id) // 删除功能
+{
+    User *head = NULL;
+    User *temp = (User *)malloc(sizeof(User));
+    if (temp == NULL)
+    {
+        printf("============================\n");
+        printf("|  内存分配失败！          |\n");
+        printf("============================\n");
+        return;
+    }
+    User *delete = NULL;
+    User user = {0};
+    FILE *file_read = fopen("users.txt", "r");
+    if (file_read == NULL)
+    {
+        printf("============================\n");
+        printf("|  连接服务器失败！        |\n");
+        printf("============================\n");
+        return;
+    }
+    while (fscanf(file_read, "用户名：%s  密码：%s  余额：%f\n", user.uid, user.code, &user.balance) != EOF)
+    {
+        if (head == NULL)
+        {
+            head = temp;
+        }
+        else
+        {
+            temp->next = (User *)malloc(sizeof(User));
+            temp = temp->next;
+            if (temp == NULL)
+            {
+                printf("============================\n");
+                printf("|  内存分配失败！          |\n");
+                printf("============================\n");
+                break;
+            }
+        }
+        strcpy(temp->uid, user.uid);
+        strcpy(temp->code, user.code);
+        temp->balance = user.balance;
+        temp->next = NULL;
+    }
+    fclose(file_read);
+    temp = head;
+    if (strcmp(id, temp->uid) == 0)
+    {
+        delete = head;
+        head = temp->next;
+    }
+    else
+    {
+        while (temp->next != NULL)
+        {
+            if (strcmp(id, temp->next->uid) == 0)
+            {
+                delete = temp->next;
+                temp->next = delete->next;
+                break;
+            }
+            temp = temp->next;
+        }
+    }
+    FILE *file_write = fopen("users.txt", "w");
+    if (file_write == NULL)
+    {
+        printf("============================\n");
+        printf("|  连接服务器失败！        |\n");
+        printf("============================\n");
+        return;
+    }
+    temp = head;
+    while (temp != NULL)
+    {
+        fprintf(file_write, "用户名：%s  密码：%s  余额：%.2f\n", temp->uid, temp->code, temp->balance);
+        temp = temp->next;
+    }
+    fclose(file_write);
+    FILE *file_wdelete = fopen("delete.txt", "a");
+    if (file_wdelete == NULL)
+    {
+        printf("============================\n");
+        printf("|  连接服务器失败！        |\n");
+        printf("============================\n");
+        return;
+    }
+    fprintf(file_wdelete, "用户名：%s  密码：%s  余额：%.2f\n", delete->uid, delete->code, delete->balance);
+    fclose(file_wdelete);
+    temp = head;
+    while (temp != NULL)
+    {
+        User *toFree = temp;
+        temp = temp->next;
+        free(toFree);
+    }
+    printf("============================\n");
+    printf("|  %s用户已经删除！      |\n", id);
     printf("============================\n");
 }

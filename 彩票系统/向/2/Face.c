@@ -34,6 +34,8 @@ void Userface(int *sc, char *id) // 用户界面
     printf("|                                |\n");
     printf("|  修改密码输入“5”               |\n");
     printf("|                                |\n");
+    printf("|  删除用户输入“6”               |\n");
+    printf("|                                |\n");
     printf("|  退出系统输入其他              |\n");
     printf("====================================\n");
     printf("你的输入：");

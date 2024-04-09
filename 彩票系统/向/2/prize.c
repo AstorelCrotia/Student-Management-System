@@ -4,7 +4,7 @@ void Prize(Lottery *lottery, int *ran, float n) // ¶Ò½±
 {
     int num[6] = {0};
     float flag = 0;
-    sscanf(lottery->usernumber, "%d %d %d %d %d : %d", &num[0], &num[1], &num[2], &num[3], &num[4], &num[5]);
+    sscanf(lottery->usernumber, "%d-%d-%d-%d-%d:%d", &num[0], &num[1], &num[2], &num[3], &num[4], &num[5]);
     for (int i = 0; i < 6; i++)
     {
         if (num[i] == *(ran+i))
@@ -18,15 +18,15 @@ void Prize(Lottery *lottery, int *ran, float n) // ¶Ò½±
         return;
     }
     User *head = NULL;
-    User *temp = NULL;
-    User *user = (User *)malloc(sizeof(User));
-    if (user == NULL)
+    User *temp = (User *)malloc(sizeof(User));
+    if (temp == NULL)
     {
         printf("============================\n");
         printf("|  ÄÚ´æ·ÖÅäÊ§°Ü£¡          |\n");
         printf("============================\n");
         return;
     }
+    User user = {0};
     FILE *file_read = fopen("users.txt", "r");
     if (file_read == NULL)
     {
@@ -35,30 +35,30 @@ void Prize(Lottery *lottery, int *ran, float n) // ¶Ò½±
         printf("============================\n");
         return;
     }
-    while (fread(user, sizeof(User), 1, file_read) == 1)
+    while (fscanf(file_read, "ÓÃ»§Ãû£º%s  ÃÜÂë£º%s  Óà¶î£º%f\n", user.uid, user.code, &user.balance) != EOF)
     {
-        user->next = NULL;
         if (head == NULL)
         {
-            head = user;
-            temp = user;
+            head = temp;
         }
         else
         {
-            temp->next = user;
-            temp = user;
+            temp->next = (User *)malloc(sizeof(User));
+            if (temp == NULL)
+            {
+                printf("============================\n");
+                printf("|  ÄÚ´æ·ÖÅäÊ§°Ü£¡          |\n");
+                printf("============================\n");
+                break;
+            }
+            temp = temp->next;
         }
-        user = (User *)malloc(sizeof(User));
-        if (user == NULL)
-        {
-            printf("============================\n");
-            printf("|  ÄÚ´æ·ÖÅäÊ§°Ü£¡          |\n");
-            printf("============================\n");
-            return;
-        }
+        strcpy(temp->uid, user.uid);
+        strcpy(temp->code, user.code);
+        temp->balance = user.balance;
+        temp->next = NULL;
     }
     fclose(file_read);
-    free(user);
     temp = head;
     while (temp != NULL)
     {
@@ -81,7 +81,7 @@ void Prize(Lottery *lottery, int *ran, float n) // ¶Ò½±
     temp = head;
     while (temp != NULL)
     {
-        fwrite(temp, sizeof(User), 1, file_write);
+        fprintf(file_write, "ÓÃ»§Ãû£º%s  ÃÜÂë£º%s  Óà¶î£º%.2f\n", temp->uid, temp->code, temp->balance);
         temp = temp->next;
     }
     fclose(file_write);

@@ -31,7 +31,7 @@ void Validation(char *id, int *group) // 验证用户名功能
     while (i != 3)
     {
         flag = 0;
-        while (fread(&tureuid, sizeof(User), 1, file_uid) == 1)
+        while (fscanf(file_uid, "用户名：%s  密码：%s  余额：%f\n", tureuid.uid, tureuid.code, &tureuid.balance) != EOF)
         {
             if (strcmp(id, tureuid.uid) == 0)
             {
@@ -44,7 +44,7 @@ void Validation(char *id, int *group) // 验证用户名功能
             }
         }
         rewind(file_uid);
-        while (fread(&tureadmin, sizeof(User), 1, file_admin) == 1)
+        while (fscanf(file_admin, "用户名：%s  密码：%s  余额：%f\n", tureadmin.uid, tureadmin.code, &tureadmin.balance) != EOF)
         {
             if (strcmp(id, tureadmin.uid) == 0)
             {
